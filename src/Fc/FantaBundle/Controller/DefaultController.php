@@ -24,7 +24,7 @@ class DefaultController extends Controller
     }
     
     /**
-     * @Route("/fanta/add/{name}")
+     * @Route("/add/{name}")
      * @Template()
      */
     public function addAction($name)
@@ -50,7 +50,7 @@ class DefaultController extends Controller
     }
     
     /**
-     * @Route("/fanta/team/{id}/rosa")
+     * @Route("/team/{id}/rosa")
      * @Template
      */
     public function getPlayersAction($id)
