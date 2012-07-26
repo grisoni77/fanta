@@ -6,6 +6,7 @@ use Doctrine\ORM\Mapping as ORM;
 
 /**
  * Fc\FantaBundle\Entity\Listing
+ * Contiene ingaggi fanta squadre
  *
  * @ORM\Table()
  * @ORM\Entity
