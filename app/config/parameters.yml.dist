@@ -1,0 +1,14 @@
+parameters:
+    database_driver: pdo_mysql
+    database_host: XXXX
+    database_port: XXXX
+    database_name: XXXX
+    database_user: XXXX
+    database_password: XXXX
+    mailer_transport: XXXX
+    mailer_host: XXXX
+    mailer_user: XXXX
+    mailer_password: XXXX
+    locale: XX
+    secret: XXXXXXX
+    fc_fanta.db.table_prefix: XXX
