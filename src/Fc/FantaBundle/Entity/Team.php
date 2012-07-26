@@ -30,13 +30,13 @@ class Team
 
     /**
      * @ORM\ManyToOne(targetEntity="User", inversedBy="teams")
-     * @ORM\JoinColumn(name="user_id", referencedColumnName="id")
+     * @ORM\JoinColumn(name="user_id", referencedColumnName="id", nullable=false)
      */
     private $user;
 
     /**
      * @ORM\ManyToOne(targetEntity="Competition", inversedBy="teams")
-     * @ORM\JoinColumn(name="competition_id", referencedColumnName="id")
+     * @ORM\JoinColumn(name="competition_id", referencedColumnName="id", nullable=false)
      */
     private $competition;
     

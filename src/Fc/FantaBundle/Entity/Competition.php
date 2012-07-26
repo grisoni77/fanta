@@ -30,13 +30,13 @@ class Competition
 
     /**
      * @ORM\OneToOne(targetEntity="CompetitionType")
-     * @ORM\JoinColumn(name="competitiontype_id", referencedColumnName="id")
+     * @ORM\JoinColumn(name="competitiontype_id", referencedColumnName="id", nullable=false)
      */
     private $type;
     
     /**
      * @ORM\ManyToOne(targetEntity="League", inversedBy="competitions")
-     * @ORM\JoinColumn(name="league_id", referencedColumnName="id")
+     * @ORM\JoinColumn(name="league_id", referencedColumnName="id", nullable=false)
      */
     private $league;
     

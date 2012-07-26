@@ -24,19 +24,19 @@ class Game
     
     /**
      * @ORM\ManyToOne(targetEntity="Round", inversedBy="games")
-     * @ORM\JoinColumn(name="round_id", referencedColumnName="id")
+     * @ORM\JoinColumn(name="round_id", referencedColumnName="id", nullable=false)
      */
     private $round;
     
     /**
      * @ORM\OneToOne(targetEntity="Team")
-     * @ORM\JoinColumn(name="team_1_id", referencedColumnName="id")
+     * @ORM\JoinColumn(name="team_1_id", referencedColumnName="id", nullable=false)
      */
     private $team_1;
 
     /**
      * @ORM\OneToOne(targetEntity="Team")
-     * @ORM\JoinColumn(name="team_2_id", referencedColumnName="id")
+     * @ORM\JoinColumn(name="team_2_id", referencedColumnName="id", nullable=false)
      */
     private $team_2;
 

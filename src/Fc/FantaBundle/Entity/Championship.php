@@ -32,7 +32,7 @@ class Championship
      * @var type 
      * 
      * @ORM\ManyToOne(targetEntity="Season", inversedBy="championships")
-     * @ORM\JoinColumn(name="season_id", referencedColumnName="id")
+     * @ORM\JoinColumn(name="season_id", referencedColumnName="id", nullable=false)
      */
     private $season;
     

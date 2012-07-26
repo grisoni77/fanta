@@ -30,13 +30,13 @@ class League
 
     /**
      * @ORM\ManyToOne(targetEntity="Championship", inversedBy="leagues")
-     * @ORM\JoinColumn(name="championship_id", referencedColumnName="id")
+     * @ORM\JoinColumn(name="championship_id", referencedColumnName="id", nullable=false)
      */
     private $championship;
     
     /** 
      * @ORM\ManyToMany(targetEntity="User", mappedBy="leagues") 
-     * @ORM\JoinTable(name="subscription")
+     * @ORM\JoinTable(name="Subscription")
      */
     private $users;
     

@@ -30,22 +30,29 @@ class Transaction
 
     /**
      * @ORM\OneToOne(targetEntity="TransactionType")
-     * @ORM\JoinColumn(name="transactiontype_id", referencedColumnName="id")
+     * @ORM\JoinColumn(name="transactiontype_id", referencedColumnName="id", nullable=false)
      */
     private $type;
 
     /**
      * @ORM\ManyToOne(targetEntity="Player", inversedBy="transactions")
-     * @ORM\JoinColumn(name="player_id", referencedColumnName="id")
+     * @ORM\JoinColumn(name="player_id", referencedColumnName="id", nullable=false)
      */
     private $player;
     
     /**
      * @ORM\ManyToOne(targetEntity="Team")
-     * @ORM\JoinColumn(name="team_id", referencedColumnName="id")
+     * @ORM\JoinColumn(name="team_id", referencedColumnName="id", nullable=false)
      */
     private $team;
-
+    
+    /**
+     * Reference a transaction associata (ad es. in caso di scambio giocatori)
+     * @ORM\ManyToOne(targetEntity="Transaction")
+     * @ORM\JoinColumn(name="rel_transaction_id", referencedColumnName="id", nullable=false)
+     */
+    private $rel_transaction;
+    
     /**
      * Get id
      *
@@ -142,5 +149,27 @@ class Transaction
     public function getTeam()
     {
         return $this->team;
+    }
+
+    /**
+     * Set rel_transaction
+     *
+     * @param Fc\FantaBundle\Entity\Transaction $relTransaction
+     * @return Transaction
+     */
+    public function setRelTransaction(\Fc\FantaBundle\Entity\Transaction $relTransaction)
+    {
+        $this->rel_transaction = $relTransaction;
+        return $this;
+    }
+
+    /**
+     * Get rel_transaction
+     *
+     * @return Fc\FantaBundle\Entity\Transaction 
+     */
+    public function getRelTransaction()
+    {
+        return $this->rel_transaction;
     }
 }

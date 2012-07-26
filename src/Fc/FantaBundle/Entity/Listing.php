@@ -31,25 +31,25 @@ class Listing
 
     /**
      * @ORM\ManyToOne(targetEntity="Player")
-     * @ORM\JoinColumn(name="player_id", referencedColumnName="id")
+     * @ORM\JoinColumn(name="player_id", referencedColumnName="id", nullable=false)
      */
     private $player;
 
     /**
      * @ORM\ManyToOne(targetEntity="Team", inversedBy="listings")
-     * @ORM\JoinColumn(name="team_id", referencedColumnName="id")
+     * @ORM\JoinColumn(name="team_id", referencedColumnName="id", nullable=false)
      */
     private $team;
     
     /**
      * @ORM\ManyToOne(targetEntity="Role")
-     * @ORM\JoinColumn(name="role_id", referencedColumnName="id")
+     * @ORM\JoinColumn(name="role_id", referencedColumnName="id", nullable=false)
      */
     private $role;
 
     /**
      * @ORM\OneToOne(targetEntity="Transaction")
-     * @ORM\JoinColumn(name="transaction_id", referencedColumnName="id")
+     * @ORM\JoinColumn(name="transaction_id", referencedColumnName="id", nullable=false)
      */
     private $transaction;
     
@@ -57,7 +57,7 @@ class Listing
      * Competition Round reference in which the player is listed for the team
      * 
      * @ORM\ManyToOne(targetEntity="Round")
-     * @ORM\JoinColumn(name="round_id", referencedColumnName="id")
+     * @ORM\JoinColumn(name="round_id", referencedColumnName="id", nullable=false)
      */    
     private $round;
     

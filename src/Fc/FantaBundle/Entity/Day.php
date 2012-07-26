@@ -37,7 +37,7 @@ class Day
 
     /**
      * @ORM\ManyToOne(targetEntity="Championship", inversedBy="days")
-     * @ORM\JoinColumn(name="championship_id", referencedColumnName="id")
+     * @ORM\JoinColumn(name="championship_id", referencedColumnName="id", nullable=false)
      */
     private $championship;
     

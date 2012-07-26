@@ -44,9 +44,15 @@ class Round
 
     /**
      * @ORM\ManyToOne(targetEntity="Competition", inversedBy="rounds")
-     * @ORM\JoinColumn(name="competition_id", referencedColumnName="id")
+     * @ORM\JoinColumn(name="competition_id", referencedColumnName="id", nullable=false)
      */
     private $competition;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="Day")
+     * @ORM\JoinColumn(name="day_id", referencedColumnName="id", nullable=false)
+     */
+    private $day;
 
     /**
      * @ORM\OneToMany(targetEntity="Game", mappedBy="round")
@@ -185,5 +191,27 @@ class Round
     public function getGames()
     {
         return $this->games;
+    }
+
+    /**
+     * Set day
+     *
+     * @param Fc\FantaBundle\Entity\Day $day
+     * @return Round
+     */
+    public function setDay(\Fc\FantaBundle\Entity\Day $day)
+    {
+        $this->day = $day;
+        return $this;
+    }
+
+    /**
+     * Get day
+     *
+     * @return Fc\FantaBundle\Entity\Day 
+     */
+    public function getDay()
+    {
+        return $this->day;
     }
 }

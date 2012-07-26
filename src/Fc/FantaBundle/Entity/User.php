@@ -37,7 +37,7 @@ class User
 
     /** 
      * @ORM\ManyToMany(targetEntity="League", inversedBy="users")
-     * @ORM\JoinTable(name="subscription") 
+     * @ORM\JoinTable(name="Subscription") 
      */
     private $leagues;
     

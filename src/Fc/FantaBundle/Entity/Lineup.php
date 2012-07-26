@@ -23,13 +23,13 @@ class Lineup
 
     /**
      * @ORM\ManyToOne(targetEntity="Game")
-     * @ORM\JoinColumn(name="game_id", referencedColumnName="id")
+     * @ORM\JoinColumn(name="game_id", referencedColumnName="id", nullable=false)
      */
     private $game;
     
     /**
      * @ORM\ManyToOne(targetEntity="Listing")
-     * @ORM\JoinColumn(name="listing_id", referencedColumnName="id")
+     * @ORM\JoinColumn(name="listing_id", referencedColumnName="id", nullable=false)
      */
     private $listing;
     
