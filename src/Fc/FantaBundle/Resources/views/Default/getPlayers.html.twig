@@ -1,0 +1,12 @@
+{% extends "AcmeDemoBundle::layout.html.twig" %}
+
+{% block title "Hello " %}
+
+{% block content %}
+    {% for p in players %}
+    {{ p.name }}<br/>
+    {% endfor %}
+{% endblock %}
+
+{% set code = code(_self) %}
+
