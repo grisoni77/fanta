@@ -41,6 +41,11 @@ class League
     private $users;
     
     /**
+     * @ORM\OneToMany(targetEntity="Competition", mappedBy="league")
+     */
+    private $competitions;
+    
+    /**
      * Get id
      *
      * @return integer 
@@ -128,5 +133,37 @@ class League
     public function getUsers()
     {
         return $this->users;
+    }
+
+    /**
+     * Add competitions
+     *
+     * @param Fc\FantaBundle\Entity\Competition $competitions
+     * @return League
+     */
+    public function addCompetition(\Fc\FantaBundle\Entity\Competition $competitions)
+    {
+        $this->competitions[] = $competitions;
+        return $this;
+    }
+
+    /**
+     * Remove competitions
+     *
+     * @param <variableType$competitions
+     */
+    public function removeCompetition(\Fc\FantaBundle\Entity\Competition $competitions)
+    {
+        $this->competitions->removeElement($competitions);
+    }
+
+    /**
+     * Get competitions
+     *
+     * @return Doctrine\Common\Collections\Collection 
+     */
+    public function getCompetitions()
+    {
+        return $this->competitions;
     }
 }

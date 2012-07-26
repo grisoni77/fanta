@@ -40,6 +40,11 @@ class User
      * @ORM\JoinTable(name="subscription") 
      */
     private $leagues;
+    
+    /**
+     * @ORM\OneToMany(targetEntity="Team", mappedBy="user")
+     */
+    private $teams;
 
     
     /**
@@ -130,5 +135,37 @@ class User
     public function getLeagues()
     {
         return $this->leagues;
+    }
+
+    /**
+     * Add teams
+     *
+     * @param Fc\FantaBundle\Entity\Team $teams
+     * @return User
+     */
+    public function addTeam(\Fc\FantaBundle\Entity\Team $teams)
+    {
+        $this->teams[] = $teams;
+        return $this;
+    }
+
+    /**
+     * Remove teams
+     *
+     * @param <variableType$teams
+     */
+    public function removeTeam(\Fc\FantaBundle\Entity\Team $teams)
+    {
+        $this->teams->removeElement($teams);
+    }
+
+    /**
+     * Get teams
+     *
+     * @return Doctrine\Common\Collections\Collection 
+     */
+    public function getTeams()
+    {
+        return $this->teams;
     }
 }

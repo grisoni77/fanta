@@ -37,9 +37,14 @@ class User
 
     /** 
      * @ORM\ManyToMany(targetEntity="League", inversedBy="users")
-     * @ORM\JoinTable(name="subscriptions") 
+     * @ORM\JoinTable(name="subscription") 
      */
     private $leagues;
+    
+    /**
+     * @ORM\OneToMany(targetEntity="Team", mappedBy="user")
+     */
+    private $teams;
 
     
     /**
@@ -94,5 +99,73 @@ class User
     public function getNickname()
     {
         return $this->nickname;
+    }
+    public function __construct()
+    {
+        $this->leagues = new \Doctrine\Common\Collections\ArrayCollection();
+    }
+    
+    /**
+     * Add leagues
+     *
+     * @param Fc\FantaBundle\Entity\League $leagues
+     * @return User
+     */
+    public function addLeague(\Fc\FantaBundle\Entity\League $leagues)
+    {
+        $this->leagues[] = $leagues;
+        return $this;
+    }
+
+    /**
+     * Remove leagues
+     *
+     * @param <variableType$leagues
+     */
+    public function removeLeague(\Fc\FantaBundle\Entity\League $leagues)
+    {
+        $this->leagues->removeElement($leagues);
+    }
+
+    /**
+     * Get leagues
+     *
+     * @return Doctrine\Common\Collections\Collection 
+     */
+    public function getLeagues()
+    {
+        return $this->leagues;
+    }
+
+    /**
+     * Add teams
+     *
+     * @param Fc\FantaBundle\Entity\Team $teams
+     * @return User
+     */
+    public function addTeam(\Fc\FantaBundle\Entity\Team $teams)
+    {
+        $this->teams[] = $teams;
+        return $this;
+    }
+
+    /**
+     * Remove teams
+     *
+     * @param <variableType$teams
+     */
+    public function removeTeam(\Fc\FantaBundle\Entity\Team $teams)
+    {
+        $this->teams->removeElement($teams);
+    }
+
+    /**
+     * Get teams
+     *
+     * @return Doctrine\Common\Collections\Collection 
+     */
+    public function getTeams()
+    {
+        return $this->teams;
     }
 }

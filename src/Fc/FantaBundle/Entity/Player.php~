@@ -30,7 +30,7 @@ class Player
 
     /**
      *
-     * @ORM\ManyToOne(targetEntity="Role", inversedBy="players")
+     * @ORM\OneToOne(targetEntity="Role")
      * @ORM\JoinColumn(name="role_id", referencedColumnName="id")
      */
     private $role;
@@ -53,6 +53,10 @@ class Player
      */
     private $marks;
     
+    /**
+     * @ORM\OneToMany(targetEntity="Transaction", mappedBy="player")
+     */
+    private $transactions;
 
     /**
      * Get id
@@ -306,5 +310,69 @@ class Player
     public function getClubs()
     {
         return $this->clubs;
+    }
+
+    /**
+     * Add listings
+     *
+     * @param Fc\FantaBundle\Entity\Listing $listings
+     * @return Player
+     */
+    public function addListing(\Fc\FantaBundle\Entity\Listing $listings)
+    {
+        $this->listings[] = $listings;
+        return $this;
+    }
+
+    /**
+     * Remove listings
+     *
+     * @param <variableType$listings
+     */
+    public function removeListing(\Fc\FantaBundle\Entity\Listing $listings)
+    {
+        $this->listings->removeElement($listings);
+    }
+
+    /**
+     * Get listings
+     *
+     * @return Doctrine\Common\Collections\Collection 
+     */
+    public function getListings()
+    {
+        return $this->listings;
+    }
+
+    /**
+     * Add transactions
+     *
+     * @param Fc\FantaBundle\Entity\Transaction $transactions
+     * @return Player
+     */
+    public function addTransaction(\Fc\FantaBundle\Entity\Transaction $transactions)
+    {
+        $this->transactions[] = $transactions;
+        return $this;
+    }
+
+    /**
+     * Remove transactions
+     *
+     * @param <variableType$transactions
+     */
+    public function removeTransaction(\Fc\FantaBundle\Entity\Transaction $transactions)
+    {
+        $this->transactions->removeElement($transactions);
+    }
+
+    /**
+     * Get transactions
+     *
+     * @return Doctrine\Common\Collections\Collection 
+     */
+    public function getTransactions()
+    {
+        return $this->transactions;
     }
 }

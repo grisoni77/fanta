@@ -29,11 +29,6 @@ class Role
     private $name;
 
     /**
-     * @ORM\OneToMany(targetEntity="Player", mappedBy="role")
-     */
-    private $players;    
-
-    /**
      * Get id
      *
      * @return integer 
@@ -64,40 +59,5 @@ class Role
     {
         return $this->name;
     }
-    public function __construct()
-    {
-        $this->players = new \Doctrine\Common\Collections\ArrayCollection();
-    }
     
-    /**
-     * Add players
-     *
-     * @param Fc\FantaBundle\Entity\Player $players
-     * @return Role
-     */
-    public function addPlayer(\Fc\FantaBundle\Entity\Player $players)
-    {
-        $this->players[] = $players;
-        return $this;
-    }
-
-    /**
-     * Remove players
-     *
-     * @param <variableType$players
-     */
-    public function removePlayer(\Fc\FantaBundle\Entity\Player $players)
-    {
-        $this->players->removeElement($players);
-    }
-
-    /**
-     * Get players
-     *
-     * @return Doctrine\Common\Collections\Collection 
-     */
-    public function getPlayers()
-    {
-        return $this->players;
-    }
 }

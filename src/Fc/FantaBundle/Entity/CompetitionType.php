@@ -5,12 +5,12 @@ namespace Fc\FantaBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * Fc\FantaBundle\Entity\Role
+ * Fc\FantaBundle\Entity\CompetitionType
  *
  * @ORM\Table()
  * @ORM\Entity
  */
-class Role
+class CompetitionType
 {
     /**
      * @var integer $id
@@ -28,6 +28,7 @@ class Role
      */
     private $name;
 
+
     /**
      * Get id
      *
@@ -42,7 +43,7 @@ class Role
      * Set name
      *
      * @param string $name
-     * @return Role
+     * @return CompetitionType
      */
     public function setName($name)
     {
@@ -59,5 +60,4 @@ class Role
     {
         return $this->name;
     }
-    
 }

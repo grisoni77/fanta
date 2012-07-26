@@ -5,12 +5,12 @@ namespace Fc\FantaBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * Fc\FantaBundle\Entity\Role
+ * Fc\FantaBundle\Entity\TransactionType
  *
  * @ORM\Table()
  * @ORM\Entity
  */
-class Role
+class TransactionType
 {
     /**
      * @var integer $id
@@ -29,6 +29,14 @@ class Role
     private $name;
 
     /**
+     * Determina se è un operazione in ingresso o in uscita
+     * 
+     * @var integer $sign [+\|-1]
+     * @ORM\Column(name="sign", type="integer")
+     */
+    private $sign;
+
+    /**
      * Get id
      *
      * @return integer 
@@ -42,7 +50,7 @@ class Role
      * Set name
      *
      * @param string $name
-     * @return Role
+     * @return TransactionType
      */
     public function setName($name)
     {
@@ -59,5 +67,26 @@ class Role
     {
         return $this->name;
     }
-    
+
+    /**
+     * Set sign
+     *
+     * @param integer $sign
+     * @return TransactionType
+     */
+    public function setSign($sign)
+    {
+        $this->sign = $sign;
+        return $this;
+    }
+
+    /**
+     * Get sign
+     *
+     * @return integer 
+     */
+    public function getSign()
+    {
+        return $this->sign;
+    }
 }

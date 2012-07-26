@@ -5,12 +5,12 @@ namespace Fc\FantaBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * Fc\FantaBundle\Entity\Team
+ * Fc\FantaBundle\Entity\Round
  *
  * @ORM\Table()
  * @ORM\Entity
  */
-class Team
+class Round
 {
     /**
      * @var integer $id
@@ -29,21 +29,29 @@ class Team
     private $name;
 
     /**
-     * @ORM\ManyToOne(targetEntity="User", inversedBy="teams")
-     * @ORM\JoinColumn(name="user_id", referencedColumnName="id")
+     * @var string $abbr
+     *
+     * @ORM\Column(name="abbr", type="string", length=5)
      */
-    private $user;
+    private $abbr;
 
     /**
-     * @ORM\ManyToOne(targetEntity="Competition", inversedBy="teams")
+     * @var integer $ordering
+     *
+     * @ORM\Column(name="ordering", type="integer")
+     */
+    private $ordering;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="Competition", inversedBy="rounds")
      * @ORM\JoinColumn(name="competition_id", referencedColumnName="id")
      */
     private $competition;
-    
+
     /**
-     * @ORM\OneToMany(targetEntity="Listing", mappedBy="team")
+     * @ORM\OneToMany(targetEntity="Game", mappedBy="round")
      */
-    private $listings;
+    private $games;
     
     /**
      * Get id
@@ -59,7 +67,7 @@ class Team
      * Set name
      *
      * @param string $name
-     * @return Team
+     * @return Round
      */
     public function setName($name)
     {
@@ -78,32 +86,54 @@ class Team
     }
 
     /**
-     * Set user
+     * Set abbr
      *
-     * @param Fc\FantaBundle\Entity\User $user
-     * @return Team
+     * @param string $abbr
+     * @return Round
      */
-    public function setUser(\Fc\FantaBundle\Entity\User $user = null)
+    public function setAbbr($abbr)
     {
-        $this->user = $user;
+        $this->abbr = $abbr;
         return $this;
     }
 
     /**
-     * Get user
+     * Get abbr
      *
-     * @return Fc\FantaBundle\Entity\User 
+     * @return string 
      */
-    public function getUser()
+    public function getAbbr()
     {
-        return $this->user;
+        return $this->abbr;
+    }
+
+    /**
+     * Set ordering
+     *
+     * @param integer $ordering
+     * @return Round
+     */
+    public function setOrdering($ordering)
+    {
+        $this->ordering = $ordering;
+        return $this;
+    }
+
+    /**
+     * Get ordering
+     *
+     * @return integer 
+     */
+    public function getOrdering()
+    {
+        return $this->ordering;
     }
 
     /**
      * Set competition
      *
      * @param Fc\FantaBundle\Entity\Competition $competition
-     * @return Team
+     * @return Round
      */
     public function setCompetition(\Fc\FantaBundle\Entity\Competition $competition = null)
     {
@@ -122,38 +152,38 @@ class Team
     }
     public function __construct()
     {
-        $this->listings = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->games = new \Doctrine\Common\Collections\ArrayCollection();
     }
     
     /**
-     * Add listings
+     * Add games
      *
-     * @param Fc\FantaBundle\Entity\Listing $listings
-     * @return Team
+     * @param Fc\FantaBundle\Entity\Game $games
+     * @return Round
      */
-    public function addListing(\Fc\FantaBundle\Entity\Listing $listings)
+    public function addGame(\Fc\FantaBundle\Entity\Game $games)
     {
-        $this->listings[] = $listings;
+        $this->games[] = $games;
         return $this;
     }
 
     /**
-     * Remove listings
+     * Remove games
      *
-     * @param <variableType$listings
+     * @param <variableType$games
      */
-    public function removeListing(\Fc\FantaBundle\Entity\Listing $listings)
+    public function removeGame(\Fc\FantaBundle\Entity\Game $games)
     {
-        $this->listings->removeElement($listings);
+        $this->games->removeElement($games);
     }
 
     /**
-     * Get listings
+     * Get games
      *
      * @return Doctrine\Common\Collections\Collection 
      */
-    public function getListings()
+    public function getGames()
     {
-        return $this->listings;
+        return $this->games;
     }
 }

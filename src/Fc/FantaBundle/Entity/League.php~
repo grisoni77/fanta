@@ -36,9 +36,14 @@ class League
     
     /** 
      * @ORM\ManyToMany(targetEntity="User", mappedBy="leagues") 
-     * @ORM\JoinTable(name="subscriptions")
+     * @ORM\JoinTable(name="subscription")
      */
     private $users;
+    
+    /**
+     * @ORM\OneToMany(targetEntity="Competition", mappedBy="league")
+     */
+    private $competitions;
     
     /**
      * Get id
@@ -92,5 +97,73 @@ class League
     public function getChampionship()
     {
         return $this->championship;
+    }
+    public function __construct()
+    {
+        $this->users = new \Doctrine\Common\Collections\ArrayCollection();
+    }
+    
+    /**
+     * Add users
+     *
+     * @param Fc\FantaBundle\Entity\User $users
+     * @return League
+     */
+    public function addUser(\Fc\FantaBundle\Entity\User $users)
+    {
+        $this->users[] = $users;
+        return $this;
+    }
+
+    /**
+     * Remove users
+     *
+     * @param <variableType$users
+     */
+    public function removeUser(\Fc\FantaBundle\Entity\User $users)
+    {
+        $this->users->removeElement($users);
+    }
+
+    /**
+     * Get users
+     *
+     * @return Doctrine\Common\Collections\Collection 
+     */
+    public function getUsers()
+    {
+        return $this->users;
+    }
+
+    /**
+     * Add competitions
+     *
+     * @param Fc\FantaBundle\Entity\Competition $competitions
+     * @return League
+     */
+    public function addCompetition(\Fc\FantaBundle\Entity\Competition $competitions)
+    {
+        $this->competitions[] = $competitions;
+        return $this;
+    }
+
+    /**
+     * Remove competitions
+     *
+     * @param <variableType$competitions
+     */
+    public function removeCompetition(\Fc\FantaBundle\Entity\Competition $competitions)
+    {
+        $this->competitions->removeElement($competitions);
+    }
+
+    /**
+     * Get competitions
+     *
+     * @return Doctrine\Common\Collections\Collection 
+     */
+    public function getCompetitions()
+    {
+        return $this->competitions;
     }
 }
