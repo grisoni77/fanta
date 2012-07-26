@@ -15,6 +15,15 @@ use Fc\FantaBundle\Entity\Signing;
 class DefaultController extends Controller
 {
     /**
+     * @Route("/") 
+     * @Template
+     */
+    public function indexAction() 
+    {
+        return array();
+    }
+    
+    /**
      * @Route("/fanta/add/{name}")
      * @Template()
      */

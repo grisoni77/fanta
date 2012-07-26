@@ -1,7 +1,7 @@
 FcFantaBundle:
     resource: "@FcFantaBundle/Controller/"
     type:     annotation
-    prefix:   /
+    prefix:   /fanta
 
 # Internal routing configuration to handle ESI
 #_internal:
