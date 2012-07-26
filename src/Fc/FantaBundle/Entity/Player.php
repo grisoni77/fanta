@@ -44,7 +44,7 @@ class Player
 
     /** 
      * @ORM\ManyToMany(targetEntity="Club", inversedBy="players")
-     * @ORM\JoinTable(name="player_club") 
+     * @ORM\JoinTable(name="Player_Club") 
      */
     private $clubs;
     

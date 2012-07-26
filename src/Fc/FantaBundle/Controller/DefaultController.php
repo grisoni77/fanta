@@ -10,7 +10,6 @@ use Symfony\Component\HttpFoundation\Response;
 
 use Fc\FantaBundle\Entity\Player;
 use Fc\FantaBundle\Entity\Team;
-use Fc\FantaBundle\Entity\Signing;
 
 class DefaultController extends Controller
 {
@@ -37,13 +36,8 @@ class DefaultController extends Controller
         if (!$team) {
             throw $this->createNotFoundException('Nessun prodotto trovato per l\'id 1');
         }
-        $signing = new Signing();
-        $signing->setDay(1);
-        $signing->setPlayer($player);
-        $signing->setTeam($team);
         
         $em->persist($player);
-        $em->persist($signing);
         $em->flush();
         
         return array('name' => $name);
