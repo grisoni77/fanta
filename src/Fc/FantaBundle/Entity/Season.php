@@ -101,6 +101,11 @@ class Season
         return $this->teams;
     }
     
+    /**
+     * Return string description
+     * 
+     * @return string 
+     */
     public function __toString()
     {
         return $this->getTitle();

@@ -204,4 +204,17 @@ class Championship
     {
         return $this->leagues;
     }
+    
+    
+    /**
+     * Return string description
+     * 
+     * @return string 
+     */
+    public function __toString()
+    {
+        return $this->getName();
+    }
+
+    
 }
