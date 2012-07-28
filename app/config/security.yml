@@ -21,10 +21,15 @@ security:
           
       main:
         pattern: ^/
+        
         form_login:
           provider: fos_userbundle
           csrf_provider: form.csrf_provider
-        logout: true
+          default_target_path: season
+          
+        logout:
+          target: season
+          
         anonymous: true
           
     access_control:

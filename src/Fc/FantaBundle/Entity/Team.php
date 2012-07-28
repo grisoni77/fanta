@@ -29,7 +29,7 @@ class Team
     private $name;
 
     /**
-     * @ORM\ManyToOne(targetEntity="User", inversedBy="teams")
+     * @ORM\ManyToOne(targetEntity="Fc\UserBundle\Entity\User", inversedBy="teams")
      * @ORM\JoinColumn(name="user_id", referencedColumnName="id", nullable=false)
      */
     private $user;
@@ -77,27 +77,6 @@ class Team
         return $this->name;
     }
 
-    /**
-     * Set user
-     *
-     * @param User $user
-     * @return Team
-     */
-    public function setUser(User $user = null)
-    {
-        $this->user = $user;
-        return $this;
-    }
-
-    /**
-     * Get user
-     *
-     * @return User
-     */
-    public function getUser()
-    {
-        return $this->user;
-    }
 
     /**
      * Set competition
@@ -155,5 +134,27 @@ class Team
     public function getListings()
     {
         return $this->listings;
+    }
+
+    /**
+     * Set user
+     *
+     * @param Fc\UserBundle\Entity\User $user
+     * @return Team
+     */
+    public function setUser(\Fc\UserBundle\Entity\User $user)
+    {
+        $this->user = $user;
+        return $this;
+    }
+
+    /**
+     * Get user
+     *
+     * @return Fc\UserBundle\Entity\User 
+     */
+    public function getUser()
+    {
+        return $this->user;
     }
 }

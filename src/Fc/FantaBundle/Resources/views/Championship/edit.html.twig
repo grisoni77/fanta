@@ -1,4 +1,9 @@
-<h1>Championship edit</h1>
+{% extends "FcFantaBundle::layout2col.html.twig" %}
+
+
+{% block blog_title %}Championship edit{% endblock %}
+
+{% block body %}
 
 <form action="{{ path('championship_update', { 'id': entity.id }) }}" method="post" {{ form_enctype(edit_form) }}>
     {{ form_widget(edit_form) }}
@@ -20,3 +25,4 @@
         </form>
     </li>
 </ul>
+{% endblock %}

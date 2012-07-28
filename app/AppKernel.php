@@ -22,6 +22,7 @@ class AppKernel extends Kernel
             new JMS\SecurityExtraBundle\JMSSecurityExtraBundle(),
             new FOS\UserBundle\FOSUserBundle(),
             new Fc\FantaBundle\FcFantaBundle(),
+            new Fc\UserBundle\FcUserBundle(),
         );
 
         if (in_array($this->getEnvironment(), array('dev', 'test'))) {

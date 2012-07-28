@@ -1,13 +1,62 @@
-<!DOCTYPE html>
+<!DOCTYPE HTML>
 <html>
+
     <head>
-        <meta charset="UTF-8" />
         <title>{% block title %}Welcome!{% endblock %}</title>
-        {% block stylesheets %}{% endblock %}
-        <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
+        <link rel="stylesheet" type="text/css" href="http://fonts.googleapis.com/css?family=Tangerine&amp;v1" />
+        <link rel="stylesheet" type="text/css" href="http://fonts.googleapis.com/css?family=Yanone+Kaffeesatz" />
+        {% block stylesheets %}
+            <link href="{{ asset('css/style.css') }}" type="text/css" rel="stylesheet" />
+        {% endblock %}
+        <link rel="shortcut icon" href="{{ asset('favicon.ico') }}" />
+        {% block head_javascripts %}{% endblock %}
     </head>
     <body>
-        {% block body %}{% endblock %}
+        <div id="main">
+            <div id="header">
+            <div id="logo">
+                <h1>simplestyle<a href="#">_7</a></h1>
+                <div class="slogan">{% block slogan %}Cool slogan goes here!{% endblock %}</div>
+            </div>
+            <div id="menubar">
+                <ul id="menu">
+                <!-- put class="current" in the li tag for the selected page - to highlight which page you're on -->
+                <li class="current"><a href="{{ path('season') }}">Home</a></li>
+                <li><a href="">Private</a></li>
+                <li><a href="page.html">A Page</a></li>
+                <li><a href="contact.html">Contact Us</a></li>
+                {% if app.user %}
+                <li><a href="{{ path('fos_user_profile_show') }}">Profile</a></li>
+                {% endif %}
+                {% if app.user %}
+                <li><a href="{{ path('fos_user_security_logout') }}">Logout</a></li>
+                {% else %}
+                <li><a href="{{ path('fos_user_security_login') }}">Login</a></li>
+                {% endif %}
+                </ul>
+            </div>
+            </div>
+            
+            <div id="user-feedback">
+                {% if app.user %}
+                    Hello {{ app.user.username }}
+                {% else %}
+                    Hello anonymous
+                {% endif %}
+            </div>
+            
+            <div id="site_content">
+            {% block layout %}
+            <div id="content">
+                {% block body %}{% endblock %}
+                {% block comments %}{% endblock %}
+            </div>
+            {% endblock %}
+            </div>
+            <div id="footer">
+            <p>Copyright &copy; simplestyle_7 | <a href="http://validator.w3.org/check?uri=referer">HTML5</a> | <a href="http://jigsaw.w3.org/css-validator/check/referer">CSS</a> | <a href="http://www.html5webtemplates.co.uk">design from HTML5webtemplates.co.uk</a></p>
+            </div>
+        </div>
         {% block javascripts %}{% endblock %}
     </body>
 </html>

@@ -1,4 +1,9 @@
-<h1>Season creation</h1>
+{% extends "FcFantaBundle::layout2col.html.twig" %}
+
+
+{% block blog_title %}Season creation{% endblock %}
+
+{% block body %}
 
 <form action="{{ path('season_create') }}" method="post" {{ form_enctype(form) }}>
     {{ form_widget(form) }}
@@ -14,3 +19,4 @@
         </a>
     </li>
 </ul>
+{% endblock %}

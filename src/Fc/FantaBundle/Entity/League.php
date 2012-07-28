@@ -35,7 +35,7 @@ class League
     private $championship;
     
     /** 
-     * @ORM\ManyToMany(targetEntity="User", mappedBy="leagues") 
+     * @ORM\ManyToMany(targetEntity="Fc\UserBundle\Entity\User", mappedBy="leagues") 
      * @ORM\JoinTable(name="Subscription")
      */
     private $users;
@@ -102,38 +102,6 @@ class League
     {
         $this->users = new \Doctrine\Common\Collections\ArrayCollection();
     }
-    
-    /**
-     * Add users
-     *
-     * @param FcUser $users
-     * @return League
-     */
-    public function addUser(FcUser $users)
-    {
-        $this->users[] = $users;
-        return $this;
-    }
-
-    /**
-     * Remove users
-     *
-     * @param <variableType$users
-     */
-    public function removeUser(FcUser $users)
-    {
-        $this->users->removeElement($users);
-    }
-
-    /**
-     * Get users
-     *
-     * @return Doctrine\Common\Collections\Collection 
-     */
-    public function getUsers()
-    {
-        return $this->users;
-    }
 
     /**
      * Add competitions
@@ -165,5 +133,37 @@ class League
     public function getCompetitions()
     {
         return $this->competitions;
+    }
+
+    /**
+     * Add users
+     *
+     * @param Fc\UserBundle\Entity\User $users
+     * @return League
+     */
+    public function addUser(\Fc\UserBundle\Entity\User $users)
+    {
+        $this->users[] = $users;
+        return $this;
+    }
+
+    /**
+     * Remove users
+     *
+     * @param <variableType$users
+     */
+    public function removeUser(\Fc\UserBundle\Entity\User $users)
+    {
+        $this->users->removeElement($users);
+    }
+
+    /**
+     * Get users
+     *
+     * @return Doctrine\Common\Collections\Collection 
+     */
+    public function getUsers()
+    {
+        return $this->users;
     }
 }

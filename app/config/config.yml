@@ -62,4 +62,8 @@ swiftmailer:
 fos_user:
   firewall_name: main
   db_driver: orm
-  user_class: Fc\FantaBundle\Entity\User
+  user_class: Fc\UserBundle\Entity\User
+  
+  registration:
+    form:
+      type: fc_user_registration
