@@ -2,6 +2,7 @@
 
 namespace Fc\FantaBundle\Entity;
 
+use FOS\UserBundle\Entity\User as FosUser;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -10,7 +11,7 @@ use Doctrine\ORM\Mapping as ORM;
  * @ORM\Table()
  * @ORM\Entity
  */
-class User
+class User extends FosUser
 {
     /**
      * @var integer $id
@@ -19,7 +20,7 @@ class User
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="AUTO")
      */
-    private $id;
+    protected $id;
 
     /**
      * @var string $name
@@ -28,12 +29,6 @@ class User
      */
     private $name;
 
-    /**
-     * @var string $nickname
-     *
-     * @ORM\Column(name="nickname", type="string", length=255)
-     */
-    private $nickname;
 
     /** 
      * @ORM\ManyToMany(targetEntity="League", inversedBy="users")
@@ -46,7 +41,6 @@ class User
      */
     private $teams;
 
-    
     /**
      * Get id
      *
@@ -78,104 +72,4 @@ class User
     {
         return $this->name;
     }
-
-    /**
-     * Set nickname
-     *
-     * @param string $nickname
-     * @return User
-     */
-    public function setNickname($nickname)
-    {
-        $this->nickname = $nickname;
-        return $this;
-    }
-
-    /**
-     * Get nickname
-     *
-     * @return string 
-     */
-    public function getNickname()
-    {
-        return $this->nickname;
-    }
-    public function __construct()
-    {
-        $this->leagues = new \Doctrine\Common\Collections\ArrayCollection();
-    }
-    
-    /**
-     * Add leagues
-     *
-     * @param Fc\FantaBundle\Entity\League $leagues
-     * @return User
-     */
-    public function addLeague(\Fc\FantaBundle\Entity\League $leagues)
-    {
-        $this->leagues[] = $leagues;
-        return $this;
-    }
-
-    /**
-     * Remove leagues
-     *
-     * @param <variableType$leagues
-     */
-    public function removeLeague(\Fc\FantaBundle\Entity\League $leagues)
-    {
-        $this->leagues->removeElement($leagues);
-    }
-
-    /**
-     * Get leagues
-     *
-     * @return Doctrine\Common\Collections\Collection 
-     */
-    public function getLeagues()
-    {
-        return $this->leagues;
-    }
-
-    /**
-     * Add teams
-     *
-     * @param Fc\FantaBundle\Entity\Team $teams
-     * @return User
-     */
-    public function addTeam(\Fc\FantaBundle\Entity\Team $teams)
-    {
-        $this->teams[] = $teams;
-        return $this;
-    }
-
-    /**
-     * Remove teams
-     *
-     * @param <variableType$teams
-     */
-    public function removeTeam(\Fc\FantaBundle\Entity\Team $teams)
-    {
-        $this->teams->removeElement($teams);
-    }
-
-    /**
-     * Get teams
-     *
-     * @return Doctrine\Common\Collections\Collection 
-     */
-    public function getTeams()
-    {
-        return $this->teams;
-    }
-    
-    /**
-     * Return string description
-     * 
-     * @return string 
-     */
-    public function __toString()
-    {
-        return $this->getName();
-    }    
 }

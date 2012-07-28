@@ -80,10 +80,10 @@ class Team
     /**
      * Set user
      *
-     * @param Fc\FantaBundle\Entity\User $user
+     * @param User $user
      * @return Team
      */
-    public function setUser(\Fc\FantaBundle\Entity\User $user = null)
+    public function setUser(User $user = null)
     {
         $this->user = $user;
         return $this;
@@ -92,7 +92,7 @@ class Team
     /**
      * Get user
      *
-     * @return Fc\FantaBundle\Entity\User 
+     * @return User
      */
     public function getUser()
     {

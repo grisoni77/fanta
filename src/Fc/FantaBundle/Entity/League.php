@@ -106,10 +106,10 @@ class League
     /**
      * Add users
      *
-     * @param Fc\FantaBundle\Entity\User $users
+     * @param FcUser $users
      * @return League
      */
-    public function addUser(\Fc\FantaBundle\Entity\User $users)
+    public function addUser(FcUser $users)
     {
         $this->users[] = $users;
         return $this;
@@ -120,7 +120,7 @@ class League
      *
      * @param <variableType$users
      */
-    public function removeUser(\Fc\FantaBundle\Entity\User $users)
+    public function removeUser(FcUser $users)
     {
         $this->users->removeElement($users);
     }

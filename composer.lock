@@ -1,5 +1,5 @@
 {
-    "hash": "74d733d212b88cae6b6f4f3eaf6747f4",
+    "hash": "ac4f1a8761327ec63240b32e45c55fb0",
     "packages": [
         {
             "package": "doctrine/common",
@@ -34,6 +34,12 @@
             "version": "2.2.x-dev",
             "source-reference": "5d2a3bcb3b467f41ee58575764f3ba84937f76e4",
             "commit-date": "1341676080"
+        },
+        {
+            "package": "friendsofsymfony/user-bundle",
+            "version": "dev-master",
+            "source-reference": "93b174df2ca884a70ecd99cd12adc29c378ca053",
+            "commit-date": "1342876759"
         },
         {
             "package": "jms/aop-bundle",
@@ -80,8 +86,8 @@
         {
             "package": "sensio/framework-extra-bundle",
             "version": "dev-master",
-            "source-reference": "570a0bbb899264d45517a3b10c8d53eb60343d37",
-            "commit-date": "1343329251"
+            "source-reference": "a0d76a65aeb70be6f25754a4482e84a9a28fb614",
+            "commit-date": "1343456386"
         },
         {
             "package": "sensio/generator-bundle",
@@ -128,8 +134,8 @@
         {
             "package": "symfony/symfony",
             "version": "dev-master",
-            "source-reference": "e1c65fa9c0330f9dfc44355112c7c63bd1fd3b14",
-            "commit-date": "1343312182"
+            "source-reference": "de958c722c3598622031d3b2aba53a5b2e85bb2f",
+            "commit-date": "1343460308"
         },
         {
             "package": "twig/extensions",
@@ -146,8 +152,8 @@
         {
             "package": "twig/twig",
             "version": "dev-master",
-            "source-reference": "657de7bdeb680815e0df95f63da9f81e1533d2ea",
-            "commit-date": "1342953178"
+            "source-reference": "51c866f415bbee670cd9ba13591307bce8dabdca",
+            "commit-date": "1343464333"
         }
     ],
     "packages-dev": null,
