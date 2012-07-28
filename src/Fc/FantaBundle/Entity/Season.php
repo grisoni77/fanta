@@ -32,6 +32,11 @@ class Season
      * @ORM\OneToMany(targetEntity="Championship", mappedBy="season") 
      */
     private $championships;
+    
+    /**
+     * @ORM\Column(name="enabled", type="boolean")
+     */
+    private $enabled;
 
     /**
      * Get id
@@ -141,5 +146,27 @@ class Season
     public function getChampionships()
     {
         return $this->championships;
+    }
+
+    /**
+     * Set enabled
+     *
+     * @param boolean $enabled
+     * @return Season
+     */
+    public function setEnabled($enabled)
+    {
+        $this->enabled = $enabled;
+        return $this;
+    }
+
+    /**
+     * Get enabled
+     *
+     * @return boolean 
+     */
+    public function getEnabled()
+    {
+        return $this->enabled;
     }
 }

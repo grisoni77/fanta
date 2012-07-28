@@ -51,6 +51,11 @@ class Competition
      */
     private $teams;
     
+    /**
+     * @ORM\Column(name="enabled", type="boolean")
+     */
+    private $enabled;
+
     
     /**
      * Get id
@@ -194,5 +199,27 @@ class Competition
     public function getType()
     {
         return $this->type;
+    }
+
+    /**
+     * Set enabled
+     *
+     * @param boolean $enabled
+     * @return Competition
+     */
+    public function setEnabled($enabled)
+    {
+        $this->enabled = $enabled;
+        return $this;
+    }
+
+    /**
+     * Get enabled
+     *
+     * @return boolean 
+     */
+    public function getEnabled()
+    {
+        return $this->enabled;
     }
 }

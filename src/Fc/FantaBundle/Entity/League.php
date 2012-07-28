@@ -136,6 +136,11 @@ class League
     }
 
     /**
+     * @ORM\Column(name="enabled", type="boolean")
+     */
+    private $enabled;
+
+    /**
      * Add users
      *
      * @param Fc\UserBundle\Entity\User $users
@@ -165,5 +170,27 @@ class League
     public function getUsers()
     {
         return $this->users;
+    }
+
+    /**
+     * Set enabled
+     *
+     * @param boolean $enabled
+     * @return League
+     */
+    public function setEnabled($enabled)
+    {
+        $this->enabled = $enabled;
+        return $this;
+    }
+
+    /**
+     * Get enabled
+     *
+     * @return boolean 
+     */
+    public function getEnabled()
+    {
+        return $this->enabled;
     }
 }

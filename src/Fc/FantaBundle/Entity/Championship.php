@@ -52,6 +52,11 @@ class Championship
     private $leagues;
 
     /**
+     * @ORM\Column(name="enabled", type="boolean")
+     */
+    private $enabled;
+
+    /**
      * Get id
      *
      * @return integer 
@@ -217,4 +222,26 @@ class Championship
     }
 
     
+
+    /**
+     * Set enabled
+     *
+     * @param boolean $enabled
+     * @return Championship
+     */
+    public function setEnabled($enabled)
+    {
+        $this->enabled = $enabled;
+        return $this;
+    }
+
+    /**
+     * Get enabled
+     *
+     * @return boolean 
+     */
+    public function getEnabled()
+    {
+        return $this->enabled;
+    }
 }
