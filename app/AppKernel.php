@@ -23,6 +23,13 @@ class AppKernel extends Kernel
             new FOS\UserBundle\FOSUserBundle(),
             new Fc\FantaBundle\FcFantaBundle(),
             new Fc\UserBundle\FcUserBundle(),
+            new Fc\AdminBundle\FcAdminBundle(),
+            new Sonata\AdminBundle\SonataAdminBundle(),
+            new Sonata\jQueryBundle\SonatajQueryBundle(),
+            new Sonata\DoctrineORMAdminBundle\SonataDoctrineORMAdminBundle(),
+            new Knp\Bundle\MenuBundle\KnpMenuBundle,
+            new Sonata\BlockBundle\SonataBlockBundle(),
+            new Sonata\CacheBundle\SonataCacheBundle(),
         );
 
         if (in_array($this->getEnvironment(), array('dev', 'test'))) {

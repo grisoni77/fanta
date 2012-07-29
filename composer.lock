@@ -1,5 +1,5 @@
 {
-    "hash": "ac4f1a8761327ec63240b32e45c55fb0",
+    "hash": "277c47a739901eebe9379c9d35208fdc",
     "packages": [
         {
             "package": "doctrine/common",
@@ -32,8 +32,8 @@
         {
             "package": "doctrine/orm",
             "version": "2.2.x-dev",
-            "source-reference": "5d2a3bcb3b467f41ee58575764f3ba84937f76e4",
-            "commit-date": "1341676080"
+            "source-reference": "7d343302a8f886be9cfb2a9c8345a95740dcfde9",
+            "commit-date": "1343560954"
         },
         {
             "package": "friendsofsymfony/user-bundle",
@@ -60,6 +60,16 @@
         {
             "package": "jms/security-extra-bundle",
             "version": "1.1.0"
+        },
+        {
+            "package": "knplabs/knp-menu",
+            "version": "1.1.x-dev",
+            "source-reference": "v1.1.2",
+            "commit-date": "1339345240"
+        },
+        {
+            "package": "knplabs/knp-menu-bundle",
+            "version": "v1.1.0"
         },
         {
             "package": "kriswallsmith/assetic",
@@ -94,6 +104,42 @@
             "version": "dev-master",
             "source-reference": "4436c2e24301123fb413baf3f78cd93bbc016c07",
             "commit-date": "1343291371"
+        },
+        {
+            "package": "sonata-project/admin-bundle",
+            "version": "dev-master",
+            "source-reference": "e8b5cb27092fe0eb85bc50e91ccbec11b2b431e2",
+            "commit-date": "1343466527"
+        },
+        {
+            "package": "sonata-project/block-bundle",
+            "version": "dev-master",
+            "source-reference": "9bf4ff5bd675660d46c4cd8c5238d5ce434d03c6",
+            "commit-date": "1343343183"
+        },
+        {
+            "package": "sonata-project/cache-bundle",
+            "version": "dev-master",
+            "source-reference": "921309636b5f062c78bfde2c7dcdda2d820f0a4e",
+            "commit-date": "1342907451"
+        },
+        {
+            "package": "sonata-project/doctrine-orm-admin-bundle",
+            "version": "dev-master",
+            "source-reference": "b25ec97e8e83c69a9a553450bc3f939ddbb5af9a",
+            "commit-date": "1343469372"
+        },
+        {
+            "package": "sonata-project/exporter",
+            "version": "dev-master",
+            "source-reference": "bcdfd50bc3118173d914e790921701ab26fb6b14",
+            "commit-date": "1338844924"
+        },
+        {
+            "package": "sonata-project/jquery-bundle",
+            "version": "dev-master",
+            "source-reference": "785870afce016cc387fadb361ad52c3d4a2e7fe6",
+            "commit-date": "1339857469"
         },
         {
             "package": "swiftmailer/swiftmailer",
@@ -134,8 +180,8 @@
         {
             "package": "symfony/symfony",
             "version": "dev-master",
-            "source-reference": "de958c722c3598622031d3b2aba53a5b2e85bb2f",
-            "commit-date": "1343460308"
+            "source-reference": "50652a9717c97d587f215593082d1060a8b903de",
+            "commit-date": "1343553651"
         },
         {
             "package": "twig/extensions",
@@ -171,6 +217,8 @@
         "symfony/monolog-bundle": 20,
         "sensio/distribution-bundle": 20,
         "sensio/framework-extra-bundle": 20,
-        "sensio/generator-bundle": 20
+        "sensio/generator-bundle": 20,
+        "sonata-project/admin-bundle": 20,
+        "sonata-project/doctrine-orm-admin-bundle": 20
     }
 }
