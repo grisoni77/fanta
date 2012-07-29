@@ -35,7 +35,7 @@ class Club
     private $championship;
 
     /** 
-     * @ORM\ManyToMany(targetEntity="Player", inversedBy="clubs") 
+     * @ORM\ManyToMany(targetEntity="Player", mappedBy="clubs") 
      * @ORM\JoinTable(name="Player_Club")
      */
     private $players;
