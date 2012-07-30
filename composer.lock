@@ -1,9 +1,15 @@
 {
-    "hash": "277c47a739901eebe9379c9d35208fdc",
+    "hash": "b9738827a3db90f0619dc85128b0743f",
     "packages": [
         {
             "package": "doctrine/common",
             "version": "2.2.2"
+        },
+        {
+            "package": "doctrine/data-fixtures",
+            "version": "dev-master",
+            "source-reference": "779c3dfe446b6da893be87b908d6be28345d1e01",
+            "commit-date": "1341780535"
         },
         {
             "package": "doctrine/dbal",
@@ -14,8 +20,20 @@
         {
             "package": "doctrine/doctrine-bundle",
             "version": "dev-master",
-            "source-reference": "62134e6a8dd3f330131ee6a970f0cee1d7760c1d",
-            "commit-date": "1343203511"
+            "alias-pretty-version": "1.0.x-dev",
+            "alias-version": "1.0.9999999.9999999-dev"
+        },
+        {
+            "package": "doctrine/doctrine-bundle",
+            "version": "dev-master",
+            "source-reference": "ed8d02b491512f947fdb2f8b665dc8fd72b5879c",
+            "commit-date": "1343657020"
+        },
+        {
+            "package": "doctrine/doctrine-fixtures-bundle",
+            "version": "dev-master",
+            "source-reference": "a5103a71bcd9b2f851ca6c16519a077784a3184a",
+            "commit-date": "1341472847"
         },
         {
             "package": "doctrine/doctrine-migrations-bundle",
@@ -88,8 +106,8 @@
         {
             "package": "kriswallsmith/assetic",
             "version": "dev-master",
-            "source-reference": "c518a48ddc26af898191410cc35f7f30aaed448e",
-            "commit-date": "1343084248"
+            "source-reference": "11324294acf2dcf6b7f7cb0c4f35fd77e6f01cb7",
+            "commit-date": "1343684910"
         },
         {
             "package": "monolog/monolog",
@@ -100,12 +118,6 @@
             "version": "dev-master",
             "source-reference": "5886adae1613c0a72fbb95259a83ae798e86c0d3",
             "commit-date": "1342347850"
-        },
-        {
-            "package": "sensio/framework-extra-bundle",
-            "version": "dev-master",
-            "alias-pretty-version": "2.1.x-dev",
-            "alias-version": "2.1.9999999.9999999-dev"
         },
         {
             "package": "sensio/framework-extra-bundle",
@@ -122,8 +134,8 @@
         {
             "package": "sonata-project/admin-bundle",
             "version": "dev-master",
-            "source-reference": "47fdb8677041d896b3443705e5906af3850430e2",
-            "commit-date": "1343598892"
+            "source-reference": "73714ad9e18cbf48d2b64fcb9467b7beadfbcd64",
+            "commit-date": "1343657892"
         },
         {
             "package": "sonata-project/block-bundle",
@@ -170,8 +182,8 @@
         {
             "package": "symfony/assetic-bundle",
             "version": "dev-master",
-            "source-reference": "a5daf7ca4588f88105c808de9a28ba1e66bfa082",
-            "commit-date": "1343161458"
+            "source-reference": "24df9ede95084be882aeb557eaef5b761cfa00e0",
+            "commit-date": "1343684934"
         },
         {
             "package": "symfony/monolog-bundle",
@@ -194,8 +206,8 @@
         {
             "package": "symfony/symfony",
             "version": "dev-master",
-            "source-reference": "cbd03ec4c66567cf2bf4ea9e0e3315a522b4eeb3",
-            "commit-date": "1343635713"
+            "source-reference": "a172a812960d060cd5dd13e4dcf3b2bc4043a18f",
+            "commit-date": "1343639879"
         },
         {
             "package": "twig/extensions",
@@ -233,6 +245,7 @@
         "sensio/framework-extra-bundle": 20,
         "sensio/generator-bundle": 20,
         "sonata-project/admin-bundle": 20,
-        "sonata-project/doctrine-orm-admin-bundle": 20
+        "sonata-project/doctrine-orm-admin-bundle": 20,
+        "doctrine/doctrine-fixtures-bundle": 20
     }
 }
