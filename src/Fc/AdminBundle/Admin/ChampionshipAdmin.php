@@ -3,6 +3,7 @@
 namespace Fc\AdminBundle\Admin;
 
 use Sonata\AdminBundle\Admin\Admin;
+use Sonata\AdminBundle\Route\RouteCollection;
 use Sonata\AdminBundle\Form\FormMapper;
 use Sonata\AdminBundle\Datagrid\DatagridMapper;
 use Sonata\AdminBundle\Datagrid\ListMapper;
@@ -43,9 +44,12 @@ class ChampionshipAdmin extends Admin
     {
         $formMapper
             ->with('General')
-                ->add('enabled', null, array('required' => false))
+                ->add('enabled', 'sonata_type_boolean', array('required' => false, 'expanded' => false))
                 ->add('name')
                 ->add('season', 'sonata_type_model', array('expanded' => true, 'compound' => true))
+            ->end()
+            ->with('Clubs')
+                //->add('clubs', 'sonata_type_model')
             ->end()
         ;
     }
@@ -68,6 +72,7 @@ class ChampionshipAdmin extends Admin
                     'delete' => array(),
                 )
             ))
+            
         ;
     }
 
@@ -80,9 +85,30 @@ class ChampionshipAdmin extends Admin
     {
         $datagridMapper
             ->add('name')
+            ->add('season')
             ->add('enabled')
         ;
     }
+    
+    
+    
+    protected function configureRoutes(RouteCollection $collection)
+    {
+        $collection->add('import', 'import-players');
+    }    
+    
+    /**
+     * {@inheritdoc}
+     */
+    protected function configureSideMenu(MenuItemInterface $menu, $action, Admin $childAdmin = null)
+    {
+        $admin = $this->isChild() ? $this->getParent() : $this;
+
+        $menu->addChild(
+            $this->trans('Importa giocatori'),
+            array('uri' => $admin->generateUrl('import'))
+        );
+    }    
 }
 
 ?>

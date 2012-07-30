@@ -69,6 +69,21 @@ fos_user:
       type: fc_user_registration
       
       
+sonata_admin:
+    title:      Fanta Project Admin
+    title_logo: /bundles/sonataadmin/logo_title.png
+    dashboard:
+      blocks:
+        # Customize this part to add new block configuration
+        - { position: left, type: sonata.admin.block.admin_list }
+        - { position: right, type: sonata.block.service.text, settings: { content: "<h2>Welcome to the Sonata Admin</h2> <p>This is a <code>sonata.block.service.text</code> from the Block Bundle, you can create and add new block in these area by configuring the <code>sonata_admin</code> section.</p> <br /> For instance, here a RSS feed parser (<code>sonata.block.service.rss</code>):"} }
+      
+      groups:
+        datireali:
+          label: Dati reali
+          items: ~
+            
+
 sonata_block:
     default_contexts: [cms]
     blocks:
@@ -90,12 +105,18 @@ services:
   fc.admin.admin.season:
       class: Fc\AdminBundle\Admin\SeasonAdmin
       tags:
-        - { name: sonata.admin, manager_type: orm, group: Dati, label: Stagioni }
+        - { name: sonata.admin, manager_type: orm, group: datireali, label: Stagioni }
       arguments: [null, Fc\FantaBundle\Entity\Season, FcAdminBundle:SeasonAdmin]
       
   fc.admin.admin.championship:
       class: Fc\AdminBundle\Admin\ChampionshipAdmin
       tags:
-        - { name: sonata.admin, manager_type: orm, group: Dati, label: Campionati }
+        - { name: sonata.admin, manager_type: orm, group: datireali, label: Campionati }
       arguments: [null, Fc\FantaBundle\Entity\Championship, FcAdminBundle:ChampionshipAdmin]      
+
+  fc.admin.admin.club:
+      class: Fc\AdminBundle\Admin\ClubAdmin
+      tags:
+        - { name: sonata.admin, manager_type: orm, group: datireali, label: Clubs }
+      arguments: [null, Fc\FantaBundle\Entity\Club, FcAdminBundle:ClubAdmin]      
       

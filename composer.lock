@@ -63,13 +63,21 @@
         },
         {
             "package": "knplabs/knp-menu",
-            "version": "1.1.x-dev",
-            "source-reference": "v1.1.2",
-            "commit-date": "1339345240"
+            "version": "dev-master",
+            "alias-pretty-version": "2.0.x-dev",
+            "alias-version": "2.0.9999999.9999999-dev"
+        },
+        {
+            "package": "knplabs/knp-menu",
+            "version": "dev-master",
+            "source-reference": "418788056ba5b95f4a2717ba5b4d4ab078aca4ab",
+            "commit-date": "1340209324"
         },
         {
             "package": "knplabs/knp-menu-bundle",
-            "version": "v1.1.0"
+            "version": "dev-master",
+            "source-reference": "ba1ff625e4b34131106e12ee475eb6397eb5a758",
+            "commit-date": "1341324163"
         },
         {
             "package": "kriswallsmith/assetic",
@@ -96,8 +104,14 @@
         {
             "package": "sensio/framework-extra-bundle",
             "version": "dev-master",
-            "source-reference": "a0d76a65aeb70be6f25754a4482e84a9a28fb614",
-            "commit-date": "1343456386"
+            "alias-pretty-version": "2.1.x-dev",
+            "alias-version": "2.1.9999999.9999999-dev"
+        },
+        {
+            "package": "sensio/framework-extra-bundle",
+            "version": "dev-master",
+            "source-reference": "dbe4432742e16ee9ca550a2f953b059f0a80c53d",
+            "commit-date": "1343637454"
         },
         {
             "package": "sensio/generator-bundle",
@@ -108,8 +122,8 @@
         {
             "package": "sonata-project/admin-bundle",
             "version": "dev-master",
-            "source-reference": "e8b5cb27092fe0eb85bc50e91ccbec11b2b431e2",
-            "commit-date": "1343466527"
+            "source-reference": "47fdb8677041d896b3443705e5906af3850430e2",
+            "commit-date": "1343598892"
         },
         {
             "package": "sonata-project/block-bundle",
@@ -126,8 +140,8 @@
         {
             "package": "sonata-project/doctrine-orm-admin-bundle",
             "version": "dev-master",
-            "source-reference": "b25ec97e8e83c69a9a553450bc3f939ddbb5af9a",
-            "commit-date": "1343469372"
+            "source-reference": "aff26e9b857e6e8e4c80629debce90ad560e1708",
+            "commit-date": "1343578015"
         },
         {
             "package": "sonata-project/exporter",
@@ -180,8 +194,8 @@
         {
             "package": "symfony/symfony",
             "version": "dev-master",
-            "source-reference": "50652a9717c97d587f215593082d1060a8b903de",
-            "commit-date": "1343553651"
+            "source-reference": "cbd03ec4c66567cf2bf4ea9e0e3315a522b4eeb3",
+            "commit-date": "1343635713"
         },
         {
             "package": "twig/extensions",

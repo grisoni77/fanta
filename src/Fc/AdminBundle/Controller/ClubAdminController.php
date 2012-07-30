@@ -10,10 +10,7 @@ use Sonata\AdminBundle\Controller\CRUDController as Controller;
  *
  * @author cris
  */
-class ChampionshipAdminController extends Controller {
+class ClubAdminController extends Controller {
 
-    public function importAction()
-    {
-        
-    }
+
 }

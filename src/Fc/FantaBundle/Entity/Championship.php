@@ -218,7 +218,7 @@ class Championship
      */
     public function __toString()
     {
-        return $this->getName();
+        return sprintf("%s - %s", $this->getName(), $this->getSeason());
     }
 
     
