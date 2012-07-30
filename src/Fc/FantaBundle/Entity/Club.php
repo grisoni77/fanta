@@ -187,4 +187,10 @@ class Club
     {
         return $this->championship;
     }
+    
+    
+    public function __toString() {
+        return $this->getName();
+    }
+            
 }

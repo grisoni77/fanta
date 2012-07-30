@@ -29,6 +29,13 @@ class Role
     private $name;
 
     /**
+     * @var integer $code
+     * 
+     * @ORM\Column(name="code", type="integer") 
+     */
+    private $code;
+    
+    /**
      * Get id
      *
      * @return integer 
@@ -60,4 +67,30 @@ class Role
         return $this->name;
     }
     
+
+    /**
+     * Set code
+     *
+     * @param integer $code
+     * @return Role
+     */
+    public function setCode($code)
+    {
+        $this->code = $code;
+        return $this;
+    }
+
+    /**
+     * Get code
+     *
+     * @return integer 
+     */
+    public function getCode()
+    {
+        return $this->code;
+    }
+    
+    public function __toString() {
+        return $this->getName();
+    }    
 }

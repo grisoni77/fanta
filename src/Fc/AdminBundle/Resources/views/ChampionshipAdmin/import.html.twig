@@ -1,3 +1,18 @@
 {# empty Twig template #}
 
-{% extends 'SonataAdminBundle::standard_layout.html.twig' %}
+{% extends 'SonataAdminBundle:CRUD:action.html.twig' %}
+
+{% block content %}
+
+<h2>Seleziona un file dei giocatori da importare nel campionato "{{ champ }}"</h2>
+
+{% if (msg) %}
+<p>{{ msg }}</p>
+{% endif %}
+
+<form action="{{ admin.generateUrl('import', {'id': id}) }}" method="post" {{ form_enctype(form) }}>
+    {{ form_widget(form) }}
+
+    <input type="submit" />
+</form>
+{% endblock %}

@@ -119,4 +119,10 @@ services:
       tags:
         - { name: sonata.admin, manager_type: orm, group: datireali, label: Clubs }
       arguments: [null, Fc\FantaBundle\Entity\Club, FcAdminBundle:ClubAdmin]      
+
+  fc.admin.admin.player:
+      class: Fc\AdminBundle\Admin\PlayerAdmin
+      tags:
+        - { name: sonata.admin, manager_type: orm, group: datireali, label: Giocatori }
+      arguments: [null, Fc\FantaBundle\Entity\Player, FcAdminBundle:PlayerAdmin]      
       

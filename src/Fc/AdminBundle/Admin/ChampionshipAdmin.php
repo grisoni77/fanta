@@ -67,6 +67,7 @@ class ChampionshipAdmin extends Admin
             ->add('enabled')
             ->add('_action', 'actions', array(
                 'actions' => array(
+                    'import' => array('template' => 'FcAdminBundle:ChampionshipAdmin:list__action_import.html.twig'),
                     'view' => array(),
                     'edit' => array(),
                     'delete' => array(),
@@ -99,16 +100,25 @@ class ChampionshipAdmin extends Admin
     
     /**
      * {@inheritdoc}
-     */
     protected function configureSideMenu(MenuItemInterface $menu, $action, Admin $childAdmin = null)
     {
         $admin = $this->isChild() ? $this->getParent() : $this;
 
-        $menu->addChild(
-            $this->trans('Importa giocatori'),
-            array('uri' => $admin->generateUrl('import'))
-        );
+        if ($action=="list")
+        {
+            $menu->addChild(
+                $this->trans('Importa giocatori'),
+                array('uri' => $admin->generateUrl('import'))
+            );
+        }
     }    
+    
+    public function getListTemplate()
+    {
+        return 'FcAdminBundle:ChampionshipAdmin:list.html.twig';
+    }
+     */
+
 }
 
 ?>
