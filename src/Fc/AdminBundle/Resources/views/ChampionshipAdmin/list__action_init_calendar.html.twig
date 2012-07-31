@@ -1,0 +1,5 @@
+{% if object.isCalendarFrozen==false and admin.isGranted('EDIT', object) and admin.hasRoute('init_calendar') %}
+    <a href="{{ admin.generateObjectUrl('init_calendar', object) }}" class="import_link" title="Crea Calendario">
+        Crea Calendario
+    </a>
+{% endif %}

@@ -36,7 +36,7 @@ class Club
 
     /** 
      * @ORM\ManyToMany(targetEntity="Player", mappedBy="clubs") 
-     * @ORM\JoinTable(name="Player_Club")
+     * @ORM\JoinTable(name="Signing")
      */
     private $players;
     

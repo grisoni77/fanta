@@ -4,6 +4,12 @@
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
 
+    <services>
+        <service id="fc.admin.form.type.boolean" class="Fc\AdminBundle\Form\Type\FcBooleanType">
+            <tag name="form.type" alias="fc_type_boolean" />
+            <argument type="service" id="translator" />
+        </service>
+    </services>        
     <!--
     <parameters>
         <parameter key="fc_admin.example.class">Fc\AdminBundle\Example</parameter>

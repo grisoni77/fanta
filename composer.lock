@@ -206,8 +206,8 @@
         {
             "package": "symfony/symfony",
             "version": "dev-master",
-            "source-reference": "a172a812960d060cd5dd13e4dcf3b2bc4043a18f",
-            "commit-date": "1343639879"
+            "source-reference": "788e5eb730ad1c0436c519cf0b878fc48b854044",
+            "commit-date": "1343723577"
         },
         {
             "package": "twig/extensions",

@@ -44,7 +44,8 @@ class ChampionshipAdmin extends Admin
     {
         $formMapper
             ->with('General')
-                ->add('enabled', 'sonata_type_boolean', array('required' => false, 'expanded' => false))
+                ->add('enabled', 'fc_type_boolean', array('expanded' => false))
+                ->add('is_calendar_frozen', 'fc_type_boolean', array('expanded' => false))
                 ->add('name')
                 ->add('season', 'sonata_type_model', array('expanded' => true, 'compound' => true))
             ->end()
@@ -68,6 +69,7 @@ class ChampionshipAdmin extends Admin
             ->add('_action', 'actions', array(
                 'actions' => array(
                     'import' => array('template' => 'FcAdminBundle:ChampionshipAdmin:list__action_import.html.twig'),
+                    'init_calendar' => array('template' => 'FcAdminBundle:ChampionshipAdmin:list__action_init_calendar.html.twig'),
                     'view' => array(),
                     'edit' => array(),
                     'delete' => array(),
@@ -95,6 +97,7 @@ class ChampionshipAdmin extends Admin
     
     protected function configureRoutes(RouteCollection $collection)
     {
+        $collection->add('init_calendar', 'init-calendar');
         $collection->add('import', 'import-players');
     }    
     

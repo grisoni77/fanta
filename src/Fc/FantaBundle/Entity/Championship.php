@@ -41,6 +41,12 @@ class Championship
      */
     private $clubs;
     
+    
+    /**
+     * @ORM\Column(name="is_calendar_frozen", type="boolean")
+     */
+    private $isCalendarFrozen;
+            
     /**
      * @ORM\OneToMany(targetEntity="Day", mappedBy="championship") 
      */
@@ -247,4 +253,26 @@ class Championship
     
     
 
+
+    /**
+     * Set isCalendarFrozen
+     *
+     * @param boolean $isCalendarFrozen
+     * @return Championship
+     */
+    public function setIsCalendarFrozen($isCalendarFrozen)
+    {
+        $this->isCalendarFrozen = $isCalendarFrozen;
+        return $this;
+    }
+
+    /**
+     * Get isCalendarFrozen
+     *
+     * @return boolean 
+     */
+    public function getIsCalendarFrozen()
+    {
+        return $this->isCalendarFrozen;
+    }
 }
