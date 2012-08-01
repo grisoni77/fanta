@@ -4,13 +4,13 @@
 
 {% block content %}
 
-<h2>Seleziona un file dei giocatori da importare nel campionato "{{ champ }}"</h2>
+<h2>Seleziona un file dei voti Gazzetta da importare nel campionato "{{ champ }}"</h2>
 
 {% if (msg) %}
 <p>{{ msg }}</p>
 {% endif %}
 
-<form action="{{ admin.generateUrl('import', {'id': id}) }}" method="post" {{ form_enctype(form) }}>
+<form action="{{ admin.generateUrl('import_marks', {'id': id}) }}" method="post" {{ form_enctype(form) }}>
     {{ form_widget(form) }}
 
     <input type="submit" />

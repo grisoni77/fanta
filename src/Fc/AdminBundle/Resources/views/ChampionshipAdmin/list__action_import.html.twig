@@ -1,5 +1,0 @@
-{% if admin.isGranted('IMPORT', object) and admin.hasRoute('import') %}
-    <a href="{{ admin.generateObjectUrl('import', object) }}" class="import_link" title="Importa giocatori">
-        Importa giocatori
-    </a>
-{% endif %}

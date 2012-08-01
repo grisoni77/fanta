@@ -1,0 +1,5 @@
+{% if object.isCalendarFrozen==false and admin.isGranted('EDIT', object) and admin.hasRoute('import_players') %}
+    <a href="{{ admin.generateObjectUrl('import_players', object) }}" class="import_link" title="Importa giocatori">
+        Importa giocatori
+    </a>
+{% endif %}

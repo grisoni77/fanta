@@ -157,4 +157,9 @@ class Day
     {
         return $this->marks;
     }
+    
+    public function __toString()
+    {
+        return sprintf("Giornata %-2d", $this->getNumber());
+    }
 }

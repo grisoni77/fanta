@@ -42,6 +42,13 @@ class Player
      */
     private $code;
 
+    /**
+     *
+     * @var integer $quotation
+     * 
+     * @ORM\Column(name="quotation", type="integer") 
+     */
+    private $quotation;
     /** 
      * @ORM\OneToMany(targetEntity="Signing", mappedBy="player")
      */
@@ -340,6 +347,15 @@ class Player
         return $this->currentClub;
     }
     
+    public function isCurrentClub(Club $club) {
+        $curr = $this->getCurrentClub();
+        //print_r($curr->getName());
+        //print_r($club->getName());
+        //echo '<br/>';
+        //die();
+        return $club->getId() == $curr->getId();
+    }
+    
     
     public function __toString()
     {
@@ -347,5 +363,27 @@ class Player
                 $this->getRole()->getLetter(), 
                 $this->getName()
         );
+    }
+
+    /**
+     * Set quotation
+     *
+     * @param integer $quotation
+     * @return Player
+     */
+    public function setQuotation($quotation)
+    {
+        $this->quotation = $quotation;
+        return $this;
+    }
+
+    /**
+     * Get quotation
+     *
+     * @return integer 
+     */
+    public function getQuotation()
+    {
+        return $this->quotation;
     }
 }

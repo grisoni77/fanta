@@ -68,7 +68,8 @@ class ChampionshipAdmin extends Admin
             ->add('enabled')
             ->add('_action', 'actions', array(
                 'actions' => array(
-                    'import' => array('template' => 'FcAdminBundle:ChampionshipAdmin:list__action_import.html.twig'),
+                    'import_players' => array('template' => 'FcAdminBundle:ChampionshipAdmin:list__action_import_players.html.twig'),
+                    'import_marks' => array('template' => 'FcAdminBundle:ChampionshipAdmin:list__action_import_marks.html.twig'),
                     'init_calendar' => array('template' => 'FcAdminBundle:ChampionshipAdmin:list__action_init_calendar.html.twig'),
                     'view' => array(),
                     'edit' => array(),
@@ -98,7 +99,8 @@ class ChampionshipAdmin extends Admin
     protected function configureRoutes(RouteCollection $collection)
     {
         $collection->add('init_calendar', 'init-calendar');
-        $collection->add('import', 'import-players');
+        $collection->add('import_players', 'import-players');
+        $collection->add('import_marks', 'import-marks');
     }    
     
     /**
