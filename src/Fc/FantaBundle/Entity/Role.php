@@ -36,6 +36,13 @@ class Role
     private $code;
     
     /**
+     * var string $letter
+     * 
+     * @ORM\Column(name="letter", type="string", length=1)
+     */
+    private $letter;
+    
+    /**
      * Get id
      *
      * @return integer 
@@ -93,4 +100,26 @@ class Role
     public function __toString() {
         return $this->getName();
     }    
+
+    /**
+     * Set letter
+     *
+     * @param string $letter
+     * @return Role
+     */
+    public function setLetter($letter)
+    {
+        $this->letter = $letter;
+        return $this;
+    }
+
+    /**
+     * Get letter
+     *
+     * @return string 
+     */
+    public function getLetter()
+    {
+        return $this->letter;
+    }
 }

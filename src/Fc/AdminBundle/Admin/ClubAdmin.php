@@ -44,6 +44,15 @@ class ClubAdmin extends Admin
             ->end()
         ;
     }
+    
+    public function configureShowFields(ShowMapper $showMapper)
+    {
+        $showMapper
+                ->add('name')
+                ->add('championship')
+                ->add('currentPlayers')
+        ;
+    }
 }
 
 ?>

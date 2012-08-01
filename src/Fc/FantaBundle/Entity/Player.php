@@ -8,7 +8,7 @@ use Doctrine\ORM\Mapping as ORM;
  * Fc\FantaBundle\Entity\Player
  *
  * @ORM\Table()
- * @ORM\Entity
+ * @ORM\Entity(repositoryClass="Fc\FantaBundle\Repository\PlayerRepository")
  */
 class Player
 {
@@ -43,10 +43,15 @@ class Player
     private $code;
 
     /** 
-     * @ORM\ManyToMany(targetEntity="Club", inversedBy="players")
-     * @ORM\JoinTable(name="Signing") 
+     * @ORM\OneToMany(targetEntity="Signing", mappedBy="player")
      */
-    private $clubs;
+    private $signings;
+    
+    /**
+     * @ORM\ManyToOne(targetEntity="Club", inversedBy="currentPlayers")
+     * @ORM\JoinColumn(name="current_club_id", referencedColumnName="id", onDelete="SET NULL")
+     */
+    private $currentClub;
     
     /**
      * @ORM\OneToMany(targetEntity="Mark", mappedBy="player")
@@ -243,75 +248,12 @@ class Player
     }
     public function __construct()
     {
-        $this->signings = new \Doctrine\Common\Collections\ArrayCollection();
-        $this->marks = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->listings     = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->transactions = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->signings     = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->marks        = new \Doctrine\Common\Collections\ArrayCollection();
     }
     
-
-    /**
-     * Add teams
-     *
-     * @param Fc\FantaBundle\Entity\Team $teams
-     * @return Player
-     */
-    public function addTeam(\Fc\FantaBundle\Entity\Team $teams)
-    {
-        $this->teams[] = $teams;
-        return $this;
-    }
-
-    /**
-     * Remove teams
-     *
-     * @param <variableType$teams
-     */
-    public function removeTeam(\Fc\FantaBundle\Entity\Team $teams)
-    {
-        $this->teams->removeElement($teams);
-    }
-
-    /**
-     * Get teams
-     *
-     * @return Doctrine\Common\Collections\Collection 
-     */
-    public function getTeams()
-    {
-        return $this->teams;
-    }
-
-    /**
-     * Add clubs
-     *
-     * @param Fc\FantaBundle\Entity\Club $clubs
-     * @return Player
-     */
-    public function addClub(\Fc\FantaBundle\Entity\Club $clubs)
-    {
-        $this->clubs[] = $clubs;
-        return $this;
-    }
-
-    /**
-     * Remove clubs
-     *
-     * @param <variableType$clubs
-     */
-    public function removeClub(\Fc\FantaBundle\Entity\Club $clubs)
-    {
-        $this->clubs->removeElement($clubs);
-    }
-
-    /**
-     * Get clubs
-     *
-     * @return Doctrine\Common\Collections\Collection 
-     */
-    public function getClubs()
-    {
-        return $this->clubs;
-    }
-
     /**
      * Add listings
      *
@@ -374,5 +316,36 @@ class Player
     public function getTransactions()
     {
         return $this->transactions;
+    }
+
+    /**
+     * Set currentClub
+     *
+     * @param Fc\FantaBundle\Entity\Club $currentClub
+     * @return Player
+     */
+    public function setCurrentClub(\Fc\FantaBundle\Entity\Club $currentClub = null)
+    {
+        $this->currentClub = $currentClub;
+        return $this;
+    }
+
+    /**
+     * Get currentClub
+     *
+     * @return Fc\FantaBundle\Entity\Club 
+     */
+    public function getCurrentClub()
+    {
+        return $this->currentClub;
+    }
+    
+    
+    public function __toString()
+    {
+        return sprintf("%s %s", 
+                $this->getRole()->getLetter(), 
+                $this->getName()
+        );
     }
 }

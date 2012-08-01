@@ -35,11 +35,15 @@ class Club
     private $championship;
 
     /** 
-     * @ORM\ManyToMany(targetEntity="Player", mappedBy="clubs") 
-     * @ORM\JoinTable(name="Signing")
+     * @ORM\OneToMany(targetEntity="Signing", mappedBy="club")
      */
-    private $players;
+    private $signings;
     
+    /**
+     * @ORM\OneToMany(targetEntity="Player", mappedBy="currentClub") 
+     * @ORM\OrderBy({"role_code" = "ASC", "name" = "ASC"})
+     */
+    private $currentPlayers;
     
     /**
      * Get id
@@ -134,37 +138,6 @@ class Club
     }
     
 
-    /**
-     * Add players
-     *
-     * @param Fc\FantaBundle\Entity\Player $players
-     * @return Team
-     */
-    public function addPlayer(\Fc\FantaBundle\Entity\Player $players)
-    {
-        $this->players[] = $players;
-        return $this;
-    }
-
-    /**
-     * Remove players
-     *
-     * @param <variableType$players
-     */
-    public function removePlayer(\Fc\FantaBundle\Entity\Player $players)
-    {
-        $this->players->removeElement($players);
-    }
-
-    /**
-     * Get players
-     *
-     * @return Doctrine\Common\Collections\Collection 
-     */
-    public function getPlayers()
-    {
-        return $this->players;
-    }
 
     /**
      * Set championship
@@ -193,4 +166,36 @@ class Club
         return $this->getName();
     }
             
+
+    /**
+     * Add currentPlayers
+     *
+     * @param Fc\FantaBundle\Entity\Player $currentPlayers
+     * @return Club
+     */
+    public function addCurrentPlayer(\Fc\FantaBundle\Entity\Player $currentPlayers)
+    {
+        $this->currentPlayers[] = $currentPlayers;
+        return $this;
+    }
+
+    /**
+     * Remove currentPlayers
+     *
+     * @param Fc\FantaBundle\Entity\Player $currentPlayers
+     */
+    public function removeCurrentPlayer(\Fc\FantaBundle\Entity\Player $currentPlayers)
+    {
+        $this->currentPlayers->removeElement($currentPlayers);
+    }
+
+    /**
+     * Get currentPlayers
+     *
+     * @return Doctrine\Common\Collections\Collection 
+     */
+    public function getCurrentPlayers()
+    {
+        return $this->currentPlayers;
+    }
 }

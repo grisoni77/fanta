@@ -9,6 +9,7 @@ use Fc\FantaBundle\Entity\Championship;
 use Fc\FantaBundle\Entity\Player;
 use Fc\FantaBundle\Entity\Club;
 use Fc\FantaBundle\Entity\Day;
+use Fc\FantaBundle\Entity\Signing;
 
 /**
  * Description of SeasonAdminController
@@ -66,6 +67,19 @@ class ChampionshipAdminController extends Controller {
         $plRepo = $em->getRepository('FcFantaBundle:Player');
         $clRepo = $em->getRepository('FcFantaBundle:Club');
         $roRepo = $em->getRepository('FcFantaBundle:Role');
+        $daRepo = $em->getRepository('FcFantaBundle:Day');
+        $siRepo = $em->getRepository('FcFantaBundle:Signing');
+        
+        // cerca giornata zero e se non la trova la crea
+        $day = $daRepo->findOneBy(array('championship'=>$champ, 'number' => 0));
+        if (!$day) {
+            $day = new Day();
+            $day->setChampionship($champ);
+            $day->setNumber($g*$data['num_giornate']+$d);
+            $day->setDate(new \DateTime());
+            $em->persist($day);
+        }
+        
         
         //print_r($file->openFile());
         //print_r($file->getClientOriginalName());die();
@@ -97,12 +111,18 @@ class ChampionshipAdminController extends Controller {
                             $em->persist($clubs[$clubName]);
                         }
                     }
-                    $player->addClub($clubs[$clubName]);
+                    //$player->addClub($clubs[$clubName]);
                     // look for role
                     $role = $roRepo->findOneBy(array('code' => $data[5]));
                     $player->setRole($role);
                     $em->persist($player);
-                    //die();
+                    // aggiorna giornata di riferimento in signing
+                    $signing = new Signing();
+                    $signing->setDay($day);
+                    $signing->setPlayer($player);
+                    $signing->setClub($clubs[$clubName]);
+                    $player->setCurrentClub($clubs[$clubName]);
+                    $em->persist($signing);
                 }
             }
         }
@@ -161,10 +181,23 @@ class ChampionshipAdminController extends Controller {
         $em = $this->getDoctrine()->getEntityManager();
         $builder = $em->createQueryBuilder();
         // remove old days
-        $qd = $em->createQuery('delete from FcFantaBundle:Day d where d.championship = :champ')
+        $qd = $em->createQuery('delete from FcFantaBundle:Day d where d.number > 0 AND d.championship = :champ')
                 ->setParameter('champ', $champ);
-        if (!$qd->execute()) {
-            throw new ErrorException('ciupa'.$qd);
+        if (false === $qd->execute()) {
+            //throw new \Doctrine\ORM\Query\QueryException('ciupa'.$qd->getSQL());
+            return false;
+        }
+        
+        // genera giornata zero (prima dell'inizio, serve per inizializzazione giocatori)
+        // se non esiste già
+        $daRepo = $em->getRepository('FcFantaBundle:Day');
+        $day = $daRepo->findOneBy(array('championship'=>$champ, 'number' => 0));
+        if (!$day) {
+            $day = new Day();
+            $day->setChampionship($champ);
+            $day->setNumber(0);
+            $day->setDate(new \DateTime());
+            $em->persist($day);
         }
         
         for ($g=0; $g<$data['num_gironi']; $g++)
@@ -180,5 +213,6 @@ class ChampionshipAdminController extends Controller {
         }
         
         $em->flush();
+        return true;
     }
 }

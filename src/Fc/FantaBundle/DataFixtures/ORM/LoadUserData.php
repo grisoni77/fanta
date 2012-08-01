@@ -18,21 +18,25 @@ class LoadUserData implements FixtureInterface
         $role = new Role();
         $role->setCode(0);
         $role->setName('Portiere');
+        $role->setLetter('P');
         $manager->persist($role);
         
         $role = new Role();
         $role->setCode(1);
         $role->setName('Difensore');
+        $role->setLetter('D');
         $manager->persist($role);
         
         $role = new Role();
         $role->setCode(2);
         $role->setName('Centrocampista');
+        $role->setLetter('C');
         $manager->persist($role);
         
         $role = new Role();
         $role->setCode(3);
         $role->setName('Attaccante');
+        $role->setLetter('A');
         $manager->persist($role);
         
         // inserisci stagione/campionati di test

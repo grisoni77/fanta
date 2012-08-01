@@ -106,7 +106,7 @@ services:
       class: Fc\AdminBundle\Admin\SeasonAdmin
       tags:
         - { name: sonata.admin, manager_type: orm, group: datireali, label: Stagioni }
-      arguments: [null, Fc\FantaBundle\Entity\Season, FcAdminBundle:SeasonAdmin]
+      arguments: [null, Fc\FantaBundle\Entity\Season, null]
       
   fc.admin.admin.championship:
       class: Fc\AdminBundle\Admin\ChampionshipAdmin
@@ -118,11 +118,11 @@ services:
       class: Fc\AdminBundle\Admin\ClubAdmin
       tags:
         - { name: sonata.admin, manager_type: orm, group: datireali, label: Clubs }
-      arguments: [null, Fc\FantaBundle\Entity\Club, FcAdminBundle:ClubAdmin]      
+      arguments: [null, Fc\FantaBundle\Entity\Club, null]      
 
   fc.admin.admin.player:
       class: Fc\AdminBundle\Admin\PlayerAdmin
       tags:
         - { name: sonata.admin, manager_type: orm, group: datireali, label: Giocatori }
-      arguments: [null, Fc\FantaBundle\Entity\Player, FcAdminBundle:PlayerAdmin]      
+      arguments: [null, Fc\FantaBundle\Entity\Player, null]      
       

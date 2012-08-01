@@ -28,8 +28,9 @@ class SeasonAdmin extends Admin
     protected function configureShowField(ShowMapper $showMapper)
     {
         $showMapper
-            ->add('enabled')
-            ->add('title')
+                ->add('enabled')
+                ->add('title')
+                ->add('championships')
         ;
     }
 

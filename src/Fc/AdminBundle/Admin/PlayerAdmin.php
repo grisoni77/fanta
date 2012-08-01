@@ -25,7 +25,7 @@ class PlayerAdmin extends Admin
         $listMapper
             ->addIdentifier('name')
             ->add('role', 'sonata_model_type', array('label'=>'Ruolo'))
-            ->add('club', 'sonata_model_type', array('label' => 'Club'))
+            ->add('currentClub', 'sonata_model_type', array('label' => 'Club'))
             //->add('club.championship', 'sonata_model_type', array('label' => 'Campionato'))
             //->add('championship.season', 'sonata_type_model', array('label'=>'Stagione'))
             ->add('_action', 'actions', array(
@@ -49,6 +49,20 @@ class PlayerAdmin extends Admin
             ->add('name')
             ->add('role')
         ;
+    }
+    
+    protected function configureShowFields(ShowMapper $showMapper)
+    {
+        $showMapper
+                ->add('name')
+                ->add('currentClub')
+                ->add('signings', 'sonata_model_type', array('associated_tostring'=>'toStringPlayer'))
+        ;
+    }    
+    
+    protected function _configureRoutes(RouteCollection $collection)
+    {
+        //$collection->remove('edit');
     }
     
 }
