@@ -3,6 +3,7 @@
 namespace Fc\AdminBundle\Admin;
 
 use Sonata\AdminBundle\Admin\Admin;
+use Sonata\AdminBundle\Route\RouteCollection;
 use Sonata\AdminBundle\Form\FormMapper;
 use Sonata\AdminBundle\Datagrid\DatagridMapper;
 use Sonata\AdminBundle\Datagrid\ListMapper;
@@ -35,16 +36,6 @@ class ClubAdmin extends Admin
         ;
     }
     
-    public function configureFormFields(FormMapper $formMapper)
-    {
-        $formMapper
-            ->with('Generali')
-                ->add('name')
-                ->add('championship', 'sonata_type_model', array('expanded' => true, 'compound' => true))
-            ->end()
-        ;
-    }
-    
     public function configureShowFields(ShowMapper $showMapper)
     {
         $showMapper
@@ -53,6 +44,12 @@ class ClubAdmin extends Admin
                 ->add('currentPlayers')
         ;
     }
+    
+    protected function configureRoutes(RouteCollection $collection)
+    {
+        $collection->remove('create');
+        $collection->remove('edit');
+    }     
 }
 
 ?>

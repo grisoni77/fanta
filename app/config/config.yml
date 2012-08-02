@@ -72,6 +72,8 @@ fos_user:
 sonata_admin:
     title:      Fanta Project Admin
     title_logo: /bundles/sonataadmin/logo_title.png
+    templates:
+      layout: FcAdminBundle::standard_layout.html.twig
     dashboard:
       blocks:
         # Customize this part to add new block configuration

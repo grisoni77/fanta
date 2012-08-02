@@ -29,9 +29,10 @@ class ChampionshipAdmin extends Admin
     protected function configureShowField(ShowMapper $showMapper)
     {
         $showMapper
-            ->add('enabled')
-            ->add('name')
-            ->add('season', 'sonata_type_model')
+                ->add('enabled')
+                ->add('name')
+                ->add('season', 'sonata_type_model')
+                ->add('days', 'sonata_type_model')
         ;
     }
 

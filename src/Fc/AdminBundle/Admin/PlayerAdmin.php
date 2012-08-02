@@ -3,6 +3,7 @@
 namespace Fc\AdminBundle\Admin;
 
 use Sonata\AdminBundle\Admin\Admin;
+use Sonata\AdminBundle\Route\RouteCollection;
 use Sonata\AdminBundle\Form\FormMapper;
 use Sonata\AdminBundle\Datagrid\DatagridMapper;
 use Sonata\AdminBundle\Datagrid\ListMapper;
@@ -24,7 +25,7 @@ class PlayerAdmin extends Admin
     {
         $listMapper
             ->addIdentifier('name')
-            ->add('role', 'sonata_model_type', array('label'=>'Ruolo'))
+            ->add('role', 'sonata_model_type', array('label'=>'Ruolo', 'action' => 'view'))
             ->add('currentClub', 'sonata_model_type', array('label' => 'Club'))
             //->add('club.championship', 'sonata_model_type', array('label' => 'Campionato'))
             //->add('championship.season', 'sonata_type_model', array('label'=>'Stagione'))
@@ -60,9 +61,10 @@ class PlayerAdmin extends Admin
         ;
     }    
     
-    protected function _configureRoutes(RouteCollection $collection)
+    protected function configureRoutes(RouteCollection $collection)
     {
-        //$collection->remove('edit');
+        $collection->remove('create');
+        $collection->remove('edit');
     }
     
 }
