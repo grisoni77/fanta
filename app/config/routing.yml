@@ -1,3 +1,8 @@
+FcSiteBundle:
+    resource: "@FcSiteBundle/Controller/"
+    type:     annotation
+    prefix:   /
+
 FcAdminBundle:
     resource: "@FcAdminBundle/Controller/"
     type:     annotation

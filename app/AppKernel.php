@@ -32,6 +32,7 @@ class AppKernel extends Kernel
             new Sonata\CacheBundle\SonataCacheBundle(),
             //new Symfony\Bundle\DoctrineFixturesBundle\DoctrineFixturesBundle(),
             new Doctrine\Bundle\FixturesBundle\DoctrineFixturesBundle(),
+            new Fc\SiteBundle\FcSiteBundle(),
         );
 
         if (in_array($this->getEnvironment(), array('dev', 'test'))) {

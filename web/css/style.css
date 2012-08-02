@@ -167,6 +167,14 @@ ul#menu li.current a
 ul#menu li a:hover
 { color: #F14E23;}
 
+.site_central
+{ text-align: left;
+  width: 630px;
+  padding: 25px 0 5px 25px;
+  margin: 0;}
+
+
+
 #site_content
 { width: 950px;
   overflow: hidden;
