@@ -32,6 +32,7 @@
     <div id="before_body" class="site_central">
         {% if app.user %}
             Vai al pannello delle tue fantaleghe
+            <a href="{{ path('fc_site_league_index') }}">Vai</a>
         {% else %}    
             <p>Iscriviti al sito per registrarti a una lega o creare la tua!</p>
 

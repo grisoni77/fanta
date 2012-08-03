@@ -1,0 +1,25 @@
+{% extends '::layout2col.html.twig' %}
+
+{% block blog_title %}Pannello Leghe{% endblock %}
+
+{% block body %}
+
+<div id="my_leagues" class="site_central">
+    <h2>Le mie leghe</h2>
+    <ul>
+{% for league in userLeagues %}
+       <li>{{ league.name}}</li>
+{% endfor %}
+    </ul>
+</div>
+<div id="subscripted_leagues" class="site_central">
+    <h2>Leghe a cui sono iscritto</h2>
+</div>
+<div id="free_leagues" class="site_central">
+    <h2>Leghe a iscrizione aperta</h2>
+</div>
+<div id="other_leagues" class="site_central">
+    <h2>Altre leghe</h2>
+</div>
+
+{% endblock%}

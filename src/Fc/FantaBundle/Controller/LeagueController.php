@@ -12,7 +12,7 @@ use Fc\FantaBundle\Form\LeagueType;
 /**
  * League controller.
  *
- * @Route("/league")
+ * @Route("/league_crud")
  */
 class LeagueController extends Controller
 {

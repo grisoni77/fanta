@@ -8,7 +8,7 @@ use Doctrine\ORM\Mapping as ORM;
  * Fc\FantaBundle\Entity\League
  *
  * @ORM\Table()
- * @ORM\Entity
+ * @ORM\Entity(repositoryClass="Fc\FantaBundle\Repository\LeagueRepository")
  */
 class League
 {
@@ -34,6 +34,12 @@ class League
      */
     private $championship;
     
+    /**
+     * @ORM\ManyToOne(targetEntity="Fc\UserBundle\Entity\User")
+     * @ORM\JoinColumn(name="owner_user_id", referencedColumnName="id", nullable=false)
+     */
+    private $owner;
+    
     /** 
      * @ORM\ManyToMany(targetEntity="Fc\UserBundle\Entity\User", mappedBy="leagues") 
      * @ORM\JoinTable(name="Subscription")
@@ -44,6 +50,14 @@ class League
      * @ORM\OneToMany(targetEntity="Competition", mappedBy="league")
      */
     private $competitions;
+        
+    /**
+     * @var string $open
+     *
+     * @ORM\Column(name="open", type="boolean")
+     */
+    private $open;
+
     
     /**
      * Get id
@@ -192,5 +206,53 @@ class League
     public function getEnabled()
     {
         return $this->enabled;
+    }
+
+
+    /**
+     * Set open
+     *
+     * @param boolean $open
+     * @return League
+     */
+    public function setOpen($open)
+    {
+        $this->open = $open;
+        return $this;
+    }
+
+    /**
+     * Get open
+     *
+     * @return boolean 
+     */
+    public function getOpen()
+    {
+        return $this->open;
+    }
+    
+    
+
+
+    /**
+     * Set owner
+     *
+     * @param Fc\FantaBundle\Entity\User $owner
+     * @return League
+     */
+    public function setOwner(\Fc\FantaBundle\Entity\User $owner)
+    {
+        $this->owner = $owner;
+        return $this;
+    }
+
+    /**
+     * Get owner
+     *
+     * @return Fc\FantaBundle\Entity\User 
+     */
+    public function getOwner()
+    {
+        return $this->owner;
     }
 }
