@@ -3,11 +3,8 @@
 
     <head>
         <title>{% block title %}Welcome!{% endblock %}</title>
-        {% block stylesheets %}
-            <link href="{{ asset('css/style.css') }}" type="text/css" rel="stylesheet" />
-        {% endblock %}
-        <link rel="shortcut icon" href="{{ asset('favicon.ico') }}" />
         {% block head_javascripts %}{% endblock %}
+        {% block javascripts %}{% endblock %}
     </head>
     <body>
         <div id="main">

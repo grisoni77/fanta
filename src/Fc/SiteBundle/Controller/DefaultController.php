@@ -12,6 +12,7 @@ class DefaultController extends Controller
     /**
      * @Route("/")
      * @Template("FcSiteBundle:Default:home.html.twig")
+     * 
      */
     public function indexAction(Request $request)
     {

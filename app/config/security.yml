@@ -25,10 +25,10 @@ security:
         form_login:
           provider: fos_userbundle
           csrf_provider: form.csrf_provider
-          default_target_path: season
+          default_target_path: fc_site_default_index
           
         logout:
-          target: season
+          target: fc_site_default_index
           
         anonymous: true
           

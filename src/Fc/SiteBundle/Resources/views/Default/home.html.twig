@@ -1,21 +1,52 @@
 {% extends extends %}
 
+{% if (app.user) %}
+{% else %}
+{% block stylesheets %}
+    {{ parent() }}
+    {% stylesheets filter='cssrewrite'
+        'css/modal_style.css'
+        output="css/compiled/modal.css"
+    %}
+        <link href="{{ asset_url }}" type="text/css" rel="stylesheet" />
+    {% endstylesheets %}
+{% endblock%}
 
+{% block head_javascripts %}
+    {{ parent() }}
+    {#
+    {% javascripts 
+        'js/tools/jquery.tools.overlay.min.js'
+        output="js/compiled/jquerytoolsoverlay.js"
+    %}
+    <script type="text/javascript" src="{{ asset_url}}" />
+    {% endjavascripts %}
+    #}
+{% endblock%}
+{% endif %}
 {% block blog_title %}Homepage Fantacalcio{% endblock %}
 
 {% block before_body %}
-<div id="before_body" class="site_central">
-    {% if app.user %}
-        Vai al pannello delle tue fantaleghe
-    {% else %}    
-        <p>Iscriviti al sito per registrarti a una lega o creare la tua!</p>
-        
-        <a href="{{ path('fos_user_security_login', {"layout":"popup"}) }}" class="button">Login</a> oppure
-        <a href="{{ path('fos_user_registration_register', {"layout":"popup"}) }}" class="button">Registrati</a>
-    {% endif %}
-</div>
+
+
+    <div id="before_body" class="site_central">
+        {% if app.user %}
+            Vai al pannello delle tue fantaleghe
+        {% else %}    
+            <p>Iscriviti al sito per registrarti a una lega o creare la tua!</p>
+
+            <a href="{{ path('fos_user_security_login', {"layout":"popup"}) }}" class="button" rel="#overlay">Accedi</a> oppure
+            <a href="{{ path('fos_user_registration_register', {"layout":"popup"}) }}" class="button" rel="#overlay">Registrati</a>
+        {% endif %}
+    </div>
+    <!-- overlayed element -->
+    <div class="apple_overlay" id="overlay">
+      <!-- the external content is loaded inside this tag -->
+      <div class="contentWrap"></div>
+    </div>
 {% endblock%}
 
 {% block body %}
+
 Hello {{ name }}!
 {% endblock%}
