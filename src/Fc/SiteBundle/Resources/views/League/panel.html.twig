@@ -1,0 +1,31 @@
+{% extends '::layout2col.html.twig' %}
+
+{% block blog_title %}Pannello Lega {{league.name}}{% endblock %}
+
+{% block body %}
+
+<div id="league_subscriptions" class="site_central">
+    <h2>Iscrizioni</h2>
+    <ul>
+    {% for subscription in subscriptions %}
+        <li>
+            {{ subscription.user.name}}
+            {% if league.owner.id == subscription.user.id %}
+                <strong>(Amministratore)</strong>
+            {% elseif subscription.enabled == false %}
+                <form action="{{ path('fc_site_league_enablesubscription') }}" method="post">
+                    <input type="hidden" name="subscription_id" value="{{subscription.id}}" />
+                    <input type="submit" value="Approva" />
+                </form>
+            {% elseif subscription.enabled == true %}
+                <form action="{{ path('fc_site_league_disablesubscription') }}" method="post">
+                    <input type="hidden" name="subscription_id" value="{{subscription.id}}" />
+                    <input type="submit" value="Disabilita" />
+                </form>
+            {% endif %}
+        </li>
+    {% endfor %}
+    </ul>
+</div>
+
+{% endblock%}

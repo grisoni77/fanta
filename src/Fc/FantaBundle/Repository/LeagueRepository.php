@@ -5,6 +5,7 @@ namespace Fc\FantaBundle\Repository;
 use Doctrine\ORM\EntityRepository;
 use Fc\UserBundle\Entity\User;
 
+
 /**
  * LeagueRepository
  *
@@ -24,4 +25,18 @@ class LeagueRepository extends EntityRepository
         return $leagues;
     }
     
+    public function findSubscriptedLeagues(User $user)
+    {
+        return $user->getSubscriptions();
+    }
+
+    public function findOpenLeagues(User $user)
+    {
+        return $this->findBy(array('open'=>true, 'enabled'=>true));
+    }
+    
+    public function findOtherLeagues(User $user)
+    {
+        return $this->findBy(array('open'=>false, 'enabled'=>true));
+    }
 }

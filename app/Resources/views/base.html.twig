@@ -41,7 +41,7 @@
                 <!-- put class="current" in the li tag for the selected page - to highlight which page you're on -->
                 <li class="current"><a href="{{ path('fc_site_default_index') }}">Home</a></li>
                 <li><a href="{{ path('sonata_admin_dashboard') }}">Private</a></li>
-                <li><a href="page.html">A Page</a></li>
+                <li><a href="{{ path('fc_site_league_index') }}">Leghe</a></li>
                 <li><a href="contact.html">Contact Us</a></li>
                 {% if app.user %}
                 <li><a href="{{ path('fos_user_profile_show') }}">Profile</a></li>
@@ -66,6 +66,7 @@
             <div id="site_content">
             {% block layout %}
             <div id="content">
+                <h1>{% block blog_title %}{% endblock %}</h1>
                 {% block body %}{% endblock %}
                 {% block comments %}{% endblock %}
             </div>

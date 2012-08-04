@@ -28,6 +28,7 @@ class LoadUserData implements FixtureInterface, ContainerAwareInterface
         $user->addRole('ROLE_USER');
         $user->addRole('ROLE_ADMIN');
         $user->addRole('ROLE_SUPER_ADMIN');
+        $user->addRole('ROLE_SONATA_ADMIN');
         
         $userManager->updateUser($user);
         

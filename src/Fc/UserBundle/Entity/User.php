@@ -37,16 +37,16 @@ class User extends FosUser
     private $name;
 
 
-    /** 
-     * @ORM\ManyToMany(targetEntity="Fc\FantaBundle\Entity\League", inversedBy="users")
-     * @ORM\JoinTable(name="Subscription") 
-     */
-    private $leagues;
-    
     /**
      * @ORM\OneToMany(targetEntity="Fc\FantaBundle\Entity\Team", mappedBy="user")
      */
     private $teams;
+    
+    /** 
+     * @ORM\OneToMany(targetEntity="Fc\FantaBundle\Entity\Subscription", mappedBy="user")
+     */
+    private $subscriptions;
+    
 
     
     public function __construct()
@@ -90,37 +90,7 @@ class User extends FosUser
         return $this->name;
     }
     
-    /**
-     * Add leagues
-     *
-     * @param Fc\FantaBundle\Entity\League $leagues
-     * @return User
-     */
-    public function addLeague(\Fc\FantaBundle\Entity\League $leagues)
-    {
-        $this->leagues[] = $leagues;
-        return $this;
-    }
 
-    /**
-     * Remove leagues
-     *
-     * @param <variableType$leagues
-     */
-    public function removeLeague(\Fc\FantaBundle\Entity\League $leagues)
-    {
-        $this->leagues->removeElement($leagues);
-    }
-
-    /**
-     * Get leagues
-     *
-     * @return Doctrine\Common\Collections\Collection 
-     */
-    public function getLeagues()
-    {
-        return $this->leagues;
-    }
 
     /**
      * Add teams
@@ -152,5 +122,37 @@ class User extends FosUser
     public function getTeams()
     {
         return $this->teams;
+    }
+
+    /**
+     * Add subscriptions
+     *
+     * @param Fc\FantaBundle\Entity\Subscription $subscriptions
+     * @return User
+     */
+    public function addSubscription(\Fc\FantaBundle\Entity\Subscription $subscriptions)
+    {
+        $this->subscriptions[] = $subscriptions;
+        return $this;
+    }
+
+    /**
+     * Remove subscriptions
+     *
+     * @param Fc\FantaBundle\Entity\Subscription $subscriptions
+     */
+    public function removeSubscription(\Fc\FantaBundle\Entity\Subscription $subscriptions)
+    {
+        $this->subscriptions->removeElement($subscriptions);
+    }
+
+    /**
+     * Get subscriptions
+     *
+     * @return Doctrine\Common\Collections\Collection 
+     */
+    public function getSubscriptions()
+    {
+        return $this->subscriptions;
     }
 }

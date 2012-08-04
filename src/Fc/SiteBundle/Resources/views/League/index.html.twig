@@ -7,19 +7,45 @@
 <div id="my_leagues" class="site_central">
     <h2>Le mie leghe</h2>
     <ul>
-{% for league in userLeagues %}
-       <li>{{ league.name}}</li>
-{% endfor %}
+    {% for league in userLeagues %}
+        <li>{{ league.name}}
+            <a href="{{ path('fc_site_league_panel', {id: league.id}) }}">Vai al pannello</a>
+        </li>
+    {% endfor %}
     </ul>
+    <a href="{{ path('fc_site_league_new') }}">Crea una tua lega</a>
 </div>
 <div id="subscripted_leagues" class="site_central">
-    <h2>Leghe a cui sono iscritto</h2>
+    <h2>Leghe a cui sei iscritto</h2>
+    <ul>
+    {% for subscription in subscriptions %}
+        <li>{{ subscription.league.name}}
+            {% if subscription.enabled == false %}
+                <strong>(In attesa di approvazione)</strong>
+            {% endif %} 
+        </li>
+    {% endfor %}
+    </ul>
 </div>
 <div id="free_leagues" class="site_central">
-    <h2>Leghe a iscrizione aperta</h2>
+    <h2>Leghe a cui puoi iscriverti</h2>
+    <ul>
+    {% for league in openLeagues %}
+        <li>{{ league.name}}
+            <a href="{{ path('fc_site_league_subscribe', {id:league.id}) }}">Iscriviti</a>
+        </li>
+    {% endfor %}
+    </ul>
 </div>
 <div id="other_leagues" class="site_central">
     <h2>Altre leghe</h2>
+    {% if otherLeagues %}
+    <ul>
+    {% for league in otherLeagues %}
+        <li>{{ league.name}}</li>
+    {% endfor %}
+    </ul>
+    {% endif %}
 </div>
 
 {% endblock%}

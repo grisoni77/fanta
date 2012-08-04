@@ -1,0 +1,18 @@
+{% extends '::layout2col.html.twig' %}
+
+{% block title %}Iscriviti alla lega {{ league.name }}{% endblock %}
+
+{% block body %}
+<h2>Iscriviti alla lega {{ league.name }}</h2>
+<form action="{{ path('fc_site_league_subscribe', {id: league.id}) }}" method="post" {{ form_enctype(form) }}>
+    {{ form_widget(form) }}
+        
+    <p>
+        <button type="submit">Iscriviti</button>
+    </p>
+</form>
+
+<a href="{{ path('fc_site_league_index') }}">
+    Torna al pannello leghe
+</a>
+{% endblock %}

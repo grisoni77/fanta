@@ -49,6 +49,7 @@ class Player
      * @ORM\Column(name="quotation", type="integer") 
      */
     private $quotation;
+    
     /** 
      * @ORM\OneToMany(targetEntity="Signing", mappedBy="player")
      */

@@ -1,0 +1,20 @@
+{% extends '::layout2col.html.twig' %}
+
+{% block blog_title %}Crea una nuova lega{% endblock %}
+
+{% block body %}
+<form action="{{ path('fc_site_league_create') }}" method="post" {{ form_enctype(form) }}>
+    {{ form_widget(form) }}
+    <p>
+        <button type="submit">Create</button>
+    </p>
+</form>
+
+<ul class="record_actions">
+    <li>
+        <a href="{{ path('league') }}">
+            Back to the list
+        </a>
+    </li>
+</ul>
+{% endblock %}

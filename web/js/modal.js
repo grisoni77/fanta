@@ -11,6 +11,9 @@
 
                 // grab wrapper element inside content
                 var wrap = this.getOverlay().find(".contentWrap");
+                
+                // svuota
+                wrap.empty();
 
                 // load the page specified in the trigger
                 wrap.load(this.getTrigger().attr("href"));

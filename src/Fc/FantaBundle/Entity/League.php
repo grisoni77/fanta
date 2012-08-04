@@ -41,10 +41,9 @@ class League
     private $owner;
     
     /** 
-     * @ORM\ManyToMany(targetEntity="Fc\UserBundle\Entity\User", mappedBy="leagues") 
-     * @ORM\JoinTable(name="Subscription")
+     * @ORM\OneToMany(targetEntity="Fc\FantaBundle\Entity\Subscription", mappedBy="league")
      */
-    private $users;
+    private $subscriptions;
     
     /**
      * @ORM\OneToMany(targetEntity="Competition", mappedBy="league")
@@ -154,37 +153,6 @@ class League
      */
     private $enabled;
 
-    /**
-     * Add users
-     *
-     * @param Fc\UserBundle\Entity\User $users
-     * @return League
-     */
-    public function addUser(\Fc\UserBundle\Entity\User $users)
-    {
-        $this->users[] = $users;
-        return $this;
-    }
-
-    /**
-     * Remove users
-     *
-     * @param <variableType$users
-     */
-    public function removeUser(\Fc\UserBundle\Entity\User $users)
-    {
-        $this->users->removeElement($users);
-    }
-
-    /**
-     * Get users
-     *
-     * @return Doctrine\Common\Collections\Collection 
-     */
-    public function getUsers()
-    {
-        return $this->users;
-    }
 
     /**
      * Set enabled
@@ -240,7 +208,7 @@ class League
      * @param Fc\FantaBundle\Entity\User $owner
      * @return League
      */
-    public function setOwner(\Fc\FantaBundle\Entity\User $owner)
+    public function setOwner(\Fc\UserBundle\Entity\User $owner)
     {
         $this->owner = $owner;
         return $this;
@@ -249,10 +217,42 @@ class League
     /**
      * Get owner
      *
-     * @return Fc\FantaBundle\Entity\User 
+     * @return \Fc\UserBundle\Entity\User 
      */
     public function getOwner()
     {
         return $this->owner;
+    }
+
+    /**
+     * Add subscriptions
+     *
+     * @param Fc\FantaBundle\Entity\Subscription $subscriptions
+     * @return League
+     */
+    public function addSubscription(\Fc\FantaBundle\Entity\Subscription $subscriptions)
+    {
+        $this->subscriptions[] = $subscriptions;
+        return $this;
+    }
+
+    /**
+     * Remove subscriptions
+     *
+     * @param Fc\FantaBundle\Entity\Subscription $subscriptions
+     */
+    public function removeSubscription(\Fc\FantaBundle\Entity\Subscription $subscriptions)
+    {
+        $this->subscriptions->removeElement($subscriptions);
+    }
+
+    /**
+     * Get subscriptions
+     *
+     * @return Doctrine\Common\Collections\Collection 
+     */
+    public function getSubscriptions()
+    {
+        return $this->subscriptions;
     }
 }
