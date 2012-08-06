@@ -1,0 +1,20 @@
+{% extends '::layout2col.html.twig' %}
+
+{% block blog_title %}Definisci la tua squadra per la lega {{league.name}}{% endblock %}
+
+{% block body %}
+<form action="{{ path('fc_site_team_create', {league_id: league_id, user_id: user_id}) }}" method="post" {{ form_enctype(form) }}>
+    {{ form_widget(form) }}
+    <p>
+        <button type="submit">Create</button>
+    </p>
+</form>
+
+<ul class="record_actions">
+    <li>
+        <a href="{{ path('fc_site_league_panel', {id: league_id}) }}">
+            Back to the list
+        </a>
+    </li>
+</ul>
+{% endblock %}

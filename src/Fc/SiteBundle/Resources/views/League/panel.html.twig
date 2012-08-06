@@ -6,6 +6,7 @@
 
 <div id="league_subscriptions" class="site_central">
     <h2>Iscrizioni</h2>
+    {% if subscriptions %}
     <ul>
     {% for subscription in subscriptions %}
         <li>
@@ -26,6 +27,37 @@
         </li>
     {% endfor %}
     </ul>
+    {% else %}
+    <p>Nessun utente iscritto..</p>
+    {% endif %}
 </div>
+
+<div id="league_competitions" class="site_central">
+    <h2>Competizioni</h2>
+    {% if competitions %}
+    <ul>
+    {% for competition in competitions %}
+        <li>
+            <strong>{{ competition.name}}</strong>
+            <span>{{ competition.type.name }}</span>
+        </li>
+    {% endfor %}
+    </ul>
+    {% else %}
+    <p>Nessuna competizione creata..</p>
+    {% endif %}
+    <a href="{{ path('fc_site_competition_wizard', {id: league.id}) }}">Crea una competizione</a>
+</div>
+
+<div id="league_team" class="site_central">
+    <h2>La tua squadra</h2>
+    {% if userTeam %}
+    <strong>{{ userTeam.name }}</strong>
+    {% else %}
+    <p>Nessuna squadra creata..</p>
+    <a href="{{ path('fc_site_team_new', {league_id:league.id, user_id: app.user.id}) }}">Crea una squadra</a>
+    {% endif %}
+</div>
+
 
 {% endblock%}

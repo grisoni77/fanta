@@ -6,8 +6,9 @@ use Doctrine\Common\Persistence\ObjectManager;
 use Fc\FantaBundle\Entity\Role;
 use Fc\FantaBundle\Entity\Season;
 use Fc\FantaBundle\Entity\Championship;
+use Doctrine\Common\DataFixtures\OrderedFixtureInterface;
 
-class LoadUserData implements FixtureInterface
+class LoadUserData implements FixtureInterface, OrderedFixtureInterface
 {
     /**
      * {@inheritDoc}
@@ -39,17 +40,18 @@ class LoadUserData implements FixtureInterface
         $role->setLetter('A');
         $manager->persist($role);
         
-        // inserisci stagione/campionati di test
-        $season = new Season();
-        $season->setTitle('Stagione 2011/2012');
-        $season->setEnabled(true);
-        $manager->persist($season);
-        $champ = new Championship();
-        $champ->setName('Serie A TIM');
-        $champ->setSeason($season);
-        $champ->setEnabled(true);
-        $manager->persist($champ);
+        // Inserisci competiotion types
+        $comptype = new \Fc\FantaBundle\Entity\CompetitionType();
+        $comptype->setName('Campionato');
+        $manager->persist($comptype);
+        $comptype = new \Fc\FantaBundle\Entity\CompetitionType();
+        $comptype->setName('Playoff');
+        $manager->persist($comptype);
+        $comptype = new \Fc\FantaBundle\Entity\CompetitionType();
+        $comptype->setName('Coppa');
+        $manager->persist($comptype);
         
+        // inserisci stagione/campionati di test
         $season = new Season();
         $season->setTitle('Stagione 2012/2013');
         $season->setEnabled(true);
@@ -58,9 +60,44 @@ class LoadUserData implements FixtureInterface
         $champ->setName('Serie A TIM');
         $champ->setSeason($season);
         $champ->setEnabled(true);
+        $champ->setIsCalendarFrozen(false);
         $manager->persist($champ);
         
+        $season = new Season();
+        $season->setTitle('Stagione 2011/2012');
+        $season->setEnabled(true);
+        $manager->persist($season);
+        $champ = new Championship();
+        $champ->setName('Serie A TIM');
+        $champ->setSeason($season);
+        $champ->setEnabled(true);
+        $champ->setIsCalendarFrozen(false);
+        $manager->persist($champ);
+        
+        // crea lega
+        $league = new \Fc\FantaBundle\Entity\League();
+        $league->setName('Fantalega Fumante');
+        $league->setChampionship($champ);
+        $user = $manager->getRepository('FcUserBundle:User')->findOneBy(array('username'=>'user1'));
+        $league->setOwner($user);
+        $league->setEnabled(true);
+        $league->setOpen(false);
+        $manager->persist($league);
+        for ($i=1; $i<9 ; $i++) {
+            $user = $manager->getRepository('FcUserBundle:User')->findOneBy(array('username'=>'user'.$i));
+            $subscription = new \Fc\FantaBundle\Entity\Subscription();
+            $subscription->setEnabled(true);
+            $subscription->setLeague($league);
+            $subscription->setUser($user);
+            $subscription->setMessage('Messaggio fittizio...');
+            $manager->persist($subscription);
+        }
         
         $manager->flush();
+    }
+    
+    public function getOrder()
+    {
+        return 2; // ordine in cui le fixture saranno caricate
     }
 }

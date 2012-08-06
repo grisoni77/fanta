@@ -57,11 +57,18 @@ class LeagueController extends Controller
         $em = $this->getDoctrine()->getEntityManager();
         $user = $this->getUser();
         $league = $em->getRepository('FcFantaBundle:League')->find($id);
+        // get subscriptions
         $subscriptions = $league->getSubscriptions();
+        // get competitions
+        $competitions = $em->getRepository('FcFantaBundle:League')->findLeagueCompetitions($league);
+        // get user team
+        $userTeam = $em->getRepository('FcFantaBundle:Team')->findOneBy(array('user'=>$user, 'league'=>$league));
         
         return array(
             'league'          => $league,
-            'subscriptions'   => $subscriptions
+            'subscriptions'   => $subscriptions,
+            'competitions'    => $competitions,
+            'userTeam'        => $userTeam
         );        
     }
     

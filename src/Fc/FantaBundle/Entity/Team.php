@@ -33,12 +33,17 @@ class Team
      * @ORM\JoinColumn(name="user_id", referencedColumnName="id", nullable=false)
      */
     private $user;
+    
+    /**
+     * @ORM\ManyToOne(targetEntity="League"), inversedBy="teams")
+     * @ORM\JoinColumn(name="league_id", referencedColumnName="id", nullable=false)
+     */
+    private $league;
 
     /**
-     * @ORM\ManyToOne(targetEntity="Competition", inversedBy="teams")
-     * @ORM\JoinColumn(name="competition_id", referencedColumnName="id", nullable=false)
+     * @ORM\ManyToMany(targetEntity="Competition", inversedBy="teams")
      */
-    private $competition;
+    private $competitions;
     
     /**
      * @ORM\OneToMany(targetEntity="Listing", mappedBy="team")
@@ -77,32 +82,6 @@ class Team
         return $this->name;
     }
 
-
-    /**
-     * Set competition
-     *
-     * @param Fc\FantaBundle\Entity\Competition $competition
-     * @return Team
-     */
-    public function setCompetition(\Fc\FantaBundle\Entity\Competition $competition = null)
-    {
-        $this->competition = $competition;
-        return $this;
-    }
-
-    /**
-     * Get competition
-     *
-     * @return Fc\FantaBundle\Entity\Competition 
-     */
-    public function getCompetition()
-    {
-        return $this->competition;
-    }
-    public function __construct()
-    {
-        $this->listings = new \Doctrine\Common\Collections\ArrayCollection();
-    }
     
     /**
      * Add listings
@@ -156,5 +135,66 @@ class Team
     public function getUser()
     {
         return $this->user;
+    }
+    
+    
+    public function __construct()
+    {
+        $this->competitions = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->listings = new \Doctrine\Common\Collections\ArrayCollection();
+    }
+    
+    /**
+     * Add competitions
+     *
+     * @param Fc\FantaBundle\Entity\Competition $competitions
+     * @return Team
+     */
+    public function addCompetition(\Fc\FantaBundle\Entity\Competition $competitions)
+    {
+        $this->competitions[] = $competitions;
+        return $this;
+    }
+
+    /**
+     * Remove competitions
+     *
+     * @param Fc\FantaBundle\Entity\Competition $competitions
+     */
+    public function removeCompetition(\Fc\FantaBundle\Entity\Competition $competitions)
+    {
+        $this->competitions->removeElement($competitions);
+    }
+
+    /**
+     * Get competitions
+     *
+     * @return Doctrine\Common\Collections\Collection 
+     */
+    public function getCompetitions()
+    {
+        return $this->competitions;
+    }
+
+    /**
+     * Set league
+     *
+     * @param Fc\FantaBundle\Entity\League $league
+     * @return Team
+     */
+    public function setLeague(\Fc\FantaBundle\Entity\League $league)
+    {
+        $this->league = $league;
+        return $this;
+    }
+
+    /**
+     * Get league
+     *
+     * @return Fc\FantaBundle\Entity\League 
+     */
+    public function getLeague()
+    {
+        return $this->league;
     }
 }

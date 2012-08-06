@@ -4,7 +4,7 @@ namespace Fc\FantaBundle\Repository;
 
 use Doctrine\ORM\EntityRepository;
 use Fc\UserBundle\Entity\User;
-
+use Fc\FantaBundle\Entity\Subscription;
 
 /**
  * LeagueRepository
@@ -30,13 +30,42 @@ class LeagueRepository extends EntityRepository
         return $user->getSubscriptions();
     }
 
+    /**
+     * Ritorna leghe a cui l'utente può iscriversi
+     * escludendo quelle a cui è già iscritto
+     * 
+     * @param \Fc\UserBundle\Entity\User $user
+     * @return array
+     */
     public function findOpenLeagues(User $user)
     {
+        /*
+        $em = $this->getEntityManager();
+        $query = $em->createQuery(
+            'SELECT l FROM FcFantaBundle:League l
+                WHERE 
+                s.user != :user 
+                ORDER BY l.name ASC'
+        )
+        ->setParameter('user', $user);
+
+        $leagues = $query->getResult();
+        return $leagues;
+        */
         return $this->findBy(array('open'=>true, 'enabled'=>true));
     }
     
     public function findOtherLeagues(User $user)
     {
         return $this->findBy(array('open'=>false, 'enabled'=>true));
+    }
+    
+    public function findLeagueCompetitions($league)
+    {
+        return $this->getEntityManager()->getRepository('FcFantaBundle:Competition')
+                ->findBy(array(
+                    'league'    => $league,
+                    'level'     =>1
+                    ));
     }
 }

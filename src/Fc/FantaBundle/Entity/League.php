@@ -44,12 +44,12 @@ class League
      * @ORM\OneToMany(targetEntity="Fc\FantaBundle\Entity\Subscription", mappedBy="league")
      */
     private $subscriptions;
-    
+
     /**
      * @ORM\OneToMany(targetEntity="Competition", mappedBy="league")
      */
     private $competitions;
-        
+    
     /**
      * @var string $open
      *

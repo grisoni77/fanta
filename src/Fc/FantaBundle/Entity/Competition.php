@@ -47,7 +47,7 @@ class Competition
     
     
     /**
-     * @ORM\OneToMany(targetEntity="Team", mappedBy="competition")
+     * @ORM\ManyToMany(targetEntity="Team", inversedBy="competitions")
      */
     private $teams;
     
@@ -56,6 +56,10 @@ class Competition
      */
     private $enabled;
 
+    /**
+     * @ORM\Column(name="level", type="integer")
+     */
+    private $level;
     
     /**
      * Get id
@@ -110,11 +114,7 @@ class Competition
     {
         return $this->league;
     }
-    public function __construct()
-    {
-        $this->rounds = new \Doctrine\Common\Collections\ArrayCollection();
-    }
-    
+
     /**
      * Add rounds
      *
@@ -147,37 +147,6 @@ class Competition
         return $this->rounds;
     }
 
-    /**
-     * Add teams
-     *
-     * @param Fc\FantaBundle\Entity\Team $teams
-     * @return Competition
-     */
-    public function addTeam(\Fc\FantaBundle\Entity\Team $teams)
-    {
-        $this->teams[] = $teams;
-        return $this;
-    }
-
-    /**
-     * Remove teams
-     *
-     * @param <variableType$teams
-     */
-    public function removeTeam(\Fc\FantaBundle\Entity\Team $teams)
-    {
-        $this->teams->removeElement($teams);
-    }
-
-    /**
-     * Get teams
-     *
-     * @return Doctrine\Common\Collections\Collection 
-     */
-    public function getTeams()
-    {
-        return $this->teams;
-    }
 
     /**
      * Set type
@@ -221,5 +190,66 @@ class Competition
     public function getEnabled()
     {
         return $this->enabled;
+    }
+
+    /**
+     * Set level
+     *
+     * @param integer $level
+     * @return Competition
+     */
+    public function setLevel($level)
+    {
+        $this->level = $level;
+        return $this;
+    }
+
+    /**
+     * Get level
+     *
+     * @return integer 
+     */
+    public function getLevel()
+    {
+        return $this->level;
+    }
+    
+    
+    public function __construct()
+    {
+        $this->rounds = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->teams = new \Doctrine\Common\Collections\ArrayCollection();
+    }
+    
+    /**
+     * Add teams
+     *
+     * @param Fc\FantaBundle\Entity\Team $teams
+     * @return Competition
+     */
+    public function addTeam(\Fc\FantaBundle\Entity\Team $teams)
+    {
+        $this->teams[] = $teams;
+        return $this;
+    }
+
+    /**
+     * Remove teams
+     *
+     * @param Fc\FantaBundle\Entity\Team $teams
+     */
+    public function removeTeam(\Fc\FantaBundle\Entity\Team $teams)
+    {
+        $this->teams->removeElement($teams);
+    }
+
+    /**
+     * Get teams
+     *
+     * @return Doctrine\Common\Collections\Collection 
+     */
+    public function getTeams()
+    {
+        return $this->teams;
     }
 }

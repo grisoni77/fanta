@@ -4,8 +4,10 @@
 
 {% block body %}
 
+{% if app.user %}
 <div id="my_leagues" class="site_central">
     <h2>Le mie leghe</h2>
+    {% if userLeagues %}
     <ul>
     {% for league in userLeagues %}
         <li>{{ league.name}}
@@ -13,10 +15,12 @@
         </li>
     {% endfor %}
     </ul>
+    {% endif %}
     <a href="{{ path('fc_site_league_new') }}">Crea una tua lega</a>
 </div>
 <div id="subscripted_leagues" class="site_central">
     <h2>Leghe a cui sei iscritto</h2>
+    {% if subscriptions %}
     <ul>
     {% for subscription in subscriptions %}
         <li>{{ subscription.league.name}}
@@ -26,26 +30,38 @@
         </li>
     {% endfor %}
     </ul>
+    {% else %}
+        <p>Non sei iscritto a nessuna lega..</p>
+    {% endif %}
 </div>
+{% endif %}
+
 <div id="free_leagues" class="site_central">
     <h2>Leghe a cui puoi iscriverti</h2>
+    {% if openLeagues %}
     <ul>
     {% for league in openLeagues %}
         <li>{{ league.name}}
+            {% if app.user %}
             <a href="{{ path('fc_site_league_subscribe', {id:league.id}) }}">Iscriviti</a>
+            {% endif %}
         </li>
     {% endfor %}
     </ul>
+{% else %}
+    <p>Non ci sono leghe in cui l'iscrizione è ancora aperta..</p>
+{% endif %}
 </div>
+
+{% if otherLeagues %}
 <div id="other_leagues" class="site_central">
-    <h2>Altre leghe</h2>
-    {% if otherLeagues %}
+    <h2>Altre leghe</h2>    
     <ul>
     {% for league in otherLeagues %}
         <li>{{ league.name}}</li>
     {% endfor %}
     </ul>
-    {% endif %}
 </div>
+{% endif %}
 
 {% endblock%}
