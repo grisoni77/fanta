@@ -133,4 +133,17 @@ services:
       tags:
         - { name: sonata.admin, manager_type: orm, group: datireali, label: Voti }
       arguments: [null, Fc\FantaBundle\Entity\Mark, null]      
-      
+     
+  # competition type services    
+  fc_fanta.competition_factory:
+      class: Fc\FantaBundle\Competition\CompetitionFactory
+  
+  fc_fanta.competition_championship:
+      class: Fc\FantaBundle\Competition\ChampionshipCompetition
+      tags:
+        - { name: fc_fanta.competition, label: "Campionato a gironi" }
+        
+  fc_fanta.competition_cup:
+      class: Fc\FantaBundle\Competition\CupCompetition
+      tags:
+        - { name: fc_fanta.competition, label: "Coppa a eliminazione" }

@@ -22,8 +22,18 @@ class CompetitionController extends Controller {
      * @Route("/league/{id}/competition/wizard")
      * @Template()
      */
-    public function wizardAction($id) {
-        return new Response('Hello world!');
+    public function wizardAction($id) 
+    {
+        $em = $this->getDoctrine()->getEntityManager();
+        $league = $em->getRepository('FcFantaBundle:Competition')->find($id);
+        
+        $factory = $this->get('fc_fanta.competition_factory');
+        $competitions = $factory->getCompetitionTypes();
+        
+        return array(
+            'league'    => $league,
+            'types' => $competitions
+        );
     }
 
 }

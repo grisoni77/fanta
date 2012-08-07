@@ -76,5 +76,5 @@ class TeamController extends Controller
             'user_id' => $user_id,
             'form'   => $form->createView(),
         );
-    }    
+    }
 }
