@@ -23,7 +23,28 @@ class Configuration implements ConfigurationInterface
         // Here you should define the parameters that are allowed to
         // configure your bundle. See the documentation linked above for
         // more information on that topic.
-
+        $rootNode
+            ->children()
+                ->arrayNode('competitions')
+                ->addDefaultChildrenIfNoneSet()
+                ->prototype('array')
+                    ->children()
+                        ->scalarNode('name')->defaultValue('championship')->end()
+                        ->scalarNode('label')->defaultValue('Campionato a gironi')->end()
+                        ->scalarNode('class')->defaultValue('\Fc\FantaBundle\Competition\ChampionshipCompetition')->end()
+                    ->end()
+                ->end()
+                /*
+                ->defaultValue(array(
+                    'name' => 'championship',
+                    'label' => 'Campionato a gironi',
+                    'class' => '\Fc\FantaBundle\Competition\ChampionshipCompetition',
+                ))->end()
+                 * 
+                 */
+            ->end()
+        ;
+        
         return $treeBuilder;
     }
 }

@@ -9,8 +9,12 @@ use Fc\FantaBundle\Competition\CompetitionInterface;
  *
  * @author 71537
  */
-class CompetitionFactory 
+class CompetitionFactory implements \Symfony\Component\DependencyInjection\ContainerAwareInterface
 {
+    /**
+     * @var  \Symfony\Component\DependencyInjection\ContainerInterface
+     */
+    private $container;
     private $competitions;
     
     public function __construct()
@@ -26,8 +30,18 @@ class CompetitionFactory
         $this->competitions[] = $competition;
     }
     
-    public function getCompetitionTypes() 
+    public function __getCompetitionTypes() 
     {
         return $this->competitions;
     }
+    
+    public function getCompetitionTypes() 
+    {
+        print_r($this->container->getParameter('fc_fanta.competitions'));
+    }
+
+    public function setContainer(\Symfony\Component\DependencyInjection\ContainerInterface $container = null) {
+        $this->container = $container;
+    }
+    
 }

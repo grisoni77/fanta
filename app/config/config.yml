@@ -138,12 +138,21 @@ services:
   fc_fanta.competition_factory:
       class: Fc\FantaBundle\Competition\CompetitionFactory
   
-  fc_fanta.competition_championship:
-      class: Fc\FantaBundle\Competition\ChampionshipCompetition
-      tags:
-        - { name: fc_fanta.competition, label: "Campionato a gironi" }
+  #fc_fanta.competition_championship:
+  #    class: Fc\FantaBundle\Competition\ChampionshipCompetition
+  #    tags:
+  #      - { name: fc_fanta.competition, label: "Campionato a gironi" }
         
-  fc_fanta.competition_cup:
-      class: Fc\FantaBundle\Competition\CupCompetition
-      tags:
-        - { name: fc_fanta.competition, label: "Coppa a eliminazione" }
+  #fc_fanta.competition_cup:
+  #    class: Fc\FantaBundle\Competition\CupCompetition
+  #    tags:
+  #      - { name: fc_fanta.competition, label: "Coppa a eliminazione" }
+
+
+# FcFantaBundle config
+
+fc_fanta: 
+  competitions:
+    - { name: cup, label: "Coppa a eliminazione", class: Fc\FantaBundle\Competition\CupCompetition }
+    - { name: championship, label: "Campionato a gironi", class: Fc\FantaBundle\Competition\ChampionshipCompetition }
+    
