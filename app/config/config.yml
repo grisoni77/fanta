@@ -137,6 +137,8 @@ services:
   # competition type services    
   fc_fanta.competition_factory:
       class: Fc\FantaBundle\Competition\CompetitionFactory
+      arguments: 
+        - @form.factory
   
   #fc_fanta.competition_championship:
   #    class: Fc\FantaBundle\Competition\ChampionshipCompetition

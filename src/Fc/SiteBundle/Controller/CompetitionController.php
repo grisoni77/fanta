@@ -19,16 +19,15 @@ use Symfony\Component\HttpFoundation\RedirectResponse;
 class CompetitionController extends Controller {
 
     /**
-     * @Route("/league/{id}/competition/wizard")
+     * @Route("/league/{id}/competition/wizard/1")
      * @Template()
      */
-    public function wizardAction($id) 
+    public function wizard1Action($id) 
     {
         $em = $this->getDoctrine()->getEntityManager();
-        $league = $em->getRepository('FcFantaBundle:Competition')->find($id);
+        $league = $em->getRepository('FcFantaBundle:League')->find($id);
         
-        $factory = $this->get('fc_fanta.competition_factory');
-        $competitions = $factory->getCompetitionTypes();
+        $competitions = $this->container->getParameter('fc_fanta.competition_types');
         
         return array(
             'league'    => $league,
@@ -36,4 +35,44 @@ class CompetitionController extends Controller {
         );
     }
 
+    /**
+     * @Route("/league/{id}/competition/wizard/2")
+     * @Template()
+     * @Method({"POST"})
+     */
+    public function wizard2Action(Request $request, $id) 
+    {
+        $em = $this->getDoctrine()->getEntityManager();
+        $league = $em->getRepository('FcFantaBundle:League')->find($id);
+        
+        $factory = $this->get('fc_fanta.competition_factory');
+        $factory->setCompetitions($this->container->getParameter('fc_fanta.competition_types'));
+        $builder = $factory->getCompetitionBuilder($request->request->get('type'));
+        
+        //create form
+        $form = $builder->createForm();
+        
+        return array(
+            'league'    => $league,
+            'builder'   => $builder,
+            'form'      => $form->createView()
+        );
+    }
+
+    /**
+     * @Route("/league/{id}/competition/wizard/3")
+     * @Method({"POST"})
+     */
+    public function wizard3Action(Request $request, $id) 
+    {
+        $factory = $this->get('fc_fanta.competition_factory');
+        $factory->setCompetitions($this->container->getParameter('fc_fanta.competition_types'));
+        $builder = $factory->getCompetitionBuilder($request->request->get('type'));
+        
+        //create form
+        $form = $builder->createForm();
+        $form->bind($request);
+        print_r($form->getData());
+    }
+    
 }

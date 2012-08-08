@@ -2,6 +2,8 @@
 
 namespace Fc\FantaBundle\Competition;
 
+use \Symfony\Component\Form\FormFactory;
+
 /**
  * Interfaccia per classi Competition
  *
@@ -9,6 +11,16 @@ namespace Fc\FantaBundle\Competition;
  */
 interface CompetitionInterface
 {
+    /**
+     * @return FormFactory
+     */
+    public function getFormFactory();
+    
+    /**
+     * Set Form factory service 
+     */
+    public function setFormFactory(FormFactory $form_factory);
+    
     /**
      * @return Symfony\Component\Form\Form
      */

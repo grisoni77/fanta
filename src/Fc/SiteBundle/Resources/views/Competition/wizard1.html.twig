@@ -1,0 +1,21 @@
+{% extends '::layout2col.html.twig' %}
+
+{% block blog_title %}Pannello Lega {{league.name}} - Creazione Competizione{% endblock %}
+
+{% block body %}
+
+<h1>Crea competizione - Passo 1</h1>
+
+<h2>Seleziona un tipo di competizione tra quelli disponibili</h2>
+
+<form action="{{ path('fc_site_competition_wizard2', {id: league.id}) }}" method="post" >
+        <select name="type">
+            {% for c in types %}
+                <option value="{{ c.name }}">{{ c.label }}</option>
+            {% endfor %}
+        </select>
+
+        <input type="submit" value="Prosegui" />
+</form>
+
+{% endblock %}

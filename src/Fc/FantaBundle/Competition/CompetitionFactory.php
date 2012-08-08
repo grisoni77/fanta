@@ -9,39 +9,44 @@ use Fc\FantaBundle\Competition\CompetitionInterface;
  *
  * @author 71537
  */
-class CompetitionFactory implements \Symfony\Component\DependencyInjection\ContainerAwareInterface
+class CompetitionFactory
 {
-    /**
-     * @var  \Symfony\Component\DependencyInjection\ContainerInterface
-     */
-    private $container;
     private $competitions;
+    private $form_factory;
     
-    public function __construct()
+    public function __construct(\Symfony\Component\Form\FormFactory $form_factory)
     {
         $this->competitions = array();
+        $this->form_factory = $form_factory;
     }
     
-    public function addCompetition(CompetitionInterface $competition, $label = null)
-    {
-        if (!empty($label)) {
-            $competition->setLabel($label);
-        } 
-        $this->competitions[] = $competition;
-    }
-    
-    public function __getCompetitionTypes() 
-    {
-        return $this->competitions;
+    public function setCompetitions($competitions) {
+        $this->competitions = $competitions;                
     }
     
     public function getCompetitionTypes() 
     {
-        print_r($this->container->getParameter('fc_fanta.competitions'));
+        return $this->container->getParameter('fc_fanta.competition_types');
     }
 
-    public function setContainer(\Symfony\Component\DependencyInjection\ContainerInterface $container = null) {
-        $this->container = $container;
+    /**
+     * @param string $name
+     * @return Fc\FantaBundle\Competition\CompetitionInterface
+     */
+    public function getCompetitionBuilder($name)
+    {
+        foreach ($this->competitions as $c) 
+        {
+            if ($c['name']==$name) {
+                $className = $c['class'];
+                $comp = new $className();
+                $comp->setLabel($c['label']);
+                $comp->setFormFactory($this->form_factory);
+                return $comp;
+            }
+        }
+        return false;
+            
     }
     
 }

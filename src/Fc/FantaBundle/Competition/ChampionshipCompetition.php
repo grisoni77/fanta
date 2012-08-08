@@ -2,6 +2,8 @@
 
 namespace Fc\FantaBundle\Competition;
 
+use Symfony\Component\Form\Form;
+
 /**
  * Description of ChampionshipCompetition
  *
@@ -23,8 +25,15 @@ class ChampionshipCompetition extends AbstractCompetition
     /**
      * {@inheritdoc}
      */
-    public function createForm() {
+    public function createForm($data = null, array $options = array())
+    {
+        $builder = $this->getFormFactory()->createBuilder('form', $data, $options);
+        $builder
+                ->add('name')
+                ->add('num_gironi', 'integer')
+                ;
         
+        return $builder->getForm();
     }
 
     /**
