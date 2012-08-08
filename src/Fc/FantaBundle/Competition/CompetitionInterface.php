@@ -55,4 +55,25 @@ interface CompetitionInterface
      */
     public function setLabel($label);
     
+    /**
+     * Ritorna template per testo descrittivo del tipo di competizione 
+     */
+    public function getDescriptionTemplate();
+    
+    /**
+     * Ritorna nome template per testo descrittivo del tipo di competizione 
+     * completo con i parametri dell'istanza
+     */
+    public function getConcreteDescriptionTemplate();
+    
+    /**
+     * Ritorna info per costruzione calendario gare 
+     */
+    public function getCalendar();
+    
+    /**
+     * Ritorna info per risultati (ad es. claassifica girone)
+     */
+    public function getResults();
+    
 }

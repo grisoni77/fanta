@@ -62,6 +62,11 @@ class Competition
     private $level;
     
     /**
+     * @ORM\Column(name="params", type="text")
+     */
+    private $params;
+    
+    /**
      * Get id
      *
      * @return integer 
@@ -251,5 +256,27 @@ class Competition
     public function getTeams()
     {
         return $this->teams;
+    }
+
+    /**
+     * Set params
+     *
+     * @param text $params
+     * @return Competition
+     */
+    public function setParams($params)
+    {
+        $this->params = $params;
+        return $this;
+    }
+
+    /**
+     * Get params
+     *
+     * @return text 
+     */
+    public function getParams()
+    {
+        return $this->params;
     }
 }

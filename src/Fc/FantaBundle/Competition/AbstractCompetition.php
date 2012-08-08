@@ -12,6 +12,13 @@ use \Symfony\Component\Form\FormFactory;
 abstract class AbstractCompetition implements CompetitionInterface
 {
     /**
+     * Parametri campionato
+     *  
+     * @var array
+     */
+    private $params;
+    
+    /**
      * @var string 
      */
     private $label;
@@ -50,5 +57,20 @@ abstract class AbstractCompetition implements CompetitionInterface
         $this->form_factory = $form_factory;
         return $this;
     }
+    
+    /**
+     * {@inheritdoc}
+     */
+    public function getConcreteDescriptionTemplate() {
+        return 'FcFantaBundle:Competition'.$this->getName().'.concrete.html.twig';
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getDescriptionTemplate() {
+        return 'FcFantaBundle:Competition:'.$this->getName().'.html.twig';
+    }
+    
     
 }

@@ -8,6 +8,9 @@
 
 <p>Hai scelto di creare una competizione di tipo <strong>{{ builder.label }}</strong></p>
 
+{# {{ description }} #}
+{% include description_tmpl with {builder: builder} %}
+
 <h2>Compila i parametri richiesti</h2>
 
 <form action="{{ path('fc_site_competition_wizard3', {id: league.id}) }}" method="post" >

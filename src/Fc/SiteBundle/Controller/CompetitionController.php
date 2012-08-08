@@ -51,11 +51,18 @@ class CompetitionController extends Controller {
         
         //create form
         $form = $builder->createForm();
+        /*
+        $description = $this->render('FcFantaBundle:Competition:championship.html.twig', array(
+            'name' => $builder->getLabel()
+        ));
+        */
         
         return array(
             'league'    => $league,
             'builder'   => $builder,
-            'form'      => $form->createView()
+            'form'      => $form->createView(),
+            //'description' => $description->getContent()
+            'description_tmpl' => $builder->getDescriptionTemplate()
         );
     }
 
