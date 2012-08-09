@@ -175,6 +175,12 @@ class LeagueController extends Controller
         if ($request->getMethod() === 'POST') {
             $form->bind($request);
             if ($form->isValid()) {
+                // crea il team con nome fittizio
+                $team = new \Fc\FantaBundle\Entity\Team();
+                $team->setName($this->getUser().'\'s team');
+                $team->setLeague($league);
+                $team->setUser($this->getUser());
+                $em->persist($team);
                 $em->persist($entity);
                 $em->flush();
                 return $this->redirect($this->generateUrl('fc_site_league_index'));

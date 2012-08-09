@@ -3,6 +3,7 @@
 namespace Fc\FantaBundle\Competition;
 
 use Fc\FantaBundle\Competition\CompetitionInterface;
+use Symfony\Component\Form\FormFactory;
 
 /**
  * Description of CompetitionFactory
@@ -12,9 +13,12 @@ use Fc\FantaBundle\Competition\CompetitionInterface;
 class CompetitionFactory
 {
     private $competitions;
+    /**
+     * @var Symfony\Component\Form\FormFactory
+     */
     private $form_factory;
     
-    public function __construct(\Symfony\Component\Form\FormFactory $form_factory)
+    public function __construct(FormFactory $form_factory)
     {
         $this->competitions = array();
         $this->form_factory = $form_factory;

@@ -3,6 +3,7 @@
 namespace Fc\FantaBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Fc\FantaBundle\Entity\Team;
 
 /**
  * Fc\FantaBundle\Entity\Subscription
@@ -149,4 +150,5 @@ class Subscription
     {
         return $this->message;
     }
+
 }

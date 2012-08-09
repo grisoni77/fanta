@@ -62,7 +62,7 @@ abstract class AbstractCompetition implements CompetitionInterface
      * {@inheritdoc}
      */
     public function getConcreteDescriptionTemplate() {
-        return 'FcFantaBundle:Competition'.$this->getName().'.concrete.html.twig';
+        return 'FcFantaBundle:Competition:'.$this->getName().'.concrete.html.twig';
     }
 
     /**
@@ -72,5 +72,12 @@ abstract class AbstractCompetition implements CompetitionInterface
         return 'FcFantaBundle:Competition:'.$this->getName().'.html.twig';
     }
     
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getCalendarTemplate() {
+        return 'FcFantaBundle:Competition:'.$this->getName().'.calendar.html.twig';
+    }
     
 }

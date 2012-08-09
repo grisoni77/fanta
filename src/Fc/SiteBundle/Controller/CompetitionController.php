@@ -68,10 +68,14 @@ class CompetitionController extends Controller {
 
     /**
      * @Route("/league/{id}/competition/wizard/3")
+     * 
      * @Method({"POST"})
      */
     public function wizard3Action(Request $request, $id) 
     {
+        $em = $this->getDoctrine()->getEntityManager();
+        $league = $em->getRepository('FcFantaBundle:League')->find($id);
+        
         $factory = $this->get('fc_fanta.competition_factory');
         $factory->setCompetitions($this->container->getParameter('fc_fanta.competition_types'));
         $builder = $factory->getCompetitionBuilder($request->request->get('type'));
@@ -79,7 +83,82 @@ class CompetitionController extends Controller {
         //create form
         $form = $builder->createForm();
         $form->bind($request);
-        print_r($form->getData());
+        
+        if ($form->isValid()) 
+        {
+            $data = $form->getData();
+            $calendar = $builder->generateDays($data['num_teams']);
+            return $this->render('FcSiteBundle:Competition:wizard3.html.twig',
+                array(
+                    'league'    => $league,
+                    'builder'   => $builder,
+                    'form'      => $form->createView(),
+                    'data'      => $data,
+                    'calendar'  => $calendar,
+                    //'description' => $description->getContent()
+                    'calendar_tmpl' => $builder->getCalendarTemplate(),
+                    'description_tmpl' => $builder->getConcreteDescriptionTemplate()
+                )
+            );
+        }
+        
+        return $this->render('FcSiteBundle:Competition:wizard2.html.twig', array(
+            'league'    => $league,
+            'builder'   => $builder,
+            'form'      => $form->createView(),
+            //'description' => $description->getContent()
+            'description_tmpl' => $builder->getDescriptionTemplate()
+        ));
+    }
+
+    
+    /**
+     * @Route("/league/{id}/competition/wizard/4")
+     * 
+     * @Method({"POST"})
+     */
+    public function wizard4Action(Request $request, $id) 
+    {
+        $em = $this->getDoctrine()->getEntityManager();
+        $league = $em->getRepository('FcFantaBundle:League')->find($id);
+        
+        $factory = $this->get('fc_fanta.competition_factory');
+        $factory->setCompetitions($this->container->getParameter('fc_fanta.competition_types'));
+        $builder = $factory->getCompetitionBuilder($request->request->get('type'));
+        
+        //create form
+        $form = $builder->createForm();
+        $form->bind($request);
+        
+        $calendar = $builder->generateDays($data['num_teams']);
+        
+        if ($form->isValid()) 
+        {
+            $data = $form->getData();
+            $builder->createCompetition($data);
+            
+            $calendar = $builder->generateDays($data['num_teams']);
+            return $this->render('FcSiteBundle:Competition:wizard4.html.twig',
+                array(
+                    'league'    => $league,
+                    'builder'   => $builder,
+                    'form'      => $form->createView(),
+                    'data'      => $data,
+                    'calendar'  => $calendar,
+                    //'description' => $description->getContent()
+                    'calendar_tmpl' => $builder->getCalendarTemplate(),
+                    'description_tmpl' => $builder->getConcreteDescriptionTemplate()
+                )
+            );
+        }
+        
+        return $this->render('FcSiteBundle:Competition:wizard3.html.twig', array(
+            'league'    => $league,
+            'builder'   => $builder,
+            'form'      => $form->createView(),
+            //'description' => $description->getContent()
+            'description_tmpl' => $builder->getDescriptionTemplate()
+        ));
     }
     
 }

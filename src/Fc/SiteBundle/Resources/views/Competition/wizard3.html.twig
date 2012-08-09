@@ -1,0 +1,35 @@
+{% extends '::layout2col.html.twig' %}
+
+{% block blog_title %}Pannello Lega {{league.name}} - Creazione Competizione{% endblock %}
+
+{% block body %}
+
+<h1>Crea competizione - Passo 2</h1>
+
+<p>Hai scelto di creare una competizione di tipo <strong>{{ builder.label }}</strong></p>
+
+{# {{ description }} #}
+{% include description_tmpl with {data: data} %}
+
+<h2>Calendario</h2>
+
+<p>Il calendario seguente verrà generato: </p>
+{% include calendar_tmpl with {calendar: calendar} %}
+
+<h2>Conferma i parametri immessi al punto precedente oppure modificali qui sotto</h2>
+
+<form action="{{ path('fc_site_competition_wizard3', {id: league.id}) }}" method="post" >
+        {{ form_widget(form) }}
+        <input type="text" name="type" value="{{ builder.name }}" />
+        <input type="submit" value="Modifica" />
+</form>
+
+<form action="{{ path('fc_site_competition_wizard4', {id: league.id}) }}" method="post" >
+        <div style="visibility: hidden">
+        {{ form_widget(form) }}
+        </div>
+        <input type="hidden" name="type" value="{{ builder.name }}" />
+        <input type="submit" value="Conferma e crea la competizione" />
+</form>
+
+{% endblock %}

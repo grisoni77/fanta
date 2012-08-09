@@ -91,6 +91,12 @@ class LoadUserData implements FixtureInterface, OrderedFixtureInterface
             $subscription->setUser($user);
             $subscription->setMessage('Messaggio fittizio...');
             $manager->persist($subscription);
+            // crea il team con nome fittizio
+            $team = new \Fc\FantaBundle\Entity\Team();
+            $team->setName($user.'\'s team');
+            $team->setLeague($league);
+            $team->setUser($user);
+            $manager->persist($team);            
         }
         
         $manager->flush();
