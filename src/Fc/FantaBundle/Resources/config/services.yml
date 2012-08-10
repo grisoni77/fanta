@@ -1,6 +1,11 @@
 services:
-    mybundle.tblprefix_subscriber:
+    fc_fantabundle.tblprefix_subscriber:
         class: Fc\FantaBundle\Subscriber\TablePrefixSubscriber
         arguments: [%fc_fanta.db.table_prefix%]
+        tags:
+            - { name: doctrine.event_subscriber }
+            
+    fc_fantabundle.subscription_subscriber:
+        class: Fc\FantaBundle\Subscriber\SubscriptionSubscriber
         tags:
             - { name: doctrine.event_subscriber }

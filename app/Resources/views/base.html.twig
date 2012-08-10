@@ -37,21 +37,15 @@
                 <div class="slogan">{% block slogan %}Cool slogan goes here!{% endblock %}</div>
             </div>
             <div id="menubar">
+                {% set menu=knp_menu_get('FcSiteBundle:MenuBuilder:mainMenu') %}
                 <ul id="menu">
-                <!-- put class="current" in the li tag for the selected page - to highlight which page you're on -->
-                <li class="current"><a href="{{ path('fc_site_default_index') }}">Home</a></li>
-                <li><a href="{{ path('sonata_admin_dashboard') }}">Private</a></li>
-                <li><a href="{{ path('fc_site_league_index') }}">Leghe</a></li>
-                <li><a href="contact.html">Contact Us</a></li>
-                {% if app.user %}
-                <li><a href="{{ path('fos_user_profile_show') }}">Profile</a></li>
-                {% endif %}
-                {% if app.user %}
-                <li><a href="{{ path('fos_user_security_logout') }}">Logout</a></li>
-                {% else %}
-                <li><a href="{{ path('fos_user_security_login') }}">Login</a></li>
-                {% endif %}
+                {% for item in menu %}
+                <li class="{{ item.isCurrent or item.isCurrentAncestor ? 'current ' : ''}}{{ item.isLast ? 'last ' : ''}}{{ item.isFirst ? 'first' : ''}}">
+                    <a href="{{ item.uri }}" title="Vai a pagina {{item.label}}" >{{item.label}}</a>
+                </li>
+                {% endfor %}
                 </ul>
+                {#{ knp_menu_render('FcSiteBundle:MenuBuilder:mainMenu') }#}
             </div>
             </div>
             
