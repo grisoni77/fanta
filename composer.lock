@@ -1,6 +1,12 @@
 {
-    "hash": "b9738827a3db90f0619dc85128b0743f",
+    "hash": "e7079616ed05a54fdc408f1ffffdc285",
     "packages": [
+        {
+            "package": "craue/formflow-bundle",
+            "version": "dev-master",
+            "source-reference": "ffea2781dcbc13ad2a4b0be301a952b72770f405",
+            "commit-date": "1343462962"
+        },
         {
             "package": "doctrine/common",
             "version": "2.2.2"
@@ -26,8 +32,8 @@
         {
             "package": "doctrine/doctrine-bundle",
             "version": "dev-master",
-            "source-reference": "ed8d02b491512f947fdb2f8b665dc8fd72b5879c",
-            "commit-date": "1343657020"
+            "source-reference": "4d9bb0f3af470556983eb41a7d19ede23401ef0b",
+            "commit-date": "1344549563"
         },
         {
             "package": "doctrine/doctrine-fixtures-bundle",
@@ -174,12 +180,6 @@
         {
             "package": "symfony/assetic-bundle",
             "version": "dev-master",
-            "alias-pretty-version": "2.1.x-dev",
-            "alias-version": "2.1.9999999.9999999-dev"
-        },
-        {
-            "package": "symfony/assetic-bundle",
-            "version": "dev-master",
             "source-reference": "ec3a65d3eab342af9e93a3c21af0ac7b78e01c17",
             "commit-date": "1344507386"
         },
@@ -204,8 +204,8 @@
         {
             "package": "symfony/symfony",
             "version": "dev-master",
-            "source-reference": "dd9afddfd9a9f169832c4634d1094f50f34d5df4",
-            "commit-date": "1344494996"
+            "source-reference": "31536c36ec8875aee1406aa7d7a0b5e38a04af66",
+            "commit-date": "1344599303"
         },
         {
             "package": "twig/extensions",
@@ -244,6 +244,7 @@
         "sensio/generator-bundle": 20,
         "sonata-project/admin-bundle": 20,
         "sonata-project/doctrine-orm-admin-bundle": 20,
-        "doctrine/doctrine-fixtures-bundle": 20
+        "doctrine/doctrine-fixtures-bundle": 20,
+        "craue/formflow-bundle": 20
     }
 }
