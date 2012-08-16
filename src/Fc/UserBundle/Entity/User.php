@@ -37,11 +37,6 @@ class User extends FosUser
     private $name;
 
 
-    /**
-     * @ORM\OneToMany(targetEntity="Fc\FantaBundle\Entity\Team", mappedBy="user")
-     */
-    private $teams;
-    
     /** 
      * @ORM\OneToMany(targetEntity="Fc\FantaBundle\Entity\Subscription", mappedBy="user")
      */
@@ -53,7 +48,7 @@ class User extends FosUser
     {
         parent::__construct();
         
-        $this->leagues = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->subscriptions = new \Doctrine\Common\Collections\ArrayCollection();
         $this->teams = new \Doctrine\Common\Collections\ArrayCollection();
     }
     

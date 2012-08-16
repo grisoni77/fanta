@@ -4,6 +4,7 @@ namespace Fc\FantaBundle\Competition;
 
 use Fc\FantaBundle\Competition\CompetitionInterface;
 use Symfony\Component\Form\FormFactory;
+use Symfony\Component\DependencyInjection\ContainerInterface;
 
 /**
  * Description of CompetitionFactory
@@ -18,10 +19,17 @@ class CompetitionFactory
      */
     private $form_factory;
     
-    public function __construct(FormFactory $form_factory)
+    /**
+     * @var Symfony\Component\DependencyInjection\ContainerInterface 
+     */
+    private $container;
+    
+    public function __construct(ContainerInterface $container)
     {
         $this->competitions = array();
-        $this->form_factory = $form_factory;
+        $this->container = $container;
+        $this->form_factory = $container->get('form.factory');
+        $this->setCompetitions($container->getParameter('fc_fanta.competition_types'));
     }
     
     public function setCompetitions($competitions) {
@@ -53,4 +61,14 @@ class CompetitionFactory
             
     }
     
+    public function getLeagueTeams($league)
+    {
+        $em = $this->container->get('doctrine')->getEntityManager();
+        $teams = $em->getRepository('FcFantaBundle:League')->findLeagueTeams($league);
+        return $teams;
+    }
+    
+    public function getFormFactory() {
+        return $this->form_factory;
+    }
 }

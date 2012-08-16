@@ -1,12 +1,6 @@
 {
-    "hash": "e7079616ed05a54fdc408f1ffffdc285",
+    "hash": "7984cdffd355aede8f4826d8396d7940",
     "packages": [
-        {
-            "package": "craue/formflow-bundle",
-            "version": "dev-master",
-            "source-reference": "ffea2781dcbc13ad2a4b0be301a952b72770f405",
-            "commit-date": "1343462962"
-        },
         {
             "package": "doctrine/common",
             "version": "2.2.2"
@@ -20,8 +14,8 @@
         {
             "package": "doctrine/dbal",
             "version": "2.2.x-dev",
-            "source-reference": "b961a3fce6bf220f1dca47d7d747b9074bea4730",
-            "commit-date": "1341779435"
+            "source-reference": "da4b7b4d965db0c1c1d23333e87ee5ae8994e249",
+            "commit-date": "1344978731"
         },
         {
             "package": "doctrine/doctrine-bundle",
@@ -112,10 +106,16 @@
             "version": "1.1.0"
         },
         {
+            "package": "peytz/wizard",
+            "version": "dev-master",
+            "source-reference": "v1.1.0",
+            "commit-date": "1338461546"
+        },
+        {
             "package": "sensio/distribution-bundle",
             "version": "dev-master",
-            "source-reference": "57190e5baa0cc1d8ef6095ce57e6719a5eae2b79",
-            "commit-date": "1344240835"
+            "source-reference": "e5e3e4758bfe4dd5fab74bccf9418888d1492691",
+            "commit-date": "1344928161"
         },
         {
             "package": "sensio/framework-extra-bundle",
@@ -132,8 +132,8 @@
         {
             "package": "sonata-project/admin-bundle",
             "version": "dev-master",
-            "source-reference": "8e6a04fbdb0544d8c184a0c20510db1a430223d2",
-            "commit-date": "1344293100"
+            "source-reference": "07e013ec1b00bfaac58663c6e5f3abc46cf1aa36",
+            "commit-date": "1345061800"
         },
         {
             "package": "sonata-project/block-bundle",
@@ -186,8 +186,8 @@
         {
             "package": "symfony/monolog-bundle",
             "version": "dev-master",
-            "source-reference": "v2.1.0-BETA4",
-            "commit-date": "1341078487"
+            "source-reference": "aed4d742838d2a7350633fed7afe18dbfd3415de",
+            "commit-date": "1344949802"
         },
         {
             "package": "symfony/swiftmailer-bundle",
@@ -204,8 +204,8 @@
         {
             "package": "symfony/symfony",
             "version": "dev-master",
-            "source-reference": "31536c36ec8875aee1406aa7d7a0b5e38a04af66",
-            "commit-date": "1344599303"
+            "source-reference": "50df1a72aab92a93b532bf66bc4e2639f0730eb9",
+            "commit-date": "1345051403"
         },
         {
             "package": "twig/extensions",
@@ -245,6 +245,6 @@
         "sonata-project/admin-bundle": 20,
         "sonata-project/doctrine-orm-admin-bundle": 20,
         "doctrine/doctrine-fixtures-bundle": 20,
-        "craue/formflow-bundle": 20
+        "peytz/wizard": 20
     }
 }

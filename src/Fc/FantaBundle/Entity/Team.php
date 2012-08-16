@@ -29,19 +29,14 @@ class Team
     private $name;
 
     /**
-     * @ORM\ManyToOne(targetEntity="Fc\UserBundle\Entity\User", inversedBy="teams")
-     * @ORM\JoinColumn(name="user_id", referencedColumnName="id", nullable=false)
+     * @ORM\OneToOne(targetEntity="Subscription")
+     * @ORM\JoinColumn(name="subscription_id", referencedColumnName="id")
      */
-    private $user;
-    
-    /**
-     * @ORM\ManyToOne(targetEntity="League"), inversedBy="teams")
-     * @ORM\JoinColumn(name="league_id", referencedColumnName="id", nullable=false)
-     */
-    private $league;
+    private $subscription;
 
     /**
      * @ORM\ManyToMany(targetEntity="Competition", inversedBy="teams")
+     * @ORM\JoinTable(name="Competition_Team")
      */
     private $competitions;
     
@@ -115,28 +110,6 @@ class Team
         return $this->listings;
     }
 
-    /**
-     * Set user
-     *
-     * @param Fc\UserBundle\Entity\User $user
-     * @return Team
-     */
-    public function setUser(\Fc\UserBundle\Entity\User $user)
-    {
-        $this->user = $user;
-        return $this;
-    }
-
-    /**
-     * Get user
-     *
-     * @return Fc\UserBundle\Entity\User 
-     */
-    public function getUser()
-    {
-        return $this->user;
-    }
-    
     
     public function __construct()
     {
@@ -177,24 +150,24 @@ class Team
     }
 
     /**
-     * Set league
+     * Set subscription
      *
-     * @param Fc\FantaBundle\Entity\League $league
+     * @param Fc\FantaBundle\Entity\Subscription $subscription
      * @return Team
      */
-    public function setLeague(\Fc\FantaBundle\Entity\League $league)
+    public function setSubscription(\Fc\FantaBundle\Entity\Subscription $subscription)
     {
-        $this->league = $league;
+        $this->subscription = $subscription;
         return $this;
     }
 
     /**
-     * Get league
+     * Get subscription
      *
-     * @return Fc\FantaBundle\Entity\League 
+     * @return Fc\FantaBundle\Entity\Subscription 
      */
-    public function getLeague()
+    public function getSubscription()
     {
-        return $this->league;
+        return $this->subscription;
     }
 }

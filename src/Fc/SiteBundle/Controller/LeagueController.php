@@ -62,7 +62,8 @@ class LeagueController extends Controller
         // get competitions
         $competitions = $em->getRepository('FcFantaBundle:League')->findLeagueCompetitions($league);
         // get user team
-        $userTeam = $em->getRepository('FcFantaBundle:Team')->findOneBy(array('user'=>$user, 'league'=>$league));
+        $subscription = $em->getRepository('FcFantaBundle:Subscription')->findOneBy(array('user'=>$user));
+        $userTeam = $em->getRepository('FcFantaBundle:Team')->findOneBy(array('subscription'=>$subscription));
         
         return array(
             'league'          => $league,

@@ -41,7 +41,7 @@ class League
     private $owner;
     
     /** 
-     * @ORM\OneToMany(targetEntity="Fc\FantaBundle\Entity\Subscription", mappedBy="league")
+     * @ORM\OneToMany(targetEntity="Subscription", mappedBy="league")
      */
     private $subscriptions;
 

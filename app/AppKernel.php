@@ -33,7 +33,6 @@ class AppKernel extends Kernel
             //new Symfony\Bundle\DoctrineFixturesBundle\DoctrineFixturesBundle(),
             new Doctrine\Bundle\FixturesBundle\DoctrineFixturesBundle(),
             new Fc\SiteBundle\FcSiteBundle(),
-            new Craue\FormFlowBundle\CraueFormFlowBundle(),
         );
 
         if (in_array($this->getEnvironment(), array('dev', 'test'))) {

@@ -16,10 +16,10 @@ class SubscriptionSubscriber implements EventSubscriber
 {
     public function getSubscribedEvents() {
         //return array();
-        return array('prePersist');
+        return array('postPersist');
     }
     
-    public function prePersist(LifecycleEventArgs $args)
+    public function postPersist(LifecycleEventArgs $args)
     {
         //echo 'here I am, dancing like a hurricane!';
         $em = $args->getEntityManager();
@@ -27,22 +27,22 @@ class SubscriptionSubscriber implements EventSubscriber
         
         if ($entity instanceof Subscription) 
         {
+            //echo $entity->getUser()->getName();
             $user = $entity->getUser();
-            $league = $entity->getLeague();
             // verifica che non esista già una squadra
             $team = $em->getRepository('FcFantaBundle:Team')->findOneBy(array(
-                'user' => $user,
-                'league' => $league,
-            ));
+                'subscription' => $entity
+                )
+            );
+            //$team = $em->getRepository('FcFantaBundle:Team')->findBySubscription($entity);
             if (!$team) 
             {
                 // crea il team con nome fittizio
                 $team = new Team();
                 $team->setName($user.'\'s team');
-                $team->setLeague($league);
-                $team->setUser($user);
+                $team->setSubscription($entity);
                 $em->persist($team);     
-                //$em->flush();
+                $em->flush();
             }
         }
     }

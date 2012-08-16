@@ -68,4 +68,13 @@ class LeagueRepository extends EntityRepository
                     'level'     =>1
                     ));
     }
+    
+    public function findLeagueTeams($league)
+    {
+        return $this->getEntityManager()->getRepository('FcFantaBundle:Team')
+                ->findBy(array(
+                    'league'    => $league
+                    ));
+    }
+    
 }
