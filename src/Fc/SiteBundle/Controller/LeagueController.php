@@ -12,7 +12,7 @@ use Symfony\Component\HttpFoundation\RedirectResponse;
 
 use Fc\FantaBundle\Entity\League;
 use Fc\SiteBundle\Form\Type\LeagueType;
-use Fc\FantaBundle\Entity\Subscription;
+use Fc\FantaBundle\Entity\Team;
 use Fc\SiteBundle\Form\Type\SubscriptionType;
 
 /**
@@ -34,7 +34,7 @@ class LeagueController extends Controller
         // leghe create dall'utente
         $userLeagues = $user ? $em->getRepository('FcFantaBundle:League')->findUserLeagues($user) : array();
         // leghe a cui è iscritto l'utente
-        $subscriptions = $user ? $em->getRepository('FcFantaBundle:League')->findSubscriptedLeagues($user) : array();
+        $teams = $user ? $em->getRepository('FcFantaBundle:League')->findUserTeams($user) : array();
         // leghe aperte a cui utente non è iscritto
         $openLeagues = $user ? $em->getRepository('FcFantaBundle:League')->findOpenLeagues($user) : array();
         // leghe aperte a cui utente non è iscritto
@@ -42,7 +42,7 @@ class LeagueController extends Controller
         
         return array(
             'userLeagues'   => $userLeagues,
-            'subscriptions' => $subscriptions,
+            'teams' => $teams,
             'openLeagues' => $openLeagues,
             'otherLeagues' => $otherLeagues
         );
@@ -57,17 +57,20 @@ class LeagueController extends Controller
         $em = $this->getDoctrine()->getEntityManager();
         $user = $this->getUser();
         $league = $em->getRepository('FcFantaBundle:League')->find($id);
-        // get subscriptions
-        $subscriptions = $league->getSubscriptions();
+        // get league teams
+        $teams = $league->getTeams();
         // get competitions
         $competitions = $em->getRepository('FcFantaBundle:League')->findLeagueCompetitions($league);
         // get user team
-        $subscription = $em->getRepository('FcFantaBundle:Subscription')->findOneBy(array('user'=>$user));
-        $userTeam = $em->getRepository('FcFantaBundle:Team')->findOneBy(array('subscription'=>$subscription));
+        $team = $em->getRepository('FcFantaBundle:Team')->findOneBy(array('user'=>$user));
+        $userTeam = $em->getRepository('FcFantaBundle:Team')->findOneBy(array(
+            'user'   => $user,
+            'league' => $league,
+        ));
         
         return array(
             'league'          => $league,
-            'subscriptions'   => $subscriptions,
+            'teams'           => $teams,
             'competitions'    => $competitions,
             'userTeam'        => $userTeam
         );        
@@ -80,12 +83,12 @@ class LeagueController extends Controller
     public function enableSubscriptionAction(Request $request)
     {
         $em = $this->getDoctrine()->getEntityManager();
-        $subId = $request->get('subscription_id');
-        $sub = $em->getRepository('FcFantaBundle:Subscription')->find($subId);
-        $sub->setEnabled(true);
-        $em->persist($sub);
+        $teamId = $request->get('team_id');
+        $team = $em->getRepository('FcFantaBundle:Team')->find($teamId);
+        $team->setEnabled(true);
+        $em->persist($team);
         $em->flush();
-        return new RedirectResponse($this->generateUrl('fc_site_league_panel', array('id'=>$sub->getLeague()->getId())));
+        return new RedirectResponse($this->generateUrl('fc_site_league_panel', array('id'=>$team->getLeague()->getId())));
     }
     
     /**
@@ -95,12 +98,12 @@ class LeagueController extends Controller
     public function disableSubscriptionAction(Request $request)
     {
         $em = $this->getDoctrine()->getEntityManager();
-        $subId = $request->get('subscription_id');
-        $sub = $em->getRepository('FcFantaBundle:Subscription')->find($subId);
-        $sub->setEnabled(false);
-        $em->persist($sub);
+        $teamId = $request->get('team_id');
+        $team = $em->getRepository('FcFantaBundle:Team')->find($teamId);
+        $team->setEnabled(false);
+        $em->persist($team);
         $em->flush();
-        return new RedirectResponse($this->generateUrl('fc_site_league_panel', array('id'=>$sub->getLeague()->getId())));
+        return new RedirectResponse($this->generateUrl('fc_site_league_panel', array('id'=>$team->getLeague()->getId())));
     }
     
 
@@ -139,12 +142,14 @@ class LeagueController extends Controller
         if ($form->isValid()) {
             $em = $this->getDoctrine()->getManager();
             $em->persist($entity);
-            //aggiungi iscrizione per l'owner
-            $subscription = new Subscription();
-            $subscription->setLeague($entity);
-            $subscription->setUser($entity->getOwner());
-            $subscription->setEnabled(true);
-            $em->persist($subscription);
+            //aggiungi squadra per l'owner
+            $team = new Team();
+            $team->setName($entity->getOwner()->getName().'\'s team');
+            $team->setLeague($entity);
+            $team->setUser($entity->getOwner());
+            $team->setEnabled(true);
+            $team->setMessage('League Owner');
+            $em->persist($team);
             $em->flush();
 
             return $this->redirect($this->generateUrl('fc_site_league_panel', array('id' => $entity->getId())));
@@ -167,7 +172,7 @@ class LeagueController extends Controller
     {
         $em = $this->getDoctrine()->getManager();
         $league = $em->getRepository('FcFantaBundle:League')->find($id);
-        $entity = new Subscription();
+        $entity = new Team();
         $entity->setLeague($league);
         $entity->setUser($this->getUser());
         $form   = $this->createForm(new SubscriptionType(), $entity);

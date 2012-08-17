@@ -18,13 +18,13 @@
     {% endif %}
     <a href="{{ path('fc_site_league_new') }}">Crea una tua lega</a>
 </div>
-<div id="subscripted_leagues" class="site_central">
+<div id="user_teams" class="site_central">
     <h2>Leghe a cui sei iscritto</h2>
-    {% if subscriptions %}
+    {% if teams %}
     <ul>
-    {% for subscription in subscriptions %}
-        <li>{{ subscription.league.name}}
-            {% if subscription.enabled == false %}
+    {% for team in teams %}
+        <li>{{ team.league.name}} con la squadra {{ team.name }}
+            {% if team.enabled == false %}
                 <strong>(In attesa di approvazione)</strong>
             {% endif %} 
         </li>

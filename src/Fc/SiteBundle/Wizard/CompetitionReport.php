@@ -42,15 +42,16 @@ class CompetitionReport implements ReportInterface
     
     
     public function setData($data) {
-        $this->setName($data['name']);
-        $this->setType($data['type']);
-        $this->setTeams($data['teams']);
+        foreach ($data as $key=>$value) {
+            $this->$key = $value;
+        }
     }
     public function getData() {
         return array(
             'name' => $this->getName(),
             'type' => $this->getType(),
             'teams' => $this->getTeams(),
+            'params' => $this->getParams(),
         );
     }
     
@@ -81,6 +82,13 @@ class CompetitionReport implements ReportInterface
     }
     public function getTeams() {
         return $this->teams;
+    }
+    public function setParams($params) {
+        $this->params = $params;
+        return $this;
+    }
+    public function getParams() {
+        return $this->params;
     }
 }
 

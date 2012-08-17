@@ -41,9 +41,9 @@ class League
     private $owner;
     
     /** 
-     * @ORM\OneToMany(targetEntity="Subscription", mappedBy="league")
+     * @ORM\OneToMany(targetEntity="Team", mappedBy="league")
      */
-    private $subscriptions;
+    private $teams;
 
     /**
      * @ORM\OneToMany(targetEntity="Competition", mappedBy="league")
@@ -224,35 +224,37 @@ class League
         return $this->owner;
     }
 
+
+
     /**
-     * Add subscriptions
+     * Add teams
      *
-     * @param Fc\FantaBundle\Entity\Subscription $subscriptions
+     * @param Fc\FantaBundle\Entity\Team $teams
      * @return League
      */
-    public function addSubscription(\Fc\FantaBundle\Entity\Subscription $subscriptions)
+    public function addTeam(\Fc\FantaBundle\Entity\Team $teams)
     {
-        $this->subscriptions[] = $subscriptions;
+        $this->teams[] = $teams;
         return $this;
     }
 
     /**
-     * Remove subscriptions
+     * Remove teams
      *
-     * @param Fc\FantaBundle\Entity\Subscription $subscriptions
+     * @param Fc\FantaBundle\Entity\Team $teams
      */
-    public function removeSubscription(\Fc\FantaBundle\Entity\Subscription $subscriptions)
+    public function removeTeam(\Fc\FantaBundle\Entity\Team $teams)
     {
-        $this->subscriptions->removeElement($subscriptions);
+        $this->teams->removeElement($teams);
     }
 
     /**
-     * Get subscriptions
+     * Get teams
      *
      * @return Doctrine\Common\Collections\Collection 
      */
-    public function getSubscriptions()
+    public function getTeams()
     {
-        return $this->subscriptions;
+        return $this->teams;
     }
 }

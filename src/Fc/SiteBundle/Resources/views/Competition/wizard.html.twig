@@ -1,4 +1,4 @@
-{% extends '::layout2col.html.twig' %}
+{% extends '::layout1col.html.twig' %}
 
 {% block blog_title %}Pannello Lega {{league.name}} - Creazione Competizione{% endblock %}
 
@@ -6,10 +6,50 @@
 
     <h1>Crea competizione - {{ step.name }}</h1>
 
-
+    
+    <div id="wizard-menu">
+        <ul>
+        {% set past = true %}
+        {% for mstep in wizard.all %}
+            <li {% if (past and mstep.name!=step.name) %}
+                    class="past"
+                {% elseif (past and mstep.name==step.name) %}
+                    {% set past = false %}
+                    class="current"
+                {% endif %}
+                >
+                {% if (mstep.visible or past) %}
+                <a href="{{ path('fc_site_competition_wizard', {'id': league.id, 'step': mstep.name}) }}" >
+                    {{ mstep.name }}
+                </a>
+                {% else %}
+                {{ mstep.name }}
+                {% endif %}
+            </li>
+        {% endfor %}
+        </ul>
+    </div>
+    
     <form action="{{ path('fc_site_competition_wizard', {'id': league.id, 'step': step.name})}}" method="post" {{ form_enctype(form) }}>
 
-        {{ form_widget(form) }}
+        {{ form_errors(form) }}
+        
+        {# Questo per gestire i campi dinamici relativi ad ogni competizione #}
+        {# questi sono ontenuti nell'array params del report #}
+        {# e recuperati tramite metodo magico __get della classe #}
+        {# che però non funziona in questo contesto... #}
+        {% if (wizard.report.params) %}
+        {% for key,param in  wizard.report.params  %}
+            {% if form[key] is defined %}
+            {{ form_errors(form[key]) }}
+            {{ form_label(form[key]) }}
+            {{ form_widget(form[key], {'attr': {'value': wizard.report.params[key]}}) }}
+            <br/>
+            {% endif %}
+        {% endfor %}
+        {% endif %}
+        
+        {{ form_rest(form) }}
         
         <input type="submit" value="Prosegui" />
         

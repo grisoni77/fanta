@@ -29,10 +29,28 @@ class Team
     private $name;
 
     /**
-     * @ORM\OneToOne(targetEntity="Subscription")
-     * @ORM\JoinColumn(name="subscription_id", referencedColumnName="id")
+     * @var boolean $enabled
+     *
+     * @ORM\Column(name="enabled", type="boolean")
      */
-    private $subscription;
+    private $enabled;
+    
+    /**
+     * @ORM\ManyToOne(targetEntity="Fc\UserBundle\Entity\User", inversedBy="teams")
+     * @ORM\JoinColumn(onDelete="CASCADE")
+     */
+    private $user;
+    
+    /**
+     * @ORM\ManyToOne(targetEntity="League", inversedBy="teams")
+     * @ORM\JoinColumn(onDelete="CASCADE")
+     */
+    private $league;
+
+    /**
+     * @ORM\Column(name="message", type="text", nullable=true)
+     */
+    private $message;
 
     /**
      * @ORM\ManyToMany(targetEntity="Competition", inversedBy="teams")
@@ -113,6 +131,7 @@ class Team
     
     public function __construct()
     {
+        $this->enabled = false;
         $this->competitions = new \Doctrine\Common\Collections\ArrayCollection();
         $this->listings = new \Doctrine\Common\Collections\ArrayCollection();
     }
@@ -149,25 +168,93 @@ class Team
         return $this->competitions;
     }
 
+
+
     /**
-     * Set subscription
+     * Set enabled
      *
-     * @param Fc\FantaBundle\Entity\Subscription $subscription
+     * @param boolean $enabled
      * @return Team
      */
-    public function setSubscription(\Fc\FantaBundle\Entity\Subscription $subscription)
+    public function setEnabled($enabled)
     {
-        $this->subscription = $subscription;
+        $this->enabled = $enabled;
         return $this;
     }
 
     /**
-     * Get subscription
+     * Get enabled
      *
-     * @return Fc\FantaBundle\Entity\Subscription 
+     * @return boolean 
      */
-    public function getSubscription()
+    public function getEnabled()
     {
-        return $this->subscription;
+        return $this->enabled;
+    }
+
+    /**
+     * Set message
+     *
+     * @param text $message
+     * @return Team
+     */
+    public function setMessage($message)
+    {
+        $this->message = $message;
+        return $this;
+    }
+
+    /**
+     * Get message
+     *
+     * @return text 
+     */
+    public function getMessage()
+    {
+        return $this->message;
+    }
+
+    /**
+     * Set user
+     *
+     * @param Fc\UserBundle\Entity\User $user
+     * @return Team
+     */
+    public function setUser(\Fc\UserBundle\Entity\User $user = null)
+    {
+        $this->user = $user;
+        return $this;
+    }
+
+    /**
+     * Get user
+     *
+     * @return Fc\UserBundle\Entity\User 
+     */
+    public function getUser()
+    {
+        return $this->user;
+    }
+
+    /**
+     * Set league
+     *
+     * @param Fc\FantaBundle\Entity\League $league
+     * @return Team
+     */
+    public function setLeague(\Fc\FantaBundle\Entity\League $league = null)
+    {
+        $this->league = $league;
+        return $this;
+    }
+
+    /**
+     * Get league
+     *
+     * @return Fc\FantaBundle\Entity\League 
+     */
+    public function getLeague()
+    {
+        return $this->league;
     }
 }

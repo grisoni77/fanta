@@ -16,56 +16,8 @@ use Symfony\Component\HttpFoundation\RedirectResponse;
  *
  * @author 71537
  */
-class CompetitionController extends Controller {
-
-    /**
-     * @Route("/league/{id}/competition/wizard/1")
-     * @Template()
-     */
-    public function wizard1Action($id) 
-    {
-        $em = $this->getDoctrine()->getEntityManager();
-        $league = $em->getRepository('FcFantaBundle:League')->find($id);
-        
-        $competitions = $this->container->getParameter('fc_fanta.competition_types');
-        
-        return array(
-            'league'    => $league,
-            'types' => $competitions
-        );
-    }
-
-    /**
-     * @Route("/league/{id}/competition/wizard/2")
-     * @Template()
-     * @Method({"POST"})
-     */
-    public function wizard2Action(Request $request, $id) 
-    {
-        $em = $this->getDoctrine()->getEntityManager();
-        $league = $em->getRepository('FcFantaBundle:League')->find($id);
-        
-        $factory = $this->get('fc_fanta.competition_factory');
-        $factory->setCompetitions($this->container->getParameter('fc_fanta.competition_types'));
-        $builder = $factory->getCompetitionBuilder($request->request->get('type'));
-        
-        //create form
-        $form = $builder->createForm();
-        /*
-        $description = $this->render('FcFantaBundle:Competition:championship.html.twig', array(
-            'name' => $builder->getLabel()
-        ));
-        */
-        
-        return array(
-            'league'    => $league,
-            'builder'   => $builder,
-            'form'      => $form->createView(),
-            //'description' => $description->getContent()
-            'description_tmpl' => $builder->getDescriptionTemplate()
-        );
-    }
-
+class CompetitionController extends Controller 
+{
     /**
      * @Route("/league/{id}/competition/wizard/3")
      * 
@@ -183,16 +135,10 @@ class CompetitionController extends Controller {
                 $this->get('fc_fanta.competition_factory')
         );
         $step = $wizard->get($step);
-        /*
-        $form = $this->createForm($step->getFormType(), $wizard->getReport(), array(
-            'validation_groups' => array($step->getName()),
-            'flowStep' => $step->getName(),
-            'league' => $league,
+        $form = $step->getForm($report, array(
+            //'validation_groups' => array($step->getName()),
         ));
-         */
-        $form = $step->getForm($wizard->getReport(), array(
-            'validation_groups' => array($step->getName()),
-        ));
+        $wizard->process($step);
         
         if ($request->getMethod() === 'POST') {
             $form->bind($request);
@@ -221,6 +167,7 @@ class CompetitionController extends Controller {
         $next = $wizard->getNextStepByStep($step);
         return array(
             'league'    => $league,
+            'wizard'      => $wizard,
             'step'      => $step,
             'isNextStepVisible'   => ($next ? $next->isVisible($report) : false),
             'nextStep'  => $next,

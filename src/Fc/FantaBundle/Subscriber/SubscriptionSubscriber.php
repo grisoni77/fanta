@@ -15,8 +15,8 @@ use Fc\FantaBundle\Entity\Team;
 class SubscriptionSubscriber implements EventSubscriber
 {
     public function getSubscribedEvents() {
-        //return array();
-        return array('postPersist');
+        return array();
+        //return array('postPersist');
     }
     
     public function postPersist(LifecycleEventArgs $args)

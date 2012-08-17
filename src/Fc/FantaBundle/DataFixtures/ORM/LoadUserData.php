@@ -85,21 +85,22 @@ class LoadUserData implements FixtureInterface, OrderedFixtureInterface
         $manager->persist($league);
         for ($i=1; $i<9 ; $i++) {
             $user = $manager->getRepository('FcUserBundle:User')->findOneBy(array('username'=>'user'.$i));
+            /*
             $subscription = new \Fc\FantaBundle\Entity\Subscription();
             $subscription->setEnabled(true);
             $subscription->setLeague($league);
             $subscription->setUser($user);
             $subscription->setMessage('Messaggio fittizio...');
             $manager->persist($subscription);
-            /*
+            */ 
             // crea il team con nome fittizio
             $team = new \Fc\FantaBundle\Entity\Team();
             $team->setName($user.'\'s team');
             $team->setLeague($league);
             $team->setUser($user);
+            $team->setEnabled(true);
+            $team->setMessage('Messaggio fittizio...');
             $manager->persist($team);            
-             * 
-             */
         }
         
         $manager->flush();

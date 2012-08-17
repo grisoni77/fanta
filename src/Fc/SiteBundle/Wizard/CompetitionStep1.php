@@ -2,31 +2,16 @@
 
 namespace Fc\SiteBundle\Wizard;
 
-use Peytz\Wizard\Step as Step;
-use Fc\SiteBundle\Form\CompetitionFormType;
-use Fc\FantaBundle\Competition\CompetitionFactory;
+use Fc\SiteBundle\Wizard\AbstractCompetitionStep;
+use Peytz\Wizard\ReportInterface;
 
 /**
  * Description of CompetitionStep1
  *
  * @author cris
  */
-class CompetitionStep1 extends Step
+class CompetitionStep1 extends AbstractCompetitionStep
 {
-    /**
-     * @var \Fc\FantaBundle\Competition\CompetitionFactory
-     */
-    private $competition_factory;
-    
-    public function __construct(\Fc\FantaBundle\Competition\CompetitionFactory $factory) {
-        $this->competition_factory = $factory;
-    }
-
-
-    public function getFormType() {
-        return new CompetitionFormType($this->competition_factory);
-    }
-    
     public function getForm($data, $options) {
         $builder = $this->competition_factory->getFormFactory()->createBuilder('form', $data, $options);
         $types = $this->competition_factory->getCompetitionTypes();
@@ -50,8 +35,12 @@ class CompetitionStep1 extends Step
         return 'step1';
     }
     
-    public function process(\Peytz\Wizard\ReportInterface $report)
+    /**
+     * @return Boolean
+     */
+    public function isVisible(ReportInterface $report)
     {
+        return true;
     }
 }
 

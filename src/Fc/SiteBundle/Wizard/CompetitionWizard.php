@@ -4,7 +4,6 @@ namespace Fc\SiteBundle\Wizard;
 
 use Peytz\Wizard\Wizard;
 use Peytz\Wizard\ReportInterface;
-use Fc\SiteBundle\Wizard\CompetitionStep1;
 
 /**
  * Description of CompetitionWizard
@@ -23,6 +22,7 @@ class CompetitionWizard extends Wizard
         $this->set(new CompetitionStep1($this->competition_factory)); 
         $this->set(new CompetitionStep2($this->competition_factory)); 
         $this->set(new CompetitionStep3($this->competition_factory)); 
+        $this->set(new CompetitionStepConfirm($this->competition_factory));
     }
     
 }

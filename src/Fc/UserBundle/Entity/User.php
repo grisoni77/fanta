@@ -38,9 +38,9 @@ class User extends FosUser
 
 
     /** 
-     * @ORM\OneToMany(targetEntity="Fc\FantaBundle\Entity\Subscription", mappedBy="user")
+     * @ORM\OneToMany(targetEntity="Fc\FantaBundle\Entity\Team", mappedBy="user")
      */
-    private $subscriptions;
+    private $teams;
     
 
     
@@ -48,7 +48,6 @@ class User extends FosUser
     {
         parent::__construct();
         
-        $this->subscriptions = new \Doctrine\Common\Collections\ArrayCollection();
         $this->teams = new \Doctrine\Common\Collections\ArrayCollection();
     }
     
@@ -119,35 +118,4 @@ class User extends FosUser
         return $this->teams;
     }
 
-    /**
-     * Add subscriptions
-     *
-     * @param Fc\FantaBundle\Entity\Subscription $subscriptions
-     * @return User
-     */
-    public function addSubscription(\Fc\FantaBundle\Entity\Subscription $subscriptions)
-    {
-        $this->subscriptions[] = $subscriptions;
-        return $this;
-    }
-
-    /**
-     * Remove subscriptions
-     *
-     * @param Fc\FantaBundle\Entity\Subscription $subscriptions
-     */
-    public function removeSubscription(\Fc\FantaBundle\Entity\Subscription $subscriptions)
-    {
-        $this->subscriptions->removeElement($subscriptions);
-    }
-
-    /**
-     * Get subscriptions
-     *
-     * @return Doctrine\Common\Collections\Collection 
-     */
-    public function getSubscriptions()
-    {
-        return $this->subscriptions;
-    }
 }

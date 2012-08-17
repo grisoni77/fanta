@@ -25,9 +25,9 @@ class LeagueRepository extends EntityRepository
         return $leagues;
     }
     
-    public function findSubscriptedLeagues(User $user)
+    public function findUserTeams(User $user)
     {
-        return $user->getSubscriptions();
+        return $user->getTeams();
     }
 
     /**

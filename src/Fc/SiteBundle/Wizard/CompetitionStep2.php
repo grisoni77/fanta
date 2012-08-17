@@ -2,9 +2,7 @@
 
 namespace Fc\SiteBundle\Wizard;
 
-use Peytz\Wizard\Step as Step;
-use Fc\SiteBundle\Form\CompetitionFormType;
-use Fc\FantaBundle\Competition\CompetitionFactory;
+use Fc\SiteBundle\Wizard\AbstractCompetitionStep;
 use Peytz\Wizard\ReportInterface;
 
 /**
@@ -12,21 +10,8 @@ use Peytz\Wizard\ReportInterface;
  *
  * @author cris
  */
-class CompetitionStep2 extends Step
+class CompetitionStep2 extends AbstractCompetitionStep
 {
-    /**
-     * @var \Fc\FantaBundle\Competition\CompetitionFactory
-     */
-    private $competition_factory;
-    
-    public function __construct(\Fc\FantaBundle\Competition\CompetitionFactory $factory) {
-        $this->competition_factory = $factory;
-    }
-
-
-    public function getFormType() {
-        return new CompetitionFormType($this->competition_factory);
-    }
     public function getForm($data, $options) {
         $builder = $this->competition_factory->getFormFactory()->createBuilder('form', $data, $options);
         $teams = $this->competition_factory->getLeagueTeams($data->getLeague());
@@ -37,7 +22,7 @@ class CompetitionStep2 extends Step
         $builder->add('teams', 'choice', array(
             'choices' => $choices,
             'multiple'=> true,
-            'expanded'=> true,
+            'expanded'=> false,
         ));
         return $builder->getForm();
 
