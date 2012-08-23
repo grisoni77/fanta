@@ -160,6 +160,6 @@ class Day
     
     public function __toString()
     {
-        return sprintf("Giornata %-2d", $this->getNumber());
+        return sprintf("Giornata %02d il %s", $this->getNumber(), $this->getDate()->format('d-m-Y'));
     }
 }

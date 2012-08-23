@@ -4,6 +4,7 @@ namespace Fc\SiteBundle\Wizard;
 
 use Fc\SiteBundle\Wizard\AbstractCompetitionStep;
 use Peytz\Wizard\ReportInterface;
+use Fc\FantaBundle\Form\DataTransformer\LeagueToNumberTransformer;
 
 /**
  * Description of CompetitionStep1
@@ -12,21 +13,21 @@ use Peytz\Wizard\ReportInterface;
  */
 class CompetitionStep1 extends AbstractCompetitionStep
 {
-    public function getForm($data, $options) {
+    public function getForm($data = null, $options = array()) {
         $builder = $this->competition_factory->getFormFactory()->createBuilder('form', $data, $options);
         $types = $this->competition_factory->getCompetitionTypes();
         $choices = array();
         foreach ($types as $t) {
             $choices[$t['name']] = $t['label'];
         }
-        $builder
+        $builder    
             ->add('name', null, array(
                 'label' => 'Nome competizione'
             ))
             ->add('type', 'choice', array(
                 'label' => 'Tipo competizione',
                 'choices' => $choices
-            ));
+            ))
         ;
         return $builder->getForm();
     }
@@ -42,6 +43,7 @@ class CompetitionStep1 extends AbstractCompetitionStep
     {
         return true;
     }
+    
 }
 
 ?>

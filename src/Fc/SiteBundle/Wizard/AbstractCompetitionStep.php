@@ -4,6 +4,7 @@ namespace Fc\SiteBundle\Wizard;
 
 use Peytz\Wizard\Step as WizStep;
 use Fc\FantaBundle\Competition\CompetitionFactory;
+use Peytz\Wizard\ReportInterface;
 
 /**
  * Description of AbstractCompetitionStep
@@ -27,11 +28,15 @@ abstract class AbstractCompetitionStep extends WizStep
         return null;
     }
 
-    public function process(\Peytz\Wizard\ReportInterface $report)
+    public function process(ReportInterface $report)
     {
         // set visible
         $this->visible = $this->isVisible($report);
     }    
+    
+    public function getDescriptionTemplate(ReportInterface $report) {
+        return 'FcSiteBundle:Competition:'.$this->getName().'.html.twig';
+    }
 }
 
 ?>

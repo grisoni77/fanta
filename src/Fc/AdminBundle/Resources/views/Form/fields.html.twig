@@ -1,0 +1,39 @@
+{# empty Twig template #}
+
+{% block fc_type_date_picker_widget %}
+
+    {% javascripts
+        'js/tools/jquery-ui-timepicker-addon.js'
+        'js/tools/timepicker-local/*'
+        output='js/compiled/jquerylib.js'
+    %}
+    <script src="{{ asset_url }}"></script>
+    {% endjavascripts %}
+    <script type="text/javascript">
+        jQuery(function($) {
+            // initialise the "Select date" link
+            $.datepicker.setDefaults($.datepicker.regional[ "it" ]);
+            $.timepicker.setDefaults($.timepicker.regional[ "it" ]);
+            // associate the link with a date picker
+            $('.fc_date_picker').each(function(){
+                var self = $(this);
+                self.datetimepicker({
+                    dateFormat:         'dd/mm/yy',
+                    timeFormat:         'hh:mm',
+                    changeMonth:        true,
+                    changeYear:         true,
+                    showButtonPanel:    true,
+                    firstDay:           1,
+                    //monthNamesShort:    ['janv.', 'févr.', 'mars', 'avr.', 'mai', 'juin', 'juil.', 'août', 'sept.', 'oct.', 'nov.', 'déc.'],
+                    showOn:             "button",
+                    buttonImageOnly:    true,
+                    buttonImage:        self.attr('data-datepicker-icon')
+                });
+            });
+        });
+    </script>
+
+
+    {{ form_widget(form) }}
+    
+{% endblock %}

@@ -18,7 +18,7 @@ class ChampionshipConstraintValidator extends ConstraintValidator
         //echo $this->context->getGroup()->get('num_gironi')->value;
         $data = $this->context->getRoot()->getData();
         //print_r($data);
-        $this->context->addViolation($constraint->message, array('%string%' => $value));
+        //$this->context->addViolation($constraint->message, array('%string%' => $value));
     }
 }
 

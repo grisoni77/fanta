@@ -9,6 +9,10 @@
             <tag name="form.type" alias="fc_type_boolean" />
             <argument type="service" id="translator" />
         </service>
+        <service id="fc.admin.form.type.datepicker" class="Fc\AdminBundle\Form\Type\FcDatePickerType">
+            <tag name="form.type" alias="fc_type_date_picker" />
+            <argument type="service" id="translator" />
+        </service>
     </services>        
     <!--
     <parameters>

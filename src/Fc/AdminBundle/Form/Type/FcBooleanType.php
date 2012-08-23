@@ -28,8 +28,8 @@ class FcBooleanType extends BooleanType
 
         $resolver->setDefaults(array(
             'choices' => array(
-                1  => $this->translator->trans('label_type_yes', array(), 'SonataAdminBundle'),
-                0   => $this->translator->trans('label_type_no', array(), 'SonataAdminBundle')
+                1  => 'label_type_yes',
+                0   => 'label_type_no',
             )
         ));
     }

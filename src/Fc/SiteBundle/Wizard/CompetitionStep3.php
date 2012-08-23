@@ -12,9 +12,9 @@ use Peytz\Wizard\ReportInterface;
  */
 class CompetitionStep3 extends AbstractCompetitionStep
 {
-    public function getForm($data, $options) {
-        $builder = $this->competition_factory->getCompetitionBuilder($data->getType());
-        return $builder->createForm($data, $options);
+    public function getForm(ReportInterface $report = null, $options = array()) {
+        $builder = $this->competition_factory->getCompetitionBuilder($report->getType());
+        return $builder->createForm($report, $options);
     }
     
     public function getName() {
@@ -29,7 +29,12 @@ class CompetitionStep3 extends AbstractCompetitionStep
         $type = $report->getType();
         $teams = $report->getTeams();
         return !empty($type) && !empty($teams);
-    }    
+    } 
+    
+    public function getDescriptionTemplate(ReportInterface $report)
+    {
+        return $this->competition_factory->getCompetitionBuilder($report->getType())->getDescriptionTemplate();
+    }
 }
 
 ?>

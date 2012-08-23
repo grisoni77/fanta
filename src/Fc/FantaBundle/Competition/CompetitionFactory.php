@@ -71,4 +71,8 @@ class CompetitionFactory
     public function getFormFactory() {
         return $this->form_factory;
     }
+    
+    public function getServiceContainer() {
+        return $this->container;
+    }
 }

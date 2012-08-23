@@ -2,5 +2,5 @@
 
 <h2>Campionato a gironi</h2>
 
-<p>Girone all'italiana con {{data.num_teams}} squadre e {{data.num_gironi}} gironi (andata e ritorno si alternano)</p>
-<p>La competizione verrà distribuita su {{ (data.num_teams-1)*data.num_gironi }} giornate del campionato <strong>{{ league.championship }}</strong></p>
+<p>Girone all'italiana con {{ data.teams|length }} squadre e {{data.params.num_gironi}} gironi (andata e ritorno si alternano)</p>
+<p>La competizione verrà distribuita su {{ (data.teams|length-1)*data.params.num_gironi }} giornate del campionato <strong>{{ data.league.championship }}</strong></p>

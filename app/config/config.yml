@@ -17,18 +17,21 @@ framework:
     default_locale:  %locale%
     trust_proxy_headers: false # Should Request object should trust proxy headers (X_FORWARDED_FOR/HTTP_CLIENT_IP)
     session:         
-      lifetime: 600
+      lifetime: 3600
 
 # Twig Configuration
 twig:
     debug:            %kernel.debug%
     strict_variables: %kernel.debug%
-
+    form:
+        resources:
+            - 'FcAdminBundle:Form:fields.html.twig'
+            
 # Assetic Configuration
 assetic:
     debug:          %kernel.debug%
     use_controller: false
-    bundles:        [FcSiteBundle]
+    bundles:        [FcSiteBundle, FcAdminBundle]
     #java: /usr/bin/java
     filters:
         cssrewrite: ~
@@ -134,6 +137,12 @@ services:
       tags:
         - { name: sonata.admin, manager_type: orm, group: datireali, label: Voti }
       arguments: [null, Fc\FantaBundle\Entity\Mark, null]      
+
+  fc.admin.admin.day:
+      class: Fc\AdminBundle\Admin\DayAdmin
+      tags:
+        - { name: sonata.admin, manager_type: orm, group: datireali, label: Giornate }
+      arguments: [null, Fc\FantaBundle\Entity\Day, null]      
      
   # competition type services    
   fc_fanta.competition_factory:

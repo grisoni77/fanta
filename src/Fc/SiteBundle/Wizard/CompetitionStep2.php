@@ -12,7 +12,7 @@ use Peytz\Wizard\ReportInterface;
  */
 class CompetitionStep2 extends AbstractCompetitionStep
 {
-    public function getForm($data, $options) {
+    public function getForm($data = null, $options = array()) {
         $builder = $this->competition_factory->getFormFactory()->createBuilder('form', $data, $options);
         $teams = $this->competition_factory->getLeagueTeams($data->getLeague());
         $choices = array();
