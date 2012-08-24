@@ -138,8 +138,8 @@
         {
             "package": "sonata-project/block-bundle",
             "version": "dev-master",
-            "source-reference": "4eaa80db98229598e18b16663172d9063e18e732",
-            "commit-date": "1343732144"
+            "source-reference": "dc3beee73f0b6b5baa6cf945b1a444d7c03f923a",
+            "commit-date": "1345743951"
         },
         {
             "package": "sonata-project/cache-bundle",
@@ -186,12 +186,6 @@
         {
             "package": "symfony/monolog-bundle",
             "version": "dev-master",
-            "alias-pretty-version": "2.1.x-dev",
-            "alias-version": "2.1.9999999.9999999-dev"
-        },
-        {
-            "package": "symfony/monolog-bundle",
-            "version": "dev-master",
             "source-reference": "10c3d6fcda8d73eb1a35860eeea2933d1ab2c1f6",
             "commit-date": "1345557954"
         },
@@ -210,8 +204,8 @@
         {
             "package": "symfony/symfony",
             "version": "dev-master",
-            "source-reference": "2cf3cb5b7a56446c76f90689e4df047031d73205",
-            "commit-date": "1345655061"
+            "source-reference": "602a45880f1e95d7dc69cba907a5692910eba44f",
+            "commit-date": "1345796427"
         },
         {
             "package": "twig/extensions",

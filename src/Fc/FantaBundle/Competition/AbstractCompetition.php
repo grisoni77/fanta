@@ -3,6 +3,7 @@
 namespace Fc\FantaBundle\Competition;
 
 use \Symfony\Component\Form\FormFactory;
+use Doctrine\ORM\EntityManager;
 
 /**
  * Description of AbstractCompetition
@@ -16,17 +17,17 @@ abstract class AbstractCompetition implements CompetitionInterface
      *  
      * @var array
      */
-    private $params;
+    protected $params;
     
     /**
      * @var string 
      */
-    private $label;
+    protected $label;
     
     /**
      * @var FormFactory
      */
-    private $form_factory;
+    protected $form_factory;
     
     /**
      * {@inheritdoc}
@@ -46,12 +47,27 @@ abstract class AbstractCompetition implements CompetitionInterface
     /**
      * {@inheritdoc}
      */
+    public function getEntityManager() {
+        return $this->em;
+    }
+    
+    /**
+     * {@inheritdoc}     
+     */
+    public function setEntityManager(EntityManager $manager) {
+        $this->em = $manager;
+        return $this;
+    }
+    
+    /**
+     * {@inheritdoc}
+     */
     public function getFormFactory() {
         return $this->form_factory;
     }
     
     /**
-     * {@inheritdoc}     * 
+     * {@inheritdoc}     
      */
     public function setFormFactory(FormFactory $form_factory) {
         $this->form_factory = $form_factory;

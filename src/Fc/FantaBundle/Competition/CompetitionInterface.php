@@ -3,6 +3,7 @@
 namespace Fc\FantaBundle\Competition;
 
 use \Symfony\Component\Form\FormFactory;
+use Doctrine\ORM\EntityManager;
 
 /**
  * Interfaccia per classi Competition
@@ -11,6 +12,11 @@ use \Symfony\Component\Form\FormFactory;
  */
 interface CompetitionInterface
 {
+    
+    public function getEntityManager();
+    
+    public function setEntityManager(EntityManager $manager);
+    
     /**
      * @return FormFactory
      */
@@ -29,7 +35,7 @@ interface CompetitionInterface
     /**
      * Genera competizione (incluse le figlie se ci sono) e relative giornate
      */
-    public function createCompetition();
+    public function createCompetition($data);
     
     /**
      * Ritorna i parametri relativi alla singola istanza della competizione

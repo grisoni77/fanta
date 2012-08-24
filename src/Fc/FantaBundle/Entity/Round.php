@@ -44,7 +44,7 @@ class Round
 
     /**
      * @ORM\ManyToOne(targetEntity="Competition", inversedBy="rounds")
-     * @ORM\JoinColumn(name="competition_id", referencedColumnName="id", nullable=false)
+     * @ORM\JoinColumn(name="competition_id", referencedColumnName="id", nullable=false, onDelete="CASCADE")
      */
     private $competition;
 

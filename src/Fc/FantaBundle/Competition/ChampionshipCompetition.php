@@ -20,31 +20,70 @@ class ChampionshipCompetition extends AbstractCompetition
 {
     public function __construct() {
         $this->setLabel('Campionato a gironi');
-        $this->params = array(
-            'num_gironi' => array(
-                'label'     => 'Numero gironi',
-                'type'      => 'integer',
-                'default'   => 2
-            ),
-            'day_from' => array(
-                'label'     => 'Giornata iniziale',
-                'type'      => 'integer',
-                'default'   => 1
-            ),
-            'day_to' => array(
-                'label'     => 'Giornata finale',
-                'type'      => 'integer',
-                'default'   => 38
-            )
-        );
     }
     
     /**
      * {@inheritdoc}
      */
-    public function createCompetition() 
+    public function createCompetition($data) 
     {
-        
+        $em = $this->getEntityManager();
+        // crea competition
+        $comp = new Competition();
+        $comp->setLeague($data->getLeague());
+        $comp->setname($data->getName());
+        $comp->setLevel(1);
+        $comp->setParams(serialize($data->getParams()));
+        $comp->setType($em->getRepository('FcFantaBundle:CompetitionType')->findOneBy(array('name'=>'Campionato')));    
+        $comp->setEnabled(false);
+        // add teams
+        foreach ($data->getTeams() as $tid) 
+        {
+            $team = $em->getRepository('FcFantaBundle:Team')->find($tid);
+            $comp->addTeam($team);
+        }
+        $em->persist($comp);
+        // genera giornate
+        print_r($comp->getTeams()->getKeys());
+        $rounds = $this->generateDays(count($comp->getTeams()));
+        $teams = $comp->getTeams();
+        $params = $data->getParams();
+        $d = $params['day_from'];
+        $day = $em->getRepository('FcFantaBundle:Day')->find($d);
+        //$dnumber = $day->getNumber();
+        for ($g=0; $g < $params['num_gironi']; $g++) {
+            $inversion = $g%2 == 1;
+            foreach ($rounds as $k => $r)
+            {
+                $round = new Round();
+                //echo ($inversion?"R":"A");
+                $round->setAbbr((string) sprintf("%d%s%d", $k+1, ($inversion?"R":"A"), $g+1));
+                $round->setName((string) sprintf("%d° di %s(%d)", $k+1, ($inversion?'ritorno':'andata'), $g+1));
+                $round->setCompetition($comp);
+                $round->setDay($day);
+                $round->setOrdering((int)$g*count($rounds)+$k+1);
+                
+                $em->persist($round);
+                foreach ($r as $ga) 
+                {
+                    $game = new Game();
+                    $game->setRound($round);
+                    $game->setPlayed(false);
+                    $game->setTeam1($teams->get(($inversion ? $ga[1] : $ga[0])-1));
+                    $game->setTeam2($teams->get(($inversion ? $ga[0] : $ga[1])-1));
+                    $em->persist($game);
+                }
+                // cerca giornata per turno successivo
+                $day = $em->getRepository('FcFantaBundle:Day')->findOneBy(array(
+                    'number'=>$day->getNumber(), 
+                    'championship'=>$data->getLeague()->getChampionship(),
+                ));
+                //$dnumber = $day->getNumber();
+            }
+        }  
+        //print_r($rounds);die();
+        //save
+        $em->flush();
     }
 
     /**
@@ -56,26 +95,29 @@ class ChampionshipCompetition extends AbstractCompetition
             'num_gironi' => new \Fc\FantaBundle\Competition\Constraint\ChampionshipConstraint()
         ));
         $builder = $this->getFormFactory()->createBuilder('form', $data, $options);
-        /*
-        foreach ($this->params as $name => $p) {
-            $builder->add($name, $p['type'], array(
-                'label' => $p['label'],
-                'data'  => $p['default'],
-            ));
-        }
-        */
         $league = $data->getLeague();
+        /* @var $days Doctrine\ORM\PersistentCollection */
+        $days = $league->getChampionship()->getDays();
+        //Doctrine\ORM\PersistentCollection::
+        $choices = array();
+        foreach ($days as $d) {
+            if ($d->getDate() > new \DateTime('now')) {
+                $choices[$d->getId()] = (string) $d;
+            }
+        }
         $builder
             ->add('num_gironi', null , array(
                 'label'     => 'Numero gironi',
                 'data'      => 2,
             ))
-            ->add('day_from', 'entity' , array(
-                'class'     => 'Fc\FantaBundle\Entity\Day',
+            ->add('day_from', 'choice' , array(
+                'choices' => $choices,
+                //'class'     => 'Fc\FantaBundle\Entity\Day',
                 'label'     => 'Giornata iniziale',
             ))
-            ->add('day_to', 'entity' , array(
-                'class'     => 'Fc\FantaBundle\Entity\Day',
+            ->add('day_to', 'choice' , array(
+                'choices' => $choices,
+                //'class'     => 'Fc\FantaBundle\Entity\Day',
                 'label'     => 'Giornata finale',
             ))
         ;

@@ -26,10 +26,12 @@ class ChampionshipConstraintValidator extends ConstraintValidator
         $necessarie = $gior_x_girone*$num_gironi;
         
         // check numero giornate
-        $day_from = $data->day_from;
-        $day_to = $data->day_to;
+        $champ = $value->getLeague()->getChampionship();
+        $day_from   = $champ->getDayById($data->day_from);
+        $day_to     = $champ->getDayById($data->day_to);
+        echo $day_from->getNumber();    
         if ($day_to->getNumber() - $day_from->getNumber() + 1 < $necessarie) {
-            $this->context->addViolation(sprintf('Non ci sono abbastanza giornate per i parametri scelti: giornate disponibili = %d giornate scelte = %d ',
+            $this->context->addViolation(sprintf('Non ci sono abbastanza giornate per i parametri scelti: giornate scelte = %d, giornate necessarie = %d ',
                     $day_to->getNumber() - $day_from->getNumber() + 1, $necessarie
             ), array('%string%' => $value));
         }

@@ -183,6 +183,17 @@ class Championship
     {
         return $this->days;
     }
+    
+    public function getDayById($day_id)
+    {
+        $days = $this->days;
+        foreach ($days as $d) {
+            if ($d->getId() == $day_id) {
+                return $d;
+            }
+        }
+        return null;
+    }
 
     /**
      * Add leagues
@@ -250,6 +261,10 @@ class Championship
     {
         return $this->enabled;
     }
+    public function isEnabled()
+    {
+        return $this->getEnabled();
+    }
     
     
 
@@ -274,5 +289,9 @@ class Championship
     public function getIsCalendarFrozen()
     {
         return $this->isCalendarFrozen;
+    }
+    public function isCalendarFrozen()
+    {
+        return $this->getIsCalendarFrozen();
     }
 }

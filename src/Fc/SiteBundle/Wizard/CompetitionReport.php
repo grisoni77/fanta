@@ -4,7 +4,7 @@ namespace Fc\SiteBundle\Wizard;
 
 use Peytz\Wizard\ReportInterface;
 use Symfony\Component\Form\Exception\NotValidException;
-use Doctrine\ORM\Mapping as ORM;
+use Doctrine\ORM\EntityManager;
 
 /**
  * Description of CompetitionReport
@@ -14,11 +14,19 @@ use Doctrine\ORM\Mapping as ORM;
  */
 class CompetitionReport implements ReportInterface
 {
+    /* @var em EntityManager */
+    private $em = null;
+    
     private $league = null;
     private $name = '';
     private $type = '';
     private $teams = null;
     private $params = array();
+    
+    
+    public function __construct(EntityManager $em) {
+        $this->em = $em;
+    }
     
     public function __get($key) 
     {
@@ -44,6 +52,20 @@ class CompetitionReport implements ReportInterface
     public function setData($data) {
         foreach ($data as $key=>$value) {
             $this->$key = $value;
+            /*
+            //echo $key;
+            if (is_object($value)) {
+                //echo ' merged ';
+                $data[$key] = $this->em->merge($value);
+            }
+            if (is_array($value)) { 
+                $this->setData($value);
+            } else {
+                //echo ' set ';
+                $this->$key = $value;
+            }
+             * 
+             */
         }
     }
     public function getData() {

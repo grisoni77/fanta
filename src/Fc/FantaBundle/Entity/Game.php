@@ -24,18 +24,18 @@ class Game
     
     /**
      * @ORM\ManyToOne(targetEntity="Round", inversedBy="games")
-     * @ORM\JoinColumn(name="round_id", referencedColumnName="id", nullable=false)
+     * @ORM\JoinColumn(name="round_id", referencedColumnName="id", nullable=false, onDelete="CASCADE")
      */
     private $round;
     
     /**
-     * @ORM\OneToOne(targetEntity="Team")
+     * @ORM\ManyToOne(targetEntity="Team")
      * @ORM\JoinColumn(name="team_1_id", referencedColumnName="id", nullable=false)
      */
     private $team_1;
 
     /**
-     * @ORM\OneToOne(targetEntity="Team")
+     * @ORM\ManyToOne(targetEntity="Team")
      * @ORM\JoinColumn(name="team_2_id", referencedColumnName="id", nullable=false)
      */
     private $team_2;
@@ -43,42 +43,42 @@ class Game
     /**
      * @var float $team_1_partial
      *
-     * @ORM\Column(name="team_1_partial", type="float")
+     * @ORM\Column(name="team_1_partial", type="float", nullable = true)
      */
     private $team_1_partial;
 
     /**
      * @var float $team_2_partial
      *
-     * @ORM\Column(name="team_2_partial", type="float")
+     * @ORM\Column(name="team_2_partial", type="float", nullable = true)
      */
     private $team_2_partial;
 
     /**
      * @var float $team_1_total
      *
-     * @ORM\Column(name="team_1_total", type="float")
+     * @ORM\Column(name="team_1_total", type="float", nullable = true)
      */
     private $team_1_total;
 
     /**
      * @var float $team_2_total
      *
-     * @ORM\Column(name="team_2_total", type="float")
+     * @ORM\Column(name="team_2_total", type="float", nullable = true)
      */
     private $team_2_total;
 
     /**
      * @var integer $team_1_goals
      *
-     * @ORM\Column(name="team_1_goals", type="integer")
+     * @ORM\Column(name="team_1_goals", type="integer", nullable = true)
      */
-    private $team_1_goals;
+    private $team_1_goals = 0;
 
     /**
      * @var integer $team_2_goals
      *
-     * @ORM\Column(name="team_2_goals", type="integer")
+     * @ORM\Column(name="team_2_goals", type="integer", nullable = true)
      */
     private $team_2_goals;
 

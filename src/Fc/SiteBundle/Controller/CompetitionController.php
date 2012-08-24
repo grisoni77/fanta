@@ -123,13 +123,19 @@ class CompetitionController extends Controller
     {
         $em = $this->getDoctrine()->getEntityManager();
         $league = $em->getRepository('FcFantaBundle:League')->find($id);
+        
+        // check championship is ready
+        if (!$league->getChampionship()->isEnabled() || !$league->getChampionship()->isCalendarFrozen()) {
+            throw new \Exception('Questo campionato non è ancora stato consolidato');
+        }
         // get report( will contains data in session )
-        $report = new \Fc\SiteBundle\Wizard\CompetitionReport();
+        $report = new \Fc\SiteBundle\Wizard\CompetitionReport($em);
         // default data (almeno la lega)
         $report->setData(array('league'=>$league));
         // get data from session
         $data = $this->container->get('session')->get('competitionReportData');
         if ($data) {
+            // set report data
             $report->setData($data);
         }
         // build wizard
@@ -157,7 +163,8 @@ class CompetitionController extends Controller
                 if ($wizard->last() === $step) {
                     // qui chiama la generazione della competizione..
                     // @TODO
-                    // ..
+                    $comp = $this->get('fc_fanta.competition_factory')->getCompetitionBuilder($report->getType());
+                    $comp->createCompetition($report);
                     // elimina info in sessione
                     $this->container->get('session')->set('competitionReportData', null);
                     // redirect

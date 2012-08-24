@@ -54,6 +54,7 @@ class CompetitionFactory
                 $comp = new $className();
                 $comp->setLabel($c['label']);
                 $comp->setFormFactory($this->form_factory);
+                $comp->setEntityManager($this->container->get('doctrine')->getEntityManager());
                 return $comp;
             }
         }
