@@ -8,6 +8,8 @@ use Symfony\Component\Validator\Constraints\Collection;
 use Fc\FantaBundle\Entity\Competition;
 use Fc\FantaBundle\Entity\Round;
 use Fc\FantaBundle\Entity\Game;
+use Fc\FantaBundle\Entity\Day;
+
 
 /**
  * Description of ChampionshipCompetition
@@ -32,7 +34,7 @@ class ChampionshipCompetition extends AbstractCompetition
             'day_to' => array(
                 'label'     => 'Giornata finale',
                 'type'      => 'integer',
-                'default'   => 2
+                'default'   => 38
             )
         );
     }
@@ -54,12 +56,29 @@ class ChampionshipCompetition extends AbstractCompetition
             'num_gironi' => new \Fc\FantaBundle\Competition\Constraint\ChampionshipConstraint()
         ));
         $builder = $this->getFormFactory()->createBuilder('form', $data, $options);
+        /*
         foreach ($this->params as $name => $p) {
             $builder->add($name, $p['type'], array(
                 'label' => $p['label'],
                 'data'  => $p['default'],
             ));
         }
+        */
+        $league = $data->getLeague();
+        $builder
+            ->add('num_gironi', null , array(
+                'label'     => 'Numero gironi',
+                'data'      => 2,
+            ))
+            ->add('day_from', 'entity' , array(
+                'class'     => 'Fc\FantaBundle\Entity\Day',
+                'label'     => 'Giornata iniziale',
+            ))
+            ->add('day_to', 'entity' , array(
+                'class'     => 'Fc\FantaBundle\Entity\Day',
+                'label'     => 'Giornata finale',
+            ))
+        ;
         
         $form = $builder->getForm();
         
