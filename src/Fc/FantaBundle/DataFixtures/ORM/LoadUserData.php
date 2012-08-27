@@ -53,8 +53,8 @@ class LoadUserData implements FixtureInterface, OrderedFixtureInterface
         
         // inserisci stagione/campionati di test
         $season = new Season();
-        $season->setTitle('Stagione 2012/2013');
-        $season->setEnabled(true);
+        $season->setTitle('Stagione 2011/2012');
+        $season->setEnabled(false);
         $manager->persist($season);
         $champ = new Championship();
         $champ->setName('Serie A TIM');
@@ -64,7 +64,7 @@ class LoadUserData implements FixtureInterface, OrderedFixtureInterface
         $manager->persist($champ);
         
         $season = new Season();
-        $season->setTitle('Stagione 2011/2012');
+        $season->setTitle('Stagione 2012/2013');
         $season->setEnabled(true);
         $manager->persist($season);
         $champ = new Championship();

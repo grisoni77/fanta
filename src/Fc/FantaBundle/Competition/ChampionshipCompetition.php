@@ -5,6 +5,8 @@ namespace Fc\FantaBundle\Competition;
 use Symfony\Component\Form\Form;
 use Symfony\Component\Validator\Constraints\Collection;
 
+use Fc\FantaBundle\Competition\CompetitionDataInterface;
+
 use Fc\FantaBundle\Entity\Competition;
 use Fc\FantaBundle\Entity\Round;
 use Fc\FantaBundle\Entity\Game;
@@ -25,7 +27,7 @@ class ChampionshipCompetition extends AbstractCompetition
     /**
      * {@inheritdoc}
      */
-    public function createCompetition($data) 
+    public function createCompetition(CompetitionDataInterface $data) 
     {
         $em = $this->getEntityManager();
         // crea competition

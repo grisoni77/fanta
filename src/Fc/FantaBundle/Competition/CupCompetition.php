@@ -16,7 +16,7 @@ class CupCompetition extends AbstractCompetition
     /**
      * {@inheritdoc}
      */
-    public function createCompetition() {
+    public function createCompetition(CompetitionDataInterface $data) {
         
     }
 
