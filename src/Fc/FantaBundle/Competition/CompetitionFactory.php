@@ -52,7 +52,7 @@ class CompetitionFactory
             if ($c['name']==$name) {
                 $className = $c['class'];
                 $comp = new $className();
-                $comp->setLabel($c['label']);
+                //$comp->setLabel($c['label']);
                 $comp->setFormFactory($this->form_factory);
                 $comp->setEntityManager($this->container->get('doctrine')->getEntityManager());
                 return $comp;

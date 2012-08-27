@@ -166,6 +166,6 @@ services:
 
 fc_fanta: 
   competitions:
-    - { name: cup, label: "Coppa a eliminazione", class: Fc\FantaBundle\Competition\CupCompetition }
-    - { name: championship, label: "Campionato a gironi", class: Fc\FantaBundle\Competition\ChampionshipCompetition }
+    - { name: cup, class: Fc\FantaBundle\Competition\CupCompetition }
+    - { name: championship, class: Fc\FantaBundle\Competition\Builder\ChampionshipCompetitionBuilder }
     

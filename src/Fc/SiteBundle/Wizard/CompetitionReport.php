@@ -6,7 +6,7 @@ use Peytz\Wizard\ReportInterface;
 use Fc\FantaBundle\Competition\CompetitionDataInterface;
 use Symfony\Component\Form\Exception\NotValidException;
 use Doctrine\ORM\EntityManager;
-
+use Fc\FantaBundle\Entity\League;
 
 /**
  * Description of CompetitionReport
@@ -86,7 +86,7 @@ class CompetitionReport implements ReportInterface, CompetitionDataInterface
     public function getName() {
         return $this->name;
     }
-    public function setLeague($league) {
+    public function setLeague(League $league) {
         $this->league = $league;
         return $this;
     }

@@ -9,23 +9,12 @@ namespace Fc\FantaBundle\Competition;
  */
 class CupCompetition extends AbstractCompetition
 {
+    const type = 'cup';
+    
+    
     public function __construct() {
         $this->setLabel('Coppa');
     }    
-    
-    /**
-     * {@inheritdoc}
-     */
-    public function createCompetition(CompetitionDataInterface $data) {
-        
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function createForm() {
-        
-    }
 
     /**
      * {@inheritdoc}
@@ -39,6 +28,18 @@ class CupCompetition extends AbstractCompetition
      */
     public function getName() {
         return 'cup';
+    }
+
+    public function getCalendar() {
+        
+    }
+
+    public function getResults() {
+        
+    }
+
+    public static function getType() {
+        return self::type;
     }
 
 

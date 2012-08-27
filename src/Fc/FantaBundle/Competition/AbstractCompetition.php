@@ -25,11 +25,6 @@ abstract class AbstractCompetition implements CompetitionInterface
     protected $label;
     
     /**
-     * @var FormFactory
-     */
-    protected $form_factory;
-    
-    /**
      * {@inheritdoc}
      */
     public function getLabel() {
@@ -42,50 +37,6 @@ abstract class AbstractCompetition implements CompetitionInterface
     public function setLabel($label) {
         $this->label = $label;
         return $this;
-    }
-    
-    /**
-     * {@inheritdoc}
-     */
-    public function getEntityManager() {
-        return $this->em;
-    }
-    
-    /**
-     * {@inheritdoc}     
-     */
-    public function setEntityManager(EntityManager $manager) {
-        $this->em = $manager;
-        return $this;
-    }
-    
-    /**
-     * {@inheritdoc}
-     */
-    public function getFormFactory() {
-        return $this->form_factory;
-    }
-    
-    /**
-     * {@inheritdoc}     
-     */
-    public function setFormFactory(FormFactory $form_factory) {
-        $this->form_factory = $form_factory;
-        return $this;
-    }
-    
-    /**
-     * {@inheritdoc}
-     */
-    public function getConcreteDescriptionTemplate() {
-        return 'FcFantaBundle:Competition:'.$this->getName().'.concrete.html.twig';
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getDescriptionTemplate() {
-        return 'FcFantaBundle:Competition:'.$this->getName().'.html.twig';
     }
     
 

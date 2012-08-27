@@ -4,6 +4,7 @@ namespace Fc\FantaBundle\Competition;
 
 use \Symfony\Component\Form\FormFactory;
 use Doctrine\ORM\EntityManager;
+use Fc\FantaBundle\Competition\CompetitionDataInterface;
 
 /**
  * Interfaccia per classi Competition
@@ -12,36 +13,19 @@ use Doctrine\ORM\EntityManager;
  */
 interface CompetitionInterface
 {
-    
-    public function getEntityManager();
-    
-    public function setEntityManager(EntityManager $manager);
-    
-    /**
-     * @return FormFactory
-     */
-    public function getFormFactory();
-    
-    /**
-     * Set Form factory service 
-     */
-    public function setFormFactory(FormFactory $form_factory);
-    
-    /**
-     * @return Symfony\Component\Form\Form
-     */
-    public function createForm();
-    
-    /**
-     * Genera competizione (incluse le figlie se ci sono) e relative giornate
-     */
-    public function createCompetition($data);
-    
     /**
      * Ritorna i parametri relativi alla singola istanza della competizione
      * @return array
      */
     public function getParams();
+    
+    /**
+     * Ritorna il tipo univoco del tipo di competizione
+     * (definito in tabella competitionType...serve davvero sta tabella?)
+     * 
+     * @return string
+     */
+    public static function getType();    
     
     /**
      * Ritorna il nome univoco del tipo di competizione
@@ -64,13 +48,13 @@ interface CompetitionInterface
     /**
      * Ritorna template per testo descrittivo del tipo di competizione 
      */
-    public function getDescriptionTemplate();
+    public static function getDescriptionTemplate();
     
     /**
      * Ritorna nome template per testo descrittivo del tipo di competizione 
      * completo con i parametri dell'istanza
      */
-    public function getConcreteDescriptionTemplate();
+    public static function getConcreteDescriptionTemplate();
     
     /**
      * Ritorna info per costruzione calendario gare 
