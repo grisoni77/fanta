@@ -3,8 +3,10 @@
 namespace Fc\SiteBundle\Wizard;
 
 use Peytz\Wizard\ReportInterface;
+use Fc\FantaBundle\Competition\CompetitionDataInterface;
 use Symfony\Component\Form\Exception\NotValidException;
 use Doctrine\ORM\EntityManager;
+
 
 /**
  * Description of CompetitionReport
@@ -12,7 +14,7 @@ use Doctrine\ORM\EntityManager;
  * @author cris
  * 
  */
-class CompetitionReport implements ReportInterface
+class CompetitionReport implements ReportInterface, CompetitionDataInterface
 {
     /* @var em EntityManager */
     private $em = null;
