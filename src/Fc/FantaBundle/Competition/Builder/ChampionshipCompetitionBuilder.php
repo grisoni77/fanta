@@ -5,6 +5,11 @@ namespace Fc\FantaBundle\Competition\Builder;
 use Fc\FantaBundle\Competition\Builder\CompetitionBuilderInterface;
 use Fc\FantaBundle\Competition\CompetitionDataInterface;
 
+use Fc\FantaBundle\Entity\Competition;
+use Fc\FantaBundle\Entity\Round;
+use Fc\FantaBundle\Entity\Game;
+use Fc\FantaBundle\Entity\Day;
+
 /**
  * Description of ChampionshipCompetitionBuilder
  *
@@ -67,7 +72,7 @@ class ChampionshipCompetitionBuilder extends AbstractCompetitionBuilder
         $comp->setname($data->getName());
         $comp->setLevel(1);
         $comp->setParams(serialize($data->getParams()));
-        $comp->setType($em->getRepository('FcFantaBundle:CompetitionType')->findOneBy(array('name'=>'Campionato')));    
+        $comp->setType('championship');
         $comp->setEnabled(false);
         // add teams
         foreach ($data->getTeams() as $tid) 
@@ -77,7 +82,6 @@ class ChampionshipCompetitionBuilder extends AbstractCompetitionBuilder
         }
         $em->persist($comp);
         // genera giornate
-        print_r($comp->getTeams()->getKeys());
         $rounds = $this->generateDays(count($comp->getTeams()));
         $teams = $comp->getTeams();
         $params = $data->getParams();
@@ -186,6 +190,10 @@ class ChampionshipCompetitionBuilder extends AbstractCompetitionBuilder
         return $rounds;
     }
 
+    public static function getName() {
+        return \Fc\FantaBundle\Competition\ChampionshipCompetition::getName();
+    }
+    
     public function getDescriptionTemplate() {
         return \Fc\FantaBundle\Competition\ChampionshipCompetition::getDescriptionTemplate();
     }

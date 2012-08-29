@@ -166,6 +166,6 @@ services:
 
 fc_fanta: 
   competitions:
-    - { name: cup, class: Fc\FantaBundle\Competition\CupCompetition }
+    - { name: cup, class: Fc\FantaBundle\Competition\Builder\CupCompetitionBuilder }
     - { name: championship, class: Fc\FantaBundle\Competition\Builder\ChampionshipCompetitionBuilder }
     

@@ -13,7 +13,7 @@ use Symfony\Component\DependencyInjection\ContainerInterface;
  */
 class CompetitionFactory
 {
-    private $competitions;
+    private $competition_types;
     /**
      * @var Symfony\Component\Form\FormFactory
      */
@@ -26,19 +26,24 @@ class CompetitionFactory
     
     public function __construct(ContainerInterface $container)
     {
-        $this->competitions = array();
+        $this->competition_types = array();
         $this->container = $container;
         $this->form_factory = $container->get('form.factory');
-        $this->setCompetitions($container->getParameter('fc_fanta.competition_types'));
+        $this->setCompetitionTypes($container->getParameter('fc_fanta.competition_types'));
     }
     
-    public function setCompetitions($competitions) {
-        $this->competitions = $competitions;                
+    public function setCompetitionTypes($competitions) {
+        $this->competition_types = $competitions;
+        foreach ($this->competition_types as &$type) 
+        {
+            $type['label'] = call_user_func(array($type['class'], 'getName'));
+        }
     }
     
     public function getCompetitionTypes() 
     {
-        return $this->container->getParameter('fc_fanta.competition_types');
+        //return $this->container->getParameter('fc_fanta.competition_types');
+        return $this->competition_types;
     }
 
     /**
@@ -47,7 +52,7 @@ class CompetitionFactory
      */
     public function getCompetitionBuilder($name)
     {
-        foreach ($this->competitions as $c) 
+        foreach ($this->competition_types as $c) 
         {
             if ($c['name']==$name) {
                 $className = $c['class'];

@@ -26,7 +26,7 @@ class CupCompetition extends AbstractCompetition
     /**
      * {@inheritdoc}
      */
-    public function getName() {
+    public static function getName() {
         return 'cup';
     }
 
@@ -40,6 +40,14 @@ class CupCompetition extends AbstractCompetition
 
     public static function getType() {
         return self::type;
+    }
+
+    public static function getConcreteDescriptionTemplate() {
+        
+    }
+
+    public static function getDescriptionTemplate() {
+        
     }
 
 

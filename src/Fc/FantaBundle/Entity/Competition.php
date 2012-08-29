@@ -29,8 +29,9 @@ class Competition
     private $name;
 
     /**
-     * @ORM\OneToOne(targetEntity="CompetitionType")
-     * @ORM\JoinColumn(name="competitiontype_id", referencedColumnName="id", nullable=false)
+     * @var string $name
+     * 
+     * @ORM\Column(name="type", type="string", length=255)
      */
     private $type;
     
@@ -157,10 +158,10 @@ class Competition
     /**
      * Set type
      *
-     * @param Fc\FantaBundle\Entity\CompetitionType $type
+     * @param string $type
      * @return Competition
      */
-    public function setType(\Fc\FantaBundle\Entity\CompetitionType $type = null)
+    public function setType($type = null)
     {
         $this->type = $type;
         return $this;
@@ -169,7 +170,7 @@ class Competition
     /**
      * Get type
      *
-     * @return Fc\FantaBundle\Entity\CompetitionType 
+     * @return string
      */
     public function getType()
     {

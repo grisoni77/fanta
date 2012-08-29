@@ -2,9 +2,6 @@
 
 namespace Fc\FantaBundle\Competition;
 
-use Symfony\Component\Form\Form;
-use Symfony\Component\Validator\Constraints\Collection;
-
 use Fc\FantaBundle\Competition\CompetitionDataInterface;
 
 use Fc\FantaBundle\Entity\Competition;
@@ -37,7 +34,7 @@ class ChampionshipCompetition extends AbstractCompetition
     /**
      * {@inheritdoc}
      */
-    public function getName() {
+    public static function getName() {
         return 'championship';
     }
 

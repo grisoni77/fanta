@@ -40,17 +40,6 @@ class LoadUserData implements FixtureInterface, OrderedFixtureInterface
         $role->setLetter('A');
         $manager->persist($role);
         
-        // Inserisci competiotion types
-        $comptype = new \Fc\FantaBundle\Entity\CompetitionType();
-        $comptype->setName('Campionato');
-        $manager->persist($comptype);
-        $comptype = new \Fc\FantaBundle\Entity\CompetitionType();
-        $comptype->setName('Playoff');
-        $manager->persist($comptype);
-        $comptype = new \Fc\FantaBundle\Entity\CompetitionType();
-        $comptype->setName('Coppa');
-        $manager->persist($comptype);
-        
         // inserisci stagione/campionati di test
         $season = new Season();
         $season->setTitle('Stagione 2011/2012');
