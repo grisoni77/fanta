@@ -12,19 +12,25 @@
     <ul>
     {% for team in teams %}
         <li>
-            {{ team.user.name}}
+            {{ team.name }} ( {{ team.user.name}}
             {% if league.owner.id == team.user.id %}
-                <strong>(Amministratore)</strong>
-            {% elseif team.enabled == false %}
-                <form action="{{ path('fc_site_league_enablesubscription') }}" method="post">
-                    <input type="hidden" name="team_id" value="{{team.id}}" />
-                    <input type="submit" value="Approva" />
-                </form>
-            {% elseif team.enabled == true %}
-                <form action="{{ path('fc_site_league_disablesubscription') }}" method="post">
-                    <input type="hidden" name="team_id" value="{{team.id}}" />
-                    <input type="submit" value="Disabilita" />
-                </form>
+                <strong>Amministratore</strong>)
+            {% endif %}
+            )
+            | <a href="{{ path('fc_site_team_edit', {id: team.id}) }}">Dati</a>
+            | <a href="#">Rosa</a>
+            {% if league.owner.id != team.user.id %}
+                {% if team.enabled == false %}
+                    <form action="{{ path('fc_site_league_enablesubscription') }}" method="post">
+                        <input type="hidden" name="team_id" value="{{team.id}}" />
+                        <input type="submit" value="Approva" />
+                    </form>
+                {% elseif team.enabled == true %}
+                    <form action="{{ path('fc_site_league_disablesubscription') }}" method="post">
+                        <input type="hidden" name="team_id" value="{{team.id}}" />
+                        <input type="submit" value="Disabilita" />
+                    </form>
+                {% endif %}
             {% endif %}
         </li>
     {% endfor %}

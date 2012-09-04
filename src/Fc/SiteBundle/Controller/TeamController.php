@@ -48,7 +48,6 @@ class TeamController extends Controller
      *
      * @Route("/league/{league_id}/user/{user_id}/team/create")
      * @Method("post")
-     * @Template("FcFantaBundle:Team:new.html.twig")
      */
     public function createAction($league_id, $user_id)
     {
@@ -77,4 +76,52 @@ class TeamController extends Controller
             'form'   => $form->createView(),
         );
     }
+    
+    /**
+     * Displays a form to create a new League Team entity.
+     *
+     * @Route("/league/team/{id}/edit")
+     * @Template()
+     */
+    public function editAction(Team $team)
+    {
+        //$em = $this->getDoctrine()->getEntityManager();
+        //$league = $em->getRepository('FcFantaBundle:League')->find($league_id);
+        //$entity->setLeague($league);
+        $form   = $this->createForm(new TeamType(), $team);
+
+        return array(
+            'team' => $team,
+            'league' => $team->getLeague(),
+            'edit_form'   => $form->createView(),
+        );
+    }    
+    
+    /**
+     * Creates a new League Team entity.
+     *
+     * @Route("/league/team/{id}/save")
+     * @Method("post")
+     * @Template("FcSiteBundle:Team:edit.html.twig")
+     */
+    public function saveAction(Request $request, Team $team)
+    {
+        $em = $this->getDoctrine()->getEntityManager();
+        $form    = $this->createForm(new TeamType(), $team);
+        $form->bind($request);
+
+        if ($form->isValid()) {
+            $em = $this->getDoctrine()->getManager();
+            $em->persist($team);
+            $em->flush();
+
+            return $this->redirect($this->generateUrl('fc_site_league_panel', array('id' => $team->getLeague()->getId())));
+        }
+
+        return array(
+            'team' => $team,
+            'league' => $team->getLeague(),
+            'edit_form'   => $form->createView(),
+        );
+    }    
 }

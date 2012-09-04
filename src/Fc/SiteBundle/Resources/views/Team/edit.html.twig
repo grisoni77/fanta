@@ -1,22 +1,21 @@
-<h1>League edit</h1>
+{% extends '::layout2col.html.twig' %}
 
-<form action="{{ path('league_update', { 'id': entity.id }) }}" method="post" {{ form_enctype(edit_form) }}>
+{% block blog_title %}Definisci la tua squadra per la lega {{league.name}}{% endblock %}
+
+{% block body %}
+
+<form action="{{ path('fc_site_team_save', { 'id': team.id }) }}" method="post" {{ form_enctype(edit_form) }}>
     {{ form_widget(edit_form) }}
     <p>
-        <button type="submit">Edit</button>
+        <button type="submit">Salva</button>
     </p>
 </form>
 
 <ul class="record_actions">
     <li>
-        <a href="{{ path('league') }}">
+        <a href="{{ path('fc_site_league_panel', {id: league.id}) }}">
             Back to the list
         </a>
     </li>
-    <li>
-        <form action="{{ path('league_delete', { 'id': entity.id }) }}" method="post">
-            {{ form_widget(delete_form) }}
-            <button type="submit">Delete</button>
-        </form>
-    </li>
 </ul>
+{% endblock %}
