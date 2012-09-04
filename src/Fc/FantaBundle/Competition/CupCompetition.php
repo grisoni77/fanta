@@ -23,12 +23,6 @@ class CupCompetition extends AbstractCompetition
         
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    public static function getName() {
-        return 'cup';
-    }
 
     public function getCalendar() {
         

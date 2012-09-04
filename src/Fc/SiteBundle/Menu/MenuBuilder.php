@@ -22,6 +22,7 @@ class MenuBuilder extends ContainerAware
             'id'    => 'nav-ipsum',
             'class' => 'menu'
         ));
+        /* @var $request \Symfony\Component\HttpFoundation\Request */
         $request = $this->container->get('request');
         $menu->setCurrentUri($request->getRequestUri());
 
@@ -31,7 +32,7 @@ class MenuBuilder extends ContainerAware
             ->addChild('leghe', array('route' => 'fc_site_league_index'))->setLabel("Leghe")
                 ->addChild('lega', array(
                     'route' => 'fc_site_league_panel', 
-                    'routeParameters' => array('id' => $request->get('id'))
+                    'routeParameters' => array('id' => $request->get('id', 0))
                 ))->setLabel("Lega")
         ;
         $user = $this->container->get('security.context')->getToken()->getUser();

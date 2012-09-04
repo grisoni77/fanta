@@ -19,6 +19,11 @@ interface CompetitionBuilderInterface
     public function setEntityManager(EntityManager $manager);
     
     /**
+     * @return string
+     */
+    public static function getType();
+
+    /**
      * @return FormFactory
      */
     public function getFormFactory();

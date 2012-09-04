@@ -94,8 +94,8 @@ class ChampionshipCompetitionBuilder extends AbstractCompetitionBuilder
             {
                 $round = new Round();
                 //echo ($inversion?"R":"A");
-                $round->setAbbr((string) sprintf("%d%s%d", $k+1, ($inversion?"R":"A"), $g+1));
-                $round->setName((string) sprintf("%d° di %s(%d)", $k+1, ($inversion?'ritorno':'andata'), $g+1));
+                $round->setAbbr((string) sprintf("%d%s%d", $k+1, ($inversion?"R":"A"), ceil(($g+1)/2)));
+                $round->setName((string) sprintf("%d° di %s(%d)", $k+1, ($inversion?'ritorno':'andata'), ceil(($g+1)/2)));
                 $round->setCompetition($comp);
                 $round->setDay($day);
                 $round->setOrdering((int)$g*count($rounds)+$k+1);
@@ -200,6 +200,10 @@ class ChampionshipCompetitionBuilder extends AbstractCompetitionBuilder
     
     public function getConcreteDescriptionTemplate() {
         return \Fc\FantaBundle\Competition\ChampionshipCompetition::getConcreteDescriptionTemplate();
+    }
+
+    public static function getType() {
+        return \Fc\FantaBundle\Competition\ChampionshipCompetition::getType();
     }
 
 }

@@ -1,17 +1,21 @@
 {# empty Twig template #}
 
 <div class="calendar">
-    {% for key, round in calendar %}
-        <div class="calendar-round">Round {{ key+1 }}
-            <ul>
-                {% for match in round %}
-                <li>{{ match[0] }} vs {{ match[1] }}</li>
+    {% for key, round in calendar.rounds %}
+        <div class="calendar-round">{{ round.name }}
+            <table>
+                {% for match in round.games %}
+                <tr>
+                    <td>{{ match.team1 }}</td>
+                    <td>vs</td> 
+                    <td>{{ match.team2 }}</td>
+                </tr>
                 {% endfor %}
-            </ul>
+            </table>
         </div>
     {% endfor %}
 </div>
 <div style="clear:left">
-<p>* Per semplicità viene mostrato solo un girone..gli altri sono speculari</p>
+<p>* Il numero tra parentesi dopo il nome della giornata indica il numero del girone a cui si riferisce la giornata</p>
 <div style="clear:left">
 

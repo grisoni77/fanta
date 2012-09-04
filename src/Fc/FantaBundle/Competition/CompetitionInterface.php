@@ -31,7 +31,7 @@ interface CompetitionInterface
      * Ritorna il nome univoco del tipo di competizione
      * @return string
      */
-    public static function getName();    
+    public function getName();    
     
     /**
      * Ritorna descrizione del tipo di competizione

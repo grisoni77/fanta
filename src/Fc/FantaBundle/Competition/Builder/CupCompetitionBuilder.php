@@ -13,8 +13,8 @@ use Fc\FantaBundle\Competition\CompetitionDataInterface;
  */
 class CupCompetitionBuilder  extends AbstractCompetitionBuilder 
 {
-    public static function getName() {
-        return \Fc\FantaBundle\Competition\CupCompetition::getName();
+    public static function getType() {
+        return \Fc\FantaBundle\Competition\CupCompetition::getType();
     }    
     
     public function createCompetition(\Fc\FantaBundle\Competition\CompetitionDataInterface $data) {

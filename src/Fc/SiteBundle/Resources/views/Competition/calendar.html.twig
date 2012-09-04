@@ -1,0 +1,9 @@
+{% extends '::layout1col.html.twig' %}
+
+{% block blog_title %} Calendario {{competition.name}}{% endblock %}
+
+{% block body %}
+
+{% include calendar_tmpl with {'calendar': calendar} %}
+
+{% endblock %}

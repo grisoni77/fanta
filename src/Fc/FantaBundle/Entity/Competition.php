@@ -48,7 +48,7 @@ class Competition
     
     
     /**
-     * @ORM\ManyToMany(targetEntity="Team", mappedBy="competitions")
+     * @ORM\ManyToMany(targetEntity="Team", inversedBy="competitions")
      * @ORM\JoinTable(name="Competition_Team")
      */
     private $teams;

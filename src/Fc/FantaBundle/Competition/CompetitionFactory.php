@@ -5,6 +5,7 @@ namespace Fc\FantaBundle\Competition;
 use Fc\FantaBundle\Competition\CompetitionInterface;
 use Symfony\Component\Form\FormFactory;
 use Symfony\Component\DependencyInjection\ContainerInterface;
+use Fc\FantaBundle\Entity\Competition;
 
 /**
  * Description of CompetitionFactory
@@ -36,7 +37,7 @@ class CompetitionFactory
         $this->competition_types = $competitions;
         foreach ($this->competition_types as &$type) 
         {
-            $type['label'] = call_user_func(array($type['class'], 'getName'));
+            $type['label'] = call_user_func(array($type['class'], 'getType'));
         }
     }
     
@@ -66,6 +67,22 @@ class CompetitionFactory
         return false;
             
     }
+    
+    
+    /**
+     *  Ritorna competizione decorata
+     * 
+     * @param \Fc\FantaBundle\Entity\Competition $competition
+     * @return \Fc\FantaBundle\Competition\CompetitionInterface
+     */
+    public function getDecoratedCompetition(Competition $competition)
+    {
+        $type = $competition->getType();
+        $decorated = new ChampionshipCompetition();
+        $decorated->setEntity($competition);
+        return $decorated;
+    }
+    
     
     public function getLeagueTeams($league)
     {

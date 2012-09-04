@@ -31,18 +31,13 @@ class ChampionshipCompetition extends AbstractCompetition
         
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    public static function getName() {
-        return 'championship';
-    }
 
     /**
      * {@inheritdoc}
      */
     public function getCalendar() {
-        
+        $rounds = $this->getRounds();
+        return array('rounds'=>$rounds);
     }
 
     /**
