@@ -4,8 +4,8 @@
         // it is assumed to be the onBeforeLoad event listener
         jQuery("a[rel]").overlay({
 
-            //mask: 'darkred',
-            //effect: 'apple',
+            mask: 'darkred',
+            effect: 'apple',
 
             onBeforeLoad: function() {
 

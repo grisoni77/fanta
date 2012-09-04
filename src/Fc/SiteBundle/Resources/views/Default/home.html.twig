@@ -5,7 +5,7 @@
 {% block stylesheets %}
     {{ parent() }}
     {% stylesheets filter='cssrewrite'
-        'css/modal_style.css'
+        'css/src/modal_style.css'
         output="css/compiled/modal.css"
     %}
         <link href="{{ asset_url }}" type="text/css" rel="stylesheet" />

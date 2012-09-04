@@ -53,7 +53,7 @@ class Team
     private $message;
 
     /**
-     * @ORM\ManyToMany(targetEntity="Competition", inversedBy="teams")
+     * @ORM\ManyToMany(targetEntity="Competition", mappedBy="teams")
      * @ORM\JoinTable(name="Competition_Team")
      */
     private $competitions;

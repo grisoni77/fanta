@@ -4,6 +4,10 @@
 
 {% block body %}
 
+<h2>Calendario {{competition.name}}</h2>
+
+<p><a href="{{ path('fc_site_league_panel', {id: league.id}) }}">Torna al pannello lega {{ league.name }}</a></p>
+
 {% include calendar_tmpl with {'calendar': calendar} %}
 
 {% endblock %}

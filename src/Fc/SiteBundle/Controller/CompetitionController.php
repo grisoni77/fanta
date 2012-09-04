@@ -114,7 +114,8 @@ class CompetitionController extends Controller
         $decorated = $this->container->get('fc_fanta.competition_factory')->getDecoratedCompetition($competition);
         
         return array(
-            'competition' => $decorated,
+            'competition'   => $decorated,
+            'league'        => $decorated->getLeague(),
             'calendar'      => $decorated->getCalendar(),
             'calendar_tmpl' => $decorated->getCalendarTemplate()
         );
