@@ -138,7 +138,7 @@ class TeamController extends Controller
         $builder
                 ->add('player', 'entity', array('label'=>'Giocatore', 'class'=>'FcFantaBundle:Player'))
                 ->add('value', 'integer', array('label'=>'Quotazione'))
-                ->add('description', 'textarea', array('label'=>'Descrizione'))
+                ->add('description', 'textarea', array('label'=>'Descrizione', 'required' => false))
                 ->add('team', 'hidden', array('data'=>$team->getId()))
                 ->add('name', 'hidden', array('data'=>'Acquisto giocatore'))
                 // TODO cercare giornata corrente
@@ -167,9 +167,24 @@ class TeamController extends Controller
         $builder = new \Fc\FantaBundle\Market\OperationBuilder();
         $builder->setEntityManager($this->getDoctrine()->getEntityManager());
         if ($builder->buyPlayer($data)) {
-            return $this->redirect($this->generateUrl('fc_site_league_panel', array('id' => $team->getLeague()->getId())));
+            return $this->redirect($this->generateUrl('fc_site_team_market', array('id' => $team->getId())));
         } else {
             die('error');
         }
     }    
+    
+    /**
+     * Displays team listings
+     *
+     * @Route("/league/team/{id}/listing")
+     * @Template()
+     */
+    public function listingAction(Team $team)
+    {
+        return array(
+            'team' => $team,
+            'listings' => $team->getListings(),
+            'league' => $team->getLeague(),
+        );
+    }
 }

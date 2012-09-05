@@ -50,7 +50,7 @@ class Operation
 
     /**
      * @var array
-     * @ORM\OneToMany(targetEntity="Transaction", mappedBy="operation", cascade={"delete"})
+     * @ORM\OneToMany(targetEntity="Transaction", mappedBy="operation")
      */
     private $transactions;
 

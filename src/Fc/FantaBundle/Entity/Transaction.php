@@ -30,7 +30,7 @@ class Transaction
     private $value;
 
     /**
-     * @ORM\OneToOne(targetEntity="TransactionType")
+     * @ORM\ManyToOne(targetEntity="TransactionType")
      * @ORM\JoinColumn(name="transactiontype_id", referencedColumnName="id", nullable=false)
      */
     private $type;
@@ -49,8 +49,8 @@ class Transaction
     
     /**
      * Reference a operazione associata (ad es. scambio giocatori o acquisto)
-     * @ORM\ManyToOne(targetEntity="Operation")
-     * 
+     * @ORM\ManyToOne(targetEntity="Operation", inversedBy="transactions")
+     * @ORM\JoinColumn(name="operation_id", referencedColumnName="id", nullable=false, onDelete="cascade")
      */
     private $operation;
     

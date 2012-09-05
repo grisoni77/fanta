@@ -49,7 +49,7 @@ class Listing
 
     /**
      * @ORM\OneToOne(targetEntity="Transaction")
-     * @ORM\JoinColumn(name="transaction_id", referencedColumnName="id", nullable=false)
+     * @ORM\JoinColumn(name="transaction_id", referencedColumnName="id", nullable=false, onDelete="cascade")
      */
     private $transaction;
 

@@ -1,0 +1,31 @@
+{% extends '::layout2col.html.twig' %}
+
+{% block blog_title %}Rosa a disposizione di {{team.name}}{% endblock %}
+
+{% block body %}
+<ul class="record_actions">
+    <li>
+        <a href="{{ path('fc_site_league_panel', {id: league.id}) }}">
+            Back to the league panel
+        </a>
+    </li>
+</ul>
+
+<table>
+    <thead>
+    <tr>
+        <th>Nome</th>
+        <th>Ruolo</th>
+        <th>Valore d'acquisto</th>
+    </tr>
+    </thead>
+{% for listing in listings %}
+    <tr>
+        <td>{{listing.player.name}}</td> 
+        <td>{{listing.player.role.name}}</td> 
+        <td>{{listing.transaction.value}}</td>
+    </tr>
+{% endfor %}
+</table>
+
+{% endblock %}
