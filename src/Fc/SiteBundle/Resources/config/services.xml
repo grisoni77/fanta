@@ -17,4 +17,21 @@
         </service>
     </services>
     -->
+    <parameters>
+        <parameter key="fc.session_idle.options" type="collection">
+            <parameter key="idleTime">60</parameter>
+            <parameter key="redirectRoute">fc_site_default_index</parameter>
+        </parameter>
+
+        <parameter key="fc.handler.session_idle.class">Fc\SiteBundle\Handler\SessionIdleHandler</parameter>
+    </parameters>
+
+    <services>
+        <service id="fc.handler.session_idle" class="%fc.handler.session_idle.class%">
+            <argument type="service" id="router" />
+            <argument type="service" id="security.context" />
+            <argument>%fc.session_idle.options%</argument>
+            <tag name="kernel.event_listener" event="kernel.request" method="onKernelRequest" />
+        </service>
+    </services>
 </container>

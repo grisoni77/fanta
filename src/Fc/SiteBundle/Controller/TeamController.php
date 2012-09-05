@@ -124,4 +124,52 @@ class TeamController extends Controller
             'edit_form'   => $form->createView(),
         );
     }    
+    
+    
+    /**
+     * Displays a form to create a new market operation
+     *
+     * @Route("/league/team/{id}/market")
+     * @Template()
+     */
+    public function marketAction(Team $team)
+    {
+        $builder = $this->container->get('form.factory')->createBuilder();
+        $builder
+                ->add('player', 'entity', array('label'=>'Giocatore', 'class'=>'FcFantaBundle:Player'))
+                ->add('value', 'integer', array('label'=>'Quotazione'))
+                ->add('description', 'textarea', array('label'=>'Descrizione'))
+                ->add('team', 'hidden', array('data'=>$team->getId()))
+                ->add('name', 'hidden', array('data'=>'Acquisto giocatore'))
+                // TODO cercare giornata corrente
+                ->add('day', 'hidden', array('data'=>1))
+        ;
+        $form   = $builder->getForm();
+
+        return array(
+            'team' => $team,
+            'listings' => $team->getListings(),
+            'league' => $team->getLeague(),
+            'buy_form'   => $form->createView(),
+        );
+    } 
+    
+    /**
+     * azione per comprare giocatore
+     *
+     * @Route("/league/team/{id}/buyPlayer")
+     * @Template()
+     * @Method({"POST"})
+     */
+    public function buyPlayerAction(Request $request, Team $team)
+    {
+        $data = $request->request->get('form');
+        $builder = new \Fc\FantaBundle\Market\OperationBuilder();
+        $builder->setEntityManager($this->getDoctrine()->getEntityManager());
+        if ($builder->buyPlayer($data)) {
+            return $this->redirect($this->generateUrl('fc_site_league_panel', array('id' => $team->getLeague()->getId())));
+        } else {
+            die('error');
+        }
+    }    
 }

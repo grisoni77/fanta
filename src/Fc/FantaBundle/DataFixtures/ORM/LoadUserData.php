@@ -92,6 +92,24 @@ class LoadUserData implements FixtureInterface, OrderedFixtureInterface
             $manager->persist($team);            
         }
         
+        // crea transaction types
+        $ttype = new \Fc\FantaBundle\Entity\TransactionType();
+        $ttype->setName('Acquisto');
+        $ttype->setSign(-1);
+        $manager->persist($ttype);
+        $ttype = new \Fc\FantaBundle\Entity\TransactionType();
+        $ttype->setName('Vendita');
+        $ttype->setSign(+1);
+        $manager->persist($ttype);
+        $ttype = new \Fc\FantaBundle\Entity\TransactionType();
+        $ttype->setName('Scambio in entrata');
+        $ttype->setSign(-1);
+        $manager->persist($ttype);
+        $ttype = new \Fc\FantaBundle\Entity\TransactionType();
+        $ttype->setName('Scambio in uscita');
+        $ttype->setSign(+1);
+        $manager->persist($ttype);
+        
         $manager->flush();
     }
     

@@ -48,11 +48,17 @@ class Transaction
     private $team;
     
     /**
-     * Reference a transaction associata (ad es. in caso di scambio giocatori)
-     * @ORM\ManyToOne(targetEntity="Transaction")
-     * @ORM\JoinColumn(name="rel_transaction_id", referencedColumnName="id", nullable=false)
+     * Reference a operazione associata (ad es. scambio giocatori o acquisto)
+     * @ORM\ManyToOne(targetEntity="Operation")
+     * 
      */
-    private $rel_transaction;
+    private $operation;
+    
+    /**
+     * @ORM\ManyToOne(targetEntity="Day")
+     * @ORM\JoinColumn(name="day_id", referencedColumnName="id", nullable=false)
+     */
+    private $day;
     
     /**
      * Get id
@@ -153,24 +159,46 @@ class Transaction
     }
 
     /**
-     * Set rel_transaction
+     * Set operation
      *
-     * @param Fc\FantaBundle\Entity\Transaction $relTransaction
+     * @param Fc\FantaBundle\Entity\Operation $operation
      * @return Transaction
      */
-    public function setRelTransaction(\Fc\FantaBundle\Entity\Transaction $relTransaction)
+    public function setOperation(\Fc\FantaBundle\Entity\Operation $operation = null)
     {
-        $this->rel_transaction = $relTransaction;
+        $this->operation = $operation;
         return $this;
     }
 
     /**
-     * Get rel_transaction
+     * Get operation
      *
-     * @return Fc\FantaBundle\Entity\Transaction 
+     * @return Fc\FantaBundle\Entity\Operation 
      */
-    public function getRelTransaction()
+    public function getOperation()
     {
-        return $this->rel_transaction;
+        return $this->operation;
+    }
+
+    /**
+     * Set day
+     *
+     * @param Fc\FantaBundle\Entity\Day $day
+     * @return Transaction
+     */
+    public function setDay(\Fc\FantaBundle\Entity\Day $day)
+    {
+        $this->day = $day;
+        return $this;
+    }
+
+    /**
+     * Get day
+     *
+     * @return Fc\FantaBundle\Entity\Day 
+     */
+    public function getDay()
+    {
+        return $this->day;
     }
 }

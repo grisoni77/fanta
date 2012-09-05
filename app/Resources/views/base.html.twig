@@ -58,14 +58,19 @@
                 {% endif %}
             </div>
             
-            <div id="site_content">
-            {% block layout %}
-            <div id="content">
-                <h1>{% block blog_title %}{% endblock %}</h1>
-                {% block body %}{% endblock %}
-                {% block comments %}{% endblock %}
-            </div>
-            {% endblock %}
+            <div id="site_content"> 
+                {% for flashMessage in app.session.flashbag.get('notice') %}
+                    <div class="flash-notice">
+                        {{ flashMessage }}
+                    </div>
+                {% endfor %}
+                {% block layout %}
+                <div id="content">
+                    <h1>{% block blog_title %}{% endblock %}</h1>
+                    {% block body %}{% endblock %}
+                    {% block comments %}{% endblock %}
+                </div>
+                {% endblock %}
             </div>
             <div id="footer">
             <p>Copyright &copy; simplestyle_7 | <a href="http://validator.w3.org/check?uri=referer">HTML5</a> | <a href="http://jigsaw.w3.org/css-validator/check/referer">CSS</a> | <a href="http://www.html5webtemplates.co.uk">design from HTML5webtemplates.co.uk</a></p>

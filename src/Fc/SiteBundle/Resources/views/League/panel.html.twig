@@ -19,6 +19,7 @@
             )
             | <a href="{{ path('fc_site_team_edit', {id: team.id}) }}">Dati</a>
             | <a href="#">Rosa</a>
+            | <a href="{{ path('fc_site_team_market', {id: team.id}) }}">Mercato</a>
             {% if league.owner.id != team.user.id %}
                 {% if team.enabled == false %}
                     <form action="{{ path('fc_site_league_enablesubscription') }}" method="post">

@@ -1,0 +1,27 @@
+{% extends '::layout2col.html.twig' %}
+
+{% block blog_title %}Operazioni di mercato per {{team.name}}{% endblock %}
+
+{% block body %}
+<form action="{{ path('fc_site_team_buyplayer', {id: team.id}) }}" method="post" {{ form_enctype(buy_form) }}>
+    {{ form_widget(buy_form) }}
+    <p>
+        <button type="submit">Compra</button>
+    </p>
+</form>
+
+<ul class="record_actions">
+    <li>
+        <a href="{{ path('fc_site_league_panel', {id: league.id}) }}">
+            Back to the league panel
+        </a>
+    </li>
+</ul>
+
+<ul>
+{% for listing in listings %}
+        <li>{{listing.player.name}} | {{listing.transaction.value}}</li>
+{% endfor %}
+</ul>
+
+{% endblock %}

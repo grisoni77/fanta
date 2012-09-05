@@ -31,7 +31,7 @@ class TransactionType
     /**
      * Determina se è un operazione in ingresso o in uscita
      * 
-     * @var integer $sign [+\|-1]
+     * @var integer $sign [+1|-1]
      * @ORM\Column(name="sign", type="integer")
      */
     private $sign;

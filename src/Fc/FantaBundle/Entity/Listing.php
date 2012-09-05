@@ -52,14 +52,7 @@ class Listing
      * @ORM\JoinColumn(name="transaction_id", referencedColumnName="id", nullable=false)
      */
     private $transaction;
-    
-    /**
-     * Competition Round reference in which the player is listed for the team
-     * 
-     * @ORM\ManyToOne(targetEntity="Round")
-     * @ORM\JoinColumn(name="round_id", referencedColumnName="id", nullable=false)
-     */    
-    private $round;
+
     
     /**
      * Get id
@@ -181,25 +174,4 @@ class Listing
         return $this->transaction;
     }
 
-    /**
-     * Set round
-     *
-     * @param Fc\FantaBundle\Entity\Round $round
-     * @return Listing
-     */
-    public function setRound(\Fc\FantaBundle\Entity\Round $round = null)
-    {
-        $this->round = $round;
-        return $this;
-    }
-
-    /**
-     * Get round
-     *
-     * @return Fc\FantaBundle\Entity\Round 
-     */
-    public function getRound()
-    {
-        return $this->round;
-    }
 }
