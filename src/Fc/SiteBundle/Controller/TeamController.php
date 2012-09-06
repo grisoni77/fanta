@@ -134,9 +134,39 @@ class TeamController extends Controller
      */
     public function marketAction(Team $team)
     {
+        // getting querybuilder for players
+        $em = $this->getDoctrine()->getEntityManager();
+        $qb2 = $em->createQueryBuilder()
+            ->select('l.player')
+            ->from('FcFantaBundle:Listing', 'l')
+            ->select('l.player_id')
+            ->innerJoin('l.team', 't')
+            ->where('enabled = :enabled')
+            ->andWhere('team.league = :league')
+            ->setParameter('enabled', 1)
+            ->setParameter('league', $team->getLeague())
+        ;
+        echo $qb2;
+        $er = $em->getRepository('FcFantaBundle:Player');
+        $qb = $er->createQueryBuilder('p')
+                ->innerJoin('p.currentClub', 'club')
+        ;
+        $qb 
+            ->where('club.championship = :champ')
+            ->setParameter('champ', $team->getLeague()->getChampionship())
+            ->andWhere($qb->expr()->notIn('p.id', $qb2))
+            ->orderBy('p.role, p.name')
+        ;
+        echo $qb;
+        // form builder
         $builder = $this->container->get('form.factory')->createBuilder();
         $builder
-                ->add('player', 'entity', array('label'=>'Giocatore', 'class'=>'FcFantaBundle:Player'))
+                ->add('player', 'entity', array(
+                    'label' => 'Giocatore', 'class'=>'FcFantaBundle:Player',
+                    'property' => 'name',
+                    'group_by' => 'role.name',
+                    'query_builder' => $qb,
+                ))
                 ->add('value', 'integer', array('label'=>'Quotazione'))
                 ->add('description', 'textarea', array('label'=>'Descrizione', 'required' => false))
                 ->add('team', 'hidden', array('data'=>$team->getId()))
