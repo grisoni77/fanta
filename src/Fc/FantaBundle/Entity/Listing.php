@@ -30,7 +30,7 @@ class Listing
     private $enabled;
 
     /**
-     * @ORM\ManyToOne(targetEntity="Player")
+     * @ORM\ManyToOne(targetEntity="Player", inversedBy="listings")
      * @ORM\JoinColumn(name="player_id", referencedColumnName="id", nullable=false)
      */
     private $player;

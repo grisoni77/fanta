@@ -13,6 +13,8 @@ use Symfony\Component\HttpFoundation\RedirectResponse;
 use Fc\FantaBundle\Entity\Team;
 use Fc\SiteBundle\Form\Type\TeamType;
 
+use Doctrine\ORM\Query\Expr\Join;
+
 /**
  * Description of TeamController
  *
@@ -136,28 +138,26 @@ class TeamController extends Controller
     {
         // getting querybuilder for players
         $em = $this->getDoctrine()->getEntityManager();
-        $qb2 = $em->createQueryBuilder()
-            ->select('l.player')
-            ->from('FcFantaBundle:Listing', 'l')
-            ->select('l.player_id')
-            ->innerJoin('l.team', 't')
-            ->where('enabled = :enabled')
-            ->andWhere('team.league = :league')
-            ->setParameter('enabled', 1)
-            ->setParameter('league', $team->getLeague())
-        ;
-        echo $qb2;
         $er = $em->getRepository('FcFantaBundle:Player');
         $qb = $er->createQueryBuilder('p')
-                ->innerJoin('p.currentClub', 'club')
+                ->select('p')
+                //->select('SUM(l.enabled)')
+                ->innerJoin('p.currentClub', 'club', Join::WITH, 'club.championship = :champ')
+                //->where('club.championship = :champ')
+                ->setParameter('champ', $team->getLeague()->getChampionship())
+                
+                ->leftJoin('p.listings', 'l')
+                ->leftJoin('l.team', 't', Join::WITH, 't.league = :league')
+                ->setParameter('league', $team->getLeague())
+                
+                //->where('l.id IS NULL')
+                ->groupBy('p.id')
+                //->having('SUM(l.enabled) = \'NULL\' ')
+                //->orHaving('SUM(l.enabled) = :null')
+                //->setParameter('null', null)
+                ->orderBy('p.role, p.name')
         ;
-        $qb 
-            ->where('club.championship = :champ')
-            ->setParameter('champ', $team->getLeague()->getChampionship())
-            ->andWhere($qb->expr()->notIn('p.id', $qb2))
-            ->orderBy('p.role, p.name')
-        ;
-        echo $qb;
+                
         // form builder
         $builder = $this->container->get('form.factory')->createBuilder();
         $builder

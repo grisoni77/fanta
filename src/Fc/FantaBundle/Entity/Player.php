@@ -70,6 +70,11 @@ class Player
      * @ORM\OneToMany(targetEntity="Transaction", mappedBy="player")
      */
     private $transactions;
+    
+    /**
+     * @ORM\OneToMany(targetEntity="Listing", mappedBy="player")
+     */
+    private $listings;
 
     /**
      * Get id
