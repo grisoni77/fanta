@@ -33,6 +33,7 @@ class AppKernel extends Kernel
             //new Symfony\Bundle\DoctrineFixturesBundle\DoctrineFixturesBundle(),
             new Doctrine\Bundle\FixturesBundle\DoctrineFixturesBundle(),
             new Fc\SiteBundle\FcSiteBundle(),
+            new Mopa\Bundle\BootstrapBundle\MopaBootstrapBundle(),
         );
 
         if (in_array($this->getEnvironment(), array('dev', 'test'))) {

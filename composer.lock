@@ -1,5 +1,5 @@
 {
-    "hash": "7984cdffd355aede8f4826d8396d7940",
+    "hash": "2199290b49e1ddf15c618d56c11d671f",
     "packages": [
         {
             "package": "doctrine/common",
@@ -80,6 +80,12 @@
             "version": "1.1.0"
         },
         {
+            "package": "knplabs/knp-components",
+            "version": "dev-master",
+            "source-reference": "99ea408dc2a7c3616e688ffe67e3248ece69ff0e",
+            "commit-date": "1339767068"
+        },
+        {
             "package": "knplabs/knp-menu",
             "version": "1.1.x-dev",
             "source-reference": "v1.1.2",
@@ -88,6 +94,12 @@
         {
             "package": "knplabs/knp-menu-bundle",
             "version": "v1.1.0"
+        },
+        {
+            "package": "knplabs/knp-paginator-bundle",
+            "version": "dev-master",
+            "source-reference": "de439d2816fe984dbe0c438fd4d0d7c67748c5ff",
+            "commit-date": "1343676956"
         },
         {
             "package": "kriswallsmith/assetic",
@@ -114,6 +126,24 @@
             "commit-date": "1346873566"
         },
         {
+            "package": "mopa/bootstrap-bundle",
+            "version": "dev-master",
+            "alias-pretty-version": "2.1.x-dev",
+            "alias-version": "2.1.9999999.9999999-dev"
+        },
+        {
+            "package": "mopa/bootstrap-bundle",
+            "version": "dev-master",
+            "source-reference": "37790e12db02e03d061309db8a9d5f8eb14f222b",
+            "commit-date": "1346680009"
+        },
+        {
+            "package": "mopa/composer-bridge",
+            "version": "dev-master",
+            "source-reference": "84b8bf537163b4470f14d02554a0e9eb5d300172",
+            "commit-date": "1337596733"
+        },
+        {
             "package": "peytz/wizard",
             "version": "dev-master",
             "source-reference": "v1.1.0",
@@ -122,20 +152,8 @@
         {
             "package": "sensio/distribution-bundle",
             "version": "dev-master",
-            "alias-pretty-version": "2.1.x-dev",
-            "alias-version": "2.1.9999999.9999999-dev"
-        },
-        {
-            "package": "sensio/distribution-bundle",
-            "version": "dev-master",
             "source-reference": "98921298951598e8707258cba2b6180b96faa91c",
             "commit-date": "1347023757"
-        },
-        {
-            "package": "sensio/framework-extra-bundle",
-            "version": "dev-master",
-            "alias-pretty-version": "2.1.x-dev",
-            "alias-version": "2.1.9999999.9999999-dev"
         },
         {
             "package": "sensio/framework-extra-bundle",
@@ -217,21 +235,9 @@
         },
         {
             "package": "symfony/symfony",
-            "version": "dev-master",
-            "alias-pretty-version": "2.1.x-dev",
-            "alias-version": "2.1.9999999.9999999-dev"
-        },
-        {
-            "package": "symfony/symfony",
-            "version": "dev-master",
-            "alias-pretty-version": "2.2.x-dev",
-            "alias-version": "2.2.9999999.9999999-dev"
-        },
-        {
-            "package": "symfony/symfony",
-            "version": "dev-master",
-            "source-reference": "4dc197c3e1ea227e36cab7ea93877fa44ecc569b",
-            "commit-date": "1346957130"
+            "version": "2.1.x-dev",
+            "source-reference": "e7059b44c78ca8e1e892adb4d93b5a482f4eb9b3",
+            "commit-date": "1346926323"
         },
         {
             "package": "twig/extensions",
@@ -250,6 +256,12 @@
             "version": "dev-master",
             "source-reference": "68b8c4619c5bbe82bd345fe56070dec8c356610a",
             "commit-date": "1347025342"
+        },
+        {
+            "package": "twitter/bootstrap",
+            "version": "master",
+            "source-reference": "master",
+            "commit-date": "1346816651"
         }
     ],
     "packages-dev": null,
@@ -271,6 +283,8 @@
         "sonata-project/admin-bundle": 20,
         "sonata-project/doctrine-orm-admin-bundle": 20,
         "doctrine/doctrine-fixtures-bundle": 20,
-        "peytz/wizard": 20
+        "peytz/wizard": 20,
+        "mopa/bootstrap-bundle": 20,
+        "knplabs/knp-paginator-bundle": 20
     }
 }
