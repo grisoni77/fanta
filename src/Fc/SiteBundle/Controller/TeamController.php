@@ -139,6 +139,7 @@ class TeamController extends Controller
         // getting querybuilder for players
         $em = $this->getDoctrine()->getEntityManager();
         $er = $em->getRepository('FcFantaBundle:Player');
+        
         $qb = $er->createQueryBuilder('p')
                 ->select('p')
                 //->select('SUM(l.enabled)')
@@ -150,14 +151,14 @@ class TeamController extends Controller
                 ->leftJoin('l.team', 't', Join::WITH, 't.league = :league')
                 ->setParameter('league', $team->getLeague())
                 
-                //->where('l.id IS NULL')
+                ->where('l.id IS NULL')
                 ->groupBy('p.id')
                 //->having('SUM(l.enabled) = \'NULL\' ')
                 //->orHaving('SUM(l.enabled) = :null')
                 //->setParameter('null', null)
                 ->orderBy('p.role, p.name')
         ;
-                
+        echo $qb->getQuery()->getSQL();
         // form builder
         $builder = $this->container->get('form.factory')->createBuilder();
         $builder

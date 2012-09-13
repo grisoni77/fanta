@@ -7,7 +7,7 @@ use Doctrine\ORM\Mapping as ORM;
 /**
  * Fc\FantaBundle\Entity\Transaction
  *
- * @ORM\Table()
+ * @ORM\Table(uniqueConstraints={@ORM\UniqueConstraint(name="unico_idx", columns={"player_id", "team_id"})})
  * @ORM\Entity
  * @ORM\HasLifecycleCallbacks()
  */
