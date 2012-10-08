@@ -77,4 +77,31 @@ class LeagueRepository extends EntityRepository
                     ));
     }
     
+    public function findFreePlayers($league)
+    {
+        //$em = $this->getEntityManager();
+        
+        $qb = $this->createQueryBuilder('p')
+                ->select('p')
+                //->select('SUM(l.enabled)')
+                ->innerJoin('p.currentClub', 'club', Join::WITH, 'club.championship = :champ')
+                //->where('club.championship = :champ')
+                ->setParameter('champ', $league->getChampionship())
+                
+                ->leftJoin('p.listings', 'l')
+                ->leftJoin('l.team', 't', Join::WITH, 't.league = :league')
+                ->setParameter('league', $league)
+                
+                ->where('l.id IS NULL')
+                ->groupBy('p.id')
+                //->having('SUM(l.enabled) = \'NULL\' ')
+                //->orHaving('SUM(l.enabled) = :null')
+                //->setParameter('null', null)
+                ->orderBy('p.role, p.name')
+        ;
+
+        $players = $qb->getQuery()->getResult();
+        return $players;
+    }
+    
 }
