@@ -50,16 +50,17 @@ class ChampionshipTest extends WebTestCase
         $champ->setName('Pippo');
         $this->season->addChampionship($champ);
         $champ->setSeason($this->season);
-        //print_r($this->season->getChampionships());
+        // Add
         $this->assertTrue($champ->getSeason() instanceof Season);
         $champs = $this->season->getChampionships();
         $this->assertTrue($champs->first() instanceof Championship);
-        
+        // Remove
         $this->season->removeChampionship($champ);
         $champ->setSeason(null);
         $champs = $this->season->getChampionships();
         $this->assertEquals(count($champs), 0);
         $this->assertEquals($champ->getSeason(), null);
+        
     }
     
 }
