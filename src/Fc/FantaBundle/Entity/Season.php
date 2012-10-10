@@ -38,6 +38,13 @@ class Season
      */
     private $enabled;
 
+    
+    public function __construct()
+    {
+        $this->championships = new \Doctrine\Common\Collections\ArrayCollection();
+    }
+    
+    
     /**
      * Get id
      *
@@ -68,42 +75,6 @@ class Season
     public function getTitle()
     {
         return $this->title;
-    }
-    public function __construct()
-    {
-        $this->teams = new \Doctrine\Common\Collections\ArrayCollection();
-    }
-    
-    /**
-     * Add teams
-     *
-     * @param Fc\FantaBundle\Entity\Team $teams
-     * @return Season
-     */
-    public function addTeam(\Fc\FantaBundle\Entity\Team $teams)
-    {
-        $this->teams[] = $teams;
-        return $this;
-    }
-
-    /**
-     * Remove teams
-     *
-     * @param <variableType$teams
-     */
-    public function removeTeam(\Fc\FantaBundle\Entity\Team $teams)
-    {
-        $this->teams->removeElement($teams);
-    }
-
-    /**
-     * Get teams
-     *
-     * @return Doctrine\Common\Collections\Collection 
-     */
-    public function getTeams()
-    {
-        return $this->teams;
     }
     
     /**

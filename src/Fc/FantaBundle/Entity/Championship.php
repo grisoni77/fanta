@@ -62,6 +62,14 @@ class Championship
      */
     private $enabled;
 
+    
+    public function __construct()
+    {
+        $this->clubs = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->days = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->leagues = new \Doctrine\Common\Collections\ArrayCollection();
+    }
+    
     /**
      * Get id
      *
@@ -92,10 +100,6 @@ class Championship
     public function getName()
     {
         return $this->name;
-    }
-    public function __construct()
-    {
-        $this->clubs = new \Doctrine\Common\Collections\ArrayCollection();
     }
     
     /**

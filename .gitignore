@@ -16,3 +16,6 @@ app/config/parameters.yml
 
 #Entities backup
 *~
+
+#Tests data
+tests
